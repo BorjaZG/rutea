@@ -1,0 +1,32 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/api/usuarios"
+  },
+  "response": {
+    "status": 200,
+    "jsonBody": [
+      {
+        "id": 1,
+        "username": "viajero_pro",
+        "email": "viajero@rutea.com",
+        "password": "hashed_secret",
+        "nivelExperiencia": 8,
+        "esPremium": true,
+        "fechaRegistro": "2024-01-15"
+      },
+      {
+        "id": 2,
+        "username": "mochilero99",
+        "email": "mochilero@rutea.com",
+        "password": "1234password",
+        "nivelExperiencia": 2,
+        "esPremium": false,
+        "fechaRegistro": "2024-03-10"
+      }
+    ],
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

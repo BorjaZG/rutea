@@ -1,0 +1,40 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/api/puntos"
+  },
+  "response": {
+    "status": 200,
+    "jsonBody": [
+      {
+        "id": 100,
+        "nombre": "Mirador del Valle",
+        "latitud": 40.416775,
+        "longitud": -3.703790,
+        "puntuacionMedia": 4.8,
+        "abiertoActualmente": true,
+        "fechaCreacion": "2024-05-20T10:00:00",
+        "categoria": {
+          "id": 10,
+          "nombre": "Montaña"
+        }
+      },
+      {
+        "id": 101,
+        "nombre": "Museo de Historia",
+        "latitud": 40.420000,
+        "longitud": -3.700000,
+        "puntuacionMedia": 4.5,
+        "abiertoActualmente": false,
+        "fechaCreacion": "2024-02-15T09:30:00",
+        "categoria": {
+          "id": 20,
+          "nombre": "Urbana"
+        }
+      }
+    ],
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}
