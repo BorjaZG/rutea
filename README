@@ -9,13 +9,5 @@ Proyecto realizado para la asignatura **Acceso a Datos** (Centro San Valero).
 ### ✔️ Requisitos previos
 - Java 21 (o superior)
 - Maven
-- MariaDB / XAMPP (Puerto 3306)
-
----
-
-## 🗄️ Configuración de Base de Datos
-
-1. Iniciar el servicio MySQL/MariaDB desde XAMPP.
-2. Crear una base de datos vacía llamada **rutea_db**:
-   ```sql
-   CREATE DATABASE rutea_db;
+- MariaDB
+- Docker (Puerto 3306)
