@@ -1,10 +1,8 @@
-# Rutea API – Gestión de Rutas Turísticas
-API REST desarrollada con **Spring Boot** para la gestión de **rutas**, **puntos de interés**, **usuarios**, **reseñas** y **categorías**.
-Proyecto realizado para la asignatura **Acceso a Datos** (Centro San Valero).
+# 🗺️ Rutea API
 
----
+API REST para gestión de rutas turísticas, puntos de interés, reseñas y usuarios.
 
-## 🚀 Puesta en marcha
+## 📋 Tabla de Contenidos
 
 ### ✔️ Requisitos previos
 - Java 21 (o superior)

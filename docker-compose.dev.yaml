@@ -1,0 +1,13 @@
+name: rutea
+services:
+  db:
+    image: mariadb:11.3.2
+    container_name: rutea-db
+    environment:
+      MYSQL_USER: 'rutea_user'
+      MYSQL_PASSWORD: 'rutea_password'
+      MYSQL_DATABASE: 'rutea'
+      MYSQL_PORT: 3306
+      MYSQL_ROOT_PASSWORD: 'rootpassword'
+    ports:
+      - "3306:3306"

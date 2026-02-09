@@ -1,44 +1,51 @@
 package com.svalero.rutea.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.*;
+import lombok.*;
+
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "usuarios")
+@NoArgsConstructor
+@Builder
+@Entity
+@Table(name = "usuarios")
 public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
-    @NotBlank(message = "El nombre de usuario es obligatorio")
-    @Size(min = 4, message = "El usuario debe tener al menos 4 caracteres")
-    @Column(unique = true) // No puede haber dos usuarios iguales
-    private String username;
-
-    @NotBlank(message = "El email es obligatorio")
-    @Email(message = "El formato del email no es válido")
-    @Column(unique = true)
+    @Column(nullable = false, unique = true)
+    @Email(message = "email must be valid")
+    @NotBlank(message = "email is mandatory")
     private String email;
 
-    @NotBlank(message = "La contraseña es obligatoria")
-    private String password;
-
-    @Min(value = 0, message = "El nivel de experiencia no puede ser negativo")
-    private int nivelExperiencia; // 0: Novato, 10: Experto
-
+    @Column(name = "es_premium", nullable = false)
     private boolean esPremium;
 
-    @NotNull(message = "La fecha de registro es obligatoria")
+    @Column(name = "fecha_registro", nullable = false)
+    @NotNull(message = "fechaRegistro is mandatory")
     private LocalDate fechaRegistro;
+
+    @Column(name = "nivel_experiencia", nullable = false)
+    @Min(value = 0, message = "nivelExperiencia must be >= 0")
+    private int nivelExperiencia;
+
+    @Column(nullable = false)
+    @NotBlank(message = "password is mandatory")
+    @Size(min = 6, message = "password must have at least 6 characters")
+    private String password;
+
+    @Column(nullable = false, unique = true)
+    @NotBlank(message = "username is mandatory")
+    private String username;
+
+    @OneToMany(mappedBy = "usuario")
+    @JsonManagedReference("usuario-resenas")
+    private List<Resena> resenas;
 }

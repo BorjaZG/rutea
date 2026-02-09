@@ -1,43 +1,65 @@
 package com.svalero.rutea.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.*;
+import lombok.*;
+
 import java.time.LocalDate;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "resenas")
+@NoArgsConstructor
+@Builder
+@Entity
+@Table(name = "resenas")
 public class Resena {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
-    private String titulo;
-
-    @NotBlank(message = "El comentario no puede estar vacío")
-    @Size(min = 10, message = "El comentario debe tener al menos 10 caracteres")
+    @Column(nullable = false)
+    @NotBlank(message = "comentario is mandatory")
     private String comentario;
 
-    @Min(1) @Max(5)
-    private int valoracion;
-
-    private int likes;
+    @Column(nullable = false)
     private boolean editada;
+
+    @Column(name = "fecha_publicacion")
     private LocalDate fechaPublicacion;
 
-    @ManyToOne
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
+    @Column(nullable = false)
+    @Min(value = 0, message = "likes must be >= 0")
+    private int likes;
+
+    @Column
+    private String titulo;
+
+    @Column(nullable = false)
+    @Min(value = 1, message = "valoracion must be between 1 and 5")
+    @Max(value = 5, message = "valoracion must be between 1 and 5")
+    private int valoracion;
 
     @ManyToOne
     @JoinColumn(name = "punto_id")
-    private PuntoInteres puntoInteres;
+    @JsonIgnore
+    private PuntoInteres punto;
+
+    @JsonProperty("puntoId")
+    public Long getPuntoId() {
+        return punto != null ? punto.getId() : null;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    @JsonIgnore
+    private Usuario usuario;
+
+    @JsonProperty("usuarioId")
+    public Long getUsuarioId() {
+        return usuario != null ? usuario.getId() : null;
+    }
 }
