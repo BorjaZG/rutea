@@ -51,7 +51,7 @@ public class PuntoInteres {
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")
-    @JsonIgnore  // ← Cambia @JsonBackReference por @JsonIgnore
+    @JsonIgnore
     private Categoria categoria;
 
     @JsonProperty("categoriaId")
