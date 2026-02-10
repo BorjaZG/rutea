@@ -34,10 +34,13 @@ class PuntoInteresControllerTest {
 
     @Test
     void getAll_shouldReturn200_withNewParam_abiertoActualmente() throws Exception {
+        // ✅ Usar constructor completo con 9 parámetros (incluyendo categoriaNombre)
+        PuntoInteresOutDto dto = new PuntoInteresOutDto(
+                10L, true, LocalDateTime.now(), 41.0, -0.8, "Parque", 4.5f, 1L, "Naturaleza"
+        );
+
         when(puntoInteresService.findAll(eq(1L), eq(true), eq("par"), eq(4.5f)))
-                .thenReturn(List.of(new PuntoInteresOutDto(
-                        10L, true, LocalDateTime.now(), 41.0, -0.8, "Parque", 4.5f, 1L
-                )));
+                .thenReturn(List.of(dto));
 
         mockMvc.perform(get("/puntos")
                         .param("categoriaId", "1")
@@ -53,10 +56,12 @@ class PuntoInteresControllerTest {
     @Test
     void getAll_shouldReturn200_usingLegacyParam_abierto_whenAbiertoActualmenteMissing() throws Exception {
         // Si no viene abiertoActualmente, el controller usa "abierto"
+        PuntoInteresOutDto dto = new PuntoInteresOutDto(
+                1L, false, null, 0.0, 0.0, "X", 0f, null, null
+        );
+
         when(puntoInteresService.findAll(isNull(), eq(false), eq(""), isNull()))
-                .thenReturn(List.of(new PuntoInteresOutDto(
-                        1L, false, null, 0, 0, "X", 0f, null
-                )));
+                .thenReturn(List.of(dto));
 
         mockMvc.perform(get("/puntos")
                         .param("abierto", "false"))
@@ -68,18 +73,17 @@ class PuntoInteresControllerTest {
     void getAll_shouldReturn400_whenBadQueryParam() throws Exception {
         mockMvc.perform(get("/puntos").param("puntuacionMedia", "abc"))
                 .andExpect(status().isBadRequest());
-        // Aquí Spring devuelve 400 por conversión de tipos (no entra en tus @ExceptionHandler)
-        // Si quieres un cuerpo unificado, habría que manejar MethodArgumentTypeMismatchException.
     }
 
     // -------------------- GET BY ID --------------------
 
     @Test
     void getById_shouldReturn200() throws Exception {
-        when(puntoInteresService.findById(1L))
-                .thenReturn(new PuntoInteresOutDto(
-                        1L, true, null, 41.0, -0.8, "Parque", 4.2f, 3L
-                ));
+        PuntoInteresOutDto dto = new PuntoInteresOutDto(
+                1L, true, null, 41.0, -0.8, "Parque", 4.2f, 3L, "Naturaleza"
+        );
+
+        when(puntoInteresService.findById(1L)).thenReturn(dto);
 
         mockMvc.perform(get("/puntos/1"))
                 .andExpect(status().isOk())
@@ -100,7 +104,6 @@ class PuntoInteresControllerTest {
     void getById_shouldReturn400_whenBadId() throws Exception {
         mockMvc.perform(get("/puntos/abc"))
                 .andExpect(status().isBadRequest());
-        // Igual que antes: este 400 es de Spring por type mismatch (no tu ErrorResponse)
     }
 
     // -------------------- POST --------------------
@@ -118,7 +121,7 @@ class PuntoInteresControllerTest {
         );
 
         PuntoInteresOutDto out = new PuntoInteresOutDto(
-                10L, true, in.getFechaCreacion(), 41.0, -0.8, "Parque", 4.5f, 1L
+                10L, true, in.getFechaCreacion(), 41.0, -0.8, "Parque", 4.5f, 1L, "Naturaleza"
         );
 
         when(puntoInteresService.add(any(PuntoInteresInDto.class))).thenReturn(out);
@@ -171,7 +174,7 @@ class PuntoInteresControllerTest {
         );
 
         PuntoInteresOutDto out = new PuntoInteresOutDto(
-                1L, false, null, 40.0, -0.7, "Nuevo", 3.5f, 2L
+                1L, false, null, 40.0, -0.7, "Nuevo", 3.5f, 2L, "Cultura"
         );
 
         when(puntoInteresService.modify(eq(1L), any(PuntoInteresInDto.class))).thenReturn(out);
