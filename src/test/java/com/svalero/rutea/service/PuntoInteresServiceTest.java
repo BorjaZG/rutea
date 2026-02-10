@@ -77,10 +77,12 @@ class PuntoInteresServiceTest {
         PuntoInteres mapped = PuntoInteres.builder().build();
         when(modelMapper.map(in, PuntoInteres.class)).thenReturn(mapped);
 
+        // ✅ Cambio: ahora puede llamar saveAndFlush
         when(puntoInteresRepository.save(any(PuntoInteres.class))).thenReturn(p1);
 
+        // ✅ CORREGIDO: 9 parámetros (añadido categoriaNombre)
         PuntoInteresOutDto mappedOut = new PuntoInteresOutDto(
-                10L, true, p1.getFechaCreacion(), 41.0, -0.8, "Parque Grande", 4.5f, 1L
+                10L, true, p1.getFechaCreacion(), 41.0, -0.8, "Parque Grande", 4.5f, 1L, "Naturaleza"
         );
         when(modelMapper.map(p1, PuntoInteresOutDto.class)).thenReturn(mappedOut);
 
@@ -120,8 +122,9 @@ class PuntoInteresServiceTest {
     void findById_shouldReturnOutDto_whenExists() throws Exception {
         when(puntoInteresRepository.findById(10L)).thenReturn(Optional.of(p1));
 
+        // ✅ CORREGIDO: 9 parámetros (añadido categoriaNombre)
         PuntoInteresOutDto mappedOut = new PuntoInteresOutDto(
-                10L, true, p1.getFechaCreacion(), 41.0, -0.8, "Parque Grande", 4.5f, 1L
+                10L, true, p1.getFechaCreacion(), 41.0, -0.8, "Parque Grande", 4.5f, 1L, "Naturaleza"
         );
         when(modelMapper.map(p1, PuntoInteresOutDto.class)).thenReturn(mappedOut);
 
@@ -170,9 +173,9 @@ class PuntoInteresServiceTest {
 
         when(puntoInteresRepository.save(any(PuntoInteres.class))).thenAnswer(inv -> inv.getArgument(0));
 
-        // Para el toOutDto (interno) llama a modelMapper.map(punto, PuntoInteresOutDto.class)
+        // ✅ CORREGIDO: 9 parámetros (añadido categoriaNombre)
         PuntoInteresOutDto mappedOut = new PuntoInteresOutDto(
-                10L, false, null, 40.0, -0.7, "Nuevo", 3.5f, 1L
+                10L, false, null, 40.0, -0.7, "Nuevo", 3.5f, 1L, "Naturaleza"
         );
         when(modelMapper.map(any(PuntoInteres.class), eq(PuntoInteresOutDto.class))).thenReturn(mappedOut);
 
@@ -249,9 +252,9 @@ class PuntoInteresServiceTest {
     void findAll_shouldFilterByCategoriaAbiertoNombrePuntuacion() {
         when(puntoInteresRepository.findAll()).thenReturn(List.of(p1, p2));
 
-        // lo que devuelve el mapper al final (lista DTO)
+        // ✅ CORREGIDO: 9 parámetros (añadido categoriaNombre)
         List<PuntoInteresOutDto> mappedList = List.of(
-                new PuntoInteresOutDto(10L, true, p1.getFechaCreacion(), 41.0, -0.8, "Parque Grande", 4.5f, 1L)
+                new PuntoInteresOutDto(10L, true, p1.getFechaCreacion(), 41.0, -0.8, "Parque Grande", 4.5f, 1L, "Naturaleza")
         );
         when(modelMapper.map(anyList(), ArgumentMatchers.<java.lang.reflect.Type>any()))
                 .thenReturn(mappedList);
