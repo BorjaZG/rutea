@@ -41,43 +41,22 @@ API REST para gestión de rutas turísticas, puntos de interés, reseñas y usua
 
 - Java JDK 21 o superior
 - Maven 3.8+
-- MariaDB 10.11+ (o XAMPP con MySQL/MariaDB)
+- MariaDB 10.11+
 - Postman (opcional, para probar API)
 
 ## 🚀 Instalación
 
 ### 1. Clonar repositorio
 
-\`\`\`bash
-git clone https://github.com/tu-usuario/rutea.git
-cd rutea
-\`\`\`
-
 ### 2. Configurar Base de Datos
 
 Iniciar MariaDB/MySQL y crear base de datos:
-
-\`\`\`sql
-CREATE DATABASE rutea_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-\`\`\`
 
 ### 3. Configurar application.properties
 
 Editar `src/main/resources/application.properties`:
 
-\`\`\`properties
-spring.datasource.url=jdbc:mariadb://localhost:3306/rutea_db
-spring.datasource.username=root
-spring.datasource.password=
-spring.jpa.hibernate.ddl-auto=update
-\`\`\`
-
 ### 4. Compilar y ejecutar
-
-\`\`\`bash
-mvn clean install
-mvn spring-boot:run
-\`\`\`
 
 La API estará disponible en: `http://localhost:8080`
 
@@ -148,11 +127,6 @@ Visualizar en Swagger Editor: https://editor.swagger.io/
 3. Commit cambios (`git commit -m 'Añadir nueva funcionalidad'`)
 4. Push a la rama (`git push origin feature/nueva-funcionalidad`)
 5. Abrir Pull Request
-
-## 👨‍💻 Autor
-
-**Tu Nombre**
-- GitHub: [@tu-usuario](https://github.com/tu-usuario)
 
 ## 📄 Licencia
 

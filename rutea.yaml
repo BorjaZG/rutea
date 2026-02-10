@@ -34,6 +34,24 @@ paths:
           name: ordenPrioridad
           required: false
           schema: { type: integer, minimum: 0 }
+          examples:
+            lista_categorias:
+              summary: Lista de categorías
+              value:
+                - id: 1
+                  nombre: "Parques y Jardines"
+                  descripcion: "Espacios verdes"
+                  activa: true
+                  costePromedio: 0.0
+                  ordenPrioridad: 1
+                  iconoUrl: "https://example.com/icons/park.png"
+                - id: 2
+                  nombre: "Museos y Cultura"
+                  descripcion: "Espacios culturales"
+                  activa: true
+                  costePromedio: 8.50
+                  ordenPrioridad: 2
+                  iconoUrl: "https://example.com/icons/museum.png"
       responses:
         "200":
           description: OK
@@ -57,6 +75,27 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/CategoriaInDto"
+            examples:
+              parques:
+                summary: Categoría de Parques
+                description: Ejemplo de categoría para parques y jardines
+                value:
+                  nombre: "Parques y Jardines"
+                  descripcion: "Espacios verdes y áreas de recreación al aire libre"
+                  activa: true
+                  costePromedio: 0.0
+                  ordenPrioridad: 1
+                  iconoUrl: "https://example.com/icons/park.png"
+              museos:
+                summary: Categoría de Museos
+                description: Ejemplo de categoría para museos y cultura
+                value:
+                  nombre: "Museos y Cultura"
+                  descripcion: "Espacios dedicados al arte, historia y cultura"
+                  activa: true
+                  costePromedio: 8.50
+                  ordenPrioridad: 2
+                  iconoUrl: "https://example.com/icons/museum.png"
       responses:
         "201":
           description: Created
@@ -64,10 +103,27 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CategoriaOutDto"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
+              examples:
+                parques:
+                  summary: Categoría creada - Parques
+                  value:
+                    id: 1
+                    nombre: "Parques y Jardines"
+                    descripcion: "Espacios verdes y áreas de recreación al aire libre"
+                    activa: true
+                    costePromedio: 0.0
+                    ordenPrioridad: 1
+                    iconoUrl: "https://example.com/icons/park.png"
+                museos:
+                  summary: Categoría creada - Museos
+                  value:
+                    id: 2
+                    nombre: "Museos y Cultura"
+                    descripcion: "Espacios dedicados al arte, historia y cultura"
+                    activa: true
+                    costePromedio: 8.50
+                    ordenPrioridad: 2
+                    iconoUrl: "https://example.com/icons/museum.png"
 
   /categorias/{id}:
     get:
@@ -82,6 +138,17 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CategoriaOutDto"
+              examples:
+                categoria_encontrada:
+                  summary: Categoría encontrada
+                  value:
+                    id: 1
+                    nombre: "Parques y Jardines"
+                    descripcion: "Espacios verdes y áreas de recreación"
+                    activa: true
+                    costePromedio: 0.0
+                    ordenPrioridad: 1
+                    iconoUrl: "https://example.com/icons/park.png"
         "400":
           $ref: "#/components/responses/BadRequest"
         "404":
@@ -90,7 +157,7 @@ paths:
           $ref: "#/components/responses/InternalServerError"
 
     put:
-      tags: [Categorias]
+      tags: [ Categorias ]
       summary: Modificar categoría
       parameters:
         - $ref: "#/components/parameters/IdPathParam"
@@ -100,6 +167,25 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/CategoriaInDto"
+            examples:
+              actualizar_nombre:
+                summary: Actualizar nombre y descripción
+                value:
+                  nombre: "Parques Urbanos"
+                  descripcion: "Parques dentro del núcleo urbano"
+                  activa: true
+                  costePromedio: 0.0
+                  ordenPrioridad: 1
+                  iconoUrl: "https://example.com/icons/urban-park.png"
+              desactivar:
+                summary: Desactivar categoría
+                value:
+                  nombre: "Museos y Cultura"
+                  descripcion: "Espacios de cultura (temporalmente cerrado)"
+                  activa: false
+                  costePromedio: 8.50
+                  ordenPrioridad: 2
+                  iconoUrl: "https://example.com/icons/museum.png"
       responses:
         "200":
           description: OK
@@ -107,6 +193,59 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CategoriaOutDto"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
+    patch:
+      tags: [ Categorias ]
+      summary: Actualización parcial de categoría
+      description: >
+        Permite modificar solo los campos especificados sin necesidad de enviar todos los datos.
+        Solo los campos incluidos en el body serán actualizados.
+      parameters:
+        - $ref: "#/components/parameters/IdPathParam"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+            examples:
+              cambiar_nombre:
+                summary: Cambiar solo el nombre
+                value:
+                  nombre: "Nuevo nombre de categoría"
+              desactivar:
+                summary: Desactivar categoría
+                value:
+                  activa: false
+              actualizar_costo:
+                summary: Actualizar costo promedio
+                value:
+                  costePromedio: 12.50
+      responses:
+        "200":
+          description: OK - Categoría actualizada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CategoriaOutDto"
+              examples:
+                nombre_actualizado:
+                  summary: Nombre actualizado
+                  value:
+                    id: 1
+                    nombre: "Nuevo nombre de categoría"
+                    descripcion: "Espacios verdes"
+                    activa: true
+                    costePromedio: 0.0
+                    ordenPrioridad: 1
+                    iconoUrl: "https://example.com/icons/park.png"
         "400":
           $ref: "#/components/responses/BadRequest"
         "404":
@@ -157,13 +296,31 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/PuntoInteresOutDto"
+              examples:
+                lista_puntos:
+                  summary: Lista de puntos de interés
+                  value:
+                    - id: 1
+                      nombre: "Parque Grande"
+                      latitud: 41.633055
+                      longitud: -0.896111
+                      abiertoActualmente: true
+                      puntuacionMedia: 4.8
+                      categoriaId: 1
+                    - id: 2
+                      nombre: "Museo Goya"
+                      latitud: 41.656389
+                      longitud: -0.876667
+                      abiertoActualmente: false
+                      puntuacionMedia: 4.5
+                      categoriaId: 2
         "400":
           $ref: "#/components/responses/BadRequest"
         "500":
           $ref: "#/components/responses/InternalServerError"
 
     post:
-      tags: [Puntos]
+      tags: [ Puntos ]
       summary: Crear punto de interés
       requestBody:
         required: true
@@ -171,6 +328,29 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/PuntoInteresInDto"
+            examples:
+              parque_grande:
+                summary: Parque Grande
+                description: Ejemplo de punto de interés - parque urbano
+                value:
+                  nombre: "Parque Grande José Antonio Labordeta"
+                  latitud: 41.633055
+                  longitud: -0.896111
+                  abiertoActualmente: true
+                  puntuacionMedia: 4.8
+                  fechaCreacion: "2024-01-15T10:00:00"
+                  categoriaId: 1
+              museo_goya:
+                summary: Museo Goya
+                description: Ejemplo de punto de interés - museo cerrado
+                value:
+                  nombre: "Museo Goya - Colección Ibercaja"
+                  latitud: 41.656389
+                  longitud: -0.876667
+                  abiertoActualmente: false
+                  puntuacionMedia: 4.5
+                  fechaCreacion: "2024-02-01T09:00:00"
+                  categoriaId: 2
       responses:
         "201":
           description: Created
@@ -178,12 +358,29 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/PuntoInteresOutDto"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "404":
-          $ref: "#/components/responses/NotFound"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
+              examples:
+                parque_grande:
+                  summary: Punto creado - Parque
+                  value:
+                    id: 1
+                    nombre: "Parque Grande José Antonio Labordeta"
+                    latitud: 41.633055
+                    longitud: -0.896111
+                    abiertoActualmente: true
+                    puntuacionMedia: 4.8
+                    fechaCreacion: "2024-01-15T10:00:00"
+                    categoriaId: 1
+                museo_goya:
+                  summary: Punto creado - Museo
+                  value:
+                    id: 2
+                    nombre: "Museo Goya - Colección Ibercaja"
+                    latitud: 41.656389
+                    longitud: -0.876667
+                    abiertoActualmente: false
+                    puntuacionMedia: 4.5
+                    fechaCreacion: "2024-02-01T09:00:00"
+                    categoriaId: 2
 
   /puntos/{id}:
     get:
@@ -219,6 +416,49 @@ paths:
       responses:
         "200":
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PuntoInteresOutDto"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
+    patch:
+      tags: [ Puntos ]
+      summary: Actualización parcial de punto de interés
+      description: >
+        Permite modificar solo los campos especificados.
+        Útil para actualizar puntuación, estado de apertura, etc.
+      parameters:
+        - $ref: "#/components/parameters/IdPathParam"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+            examples:
+              actualizar_puntuacion:
+                summary: Actualizar puntuación
+                value:
+                  puntuacionMedia: 4.9
+              cerrar_temporalmente:
+                summary: Cerrar temporalmente
+                value:
+                  abiertoActualmente: false
+              cambiar_nombre_y_puntuacion:
+                summary: Actualizar nombre y puntuación
+                value:
+                  nombre: "Parque Grande (renovado)"
+                  puntuacionMedia: 5.0
+      responses:
+        "200":
+          description: OK - Punto actualizado
           content:
             application/json:
               schema:
@@ -273,6 +513,28 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/ResenaOutDto"
+              examples:
+                lista_resenas:
+                  summary: Lista de reseñas
+                  value:
+                    - id: 1
+                      comentario: "Excelente lugar para visitar"
+                      titulo: "Muy recomendable"
+                      valoracion: 5
+                      editada: false
+                      likes: 10
+                      fechaPublicacion: "2024-02-09"
+                      puntoId: 1
+                      usuarioId: 1
+                    - id: 2
+                      comentario: "Esperaba más del museo"
+                      titulo: "Decepcionante"
+                      valoracion: 3
+                      editada: false
+                      likes: 2
+                      fechaPublicacion: "2024-02-08"
+                      puntoId: 2
+                      usuarioId: 2
         "400":
           $ref: "#/components/responses/BadRequest"
         "500":
@@ -287,6 +549,31 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/ResenaInDto"
+            examples:
+              resena_positiva:
+                summary: Reseña positiva
+                description: Ejemplo de reseña con valoración alta
+                value:
+                  comentario: "Lugar excelente para pasar el día en familia. Muy limpio y bien cuidado."
+                  titulo: "Experiencia maravillosa"
+                  valoracion: 5
+                  editada: false
+                  likes: 0
+                  fechaPublicacion: "2024-02-09"
+                  puntoId: 1
+                  usuarioId: 1
+              resena_negativa:
+                summary: Reseña negativa
+                description: Ejemplo de reseña con valoración baja
+                value:
+                  comentario: "El museo estaba cerrado cuando llegamos, a pesar de que en la web decía abierto."
+                  titulo: "Decepcionante"
+                  valoracion: 2
+                  editada: false
+                  likes: 0
+                  fechaPublicacion: "2024-02-08"
+                  puntoId: 2
+                  usuarioId: 2
       responses:
         "201":
           description: Created
@@ -346,6 +633,49 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
+    patch:
+      tags: [ Resenas ]
+      summary: Actualización parcial de reseña
+      description: >
+        Permite modificar una reseña. Útil para editar contenido o actualizar likes.
+      parameters:
+        - $ref: "#/components/parameters/IdPathParam"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+            examples:
+              editar_comentario:
+                summary: Editar comentario
+                value:
+                  comentario: "Comentario editado: Ahora que volvimos, nos encantó!"
+                  editada: true
+              actualizar_likes:
+                summary: Incrementar likes
+                value:
+                  likes: 15
+              cambiar_valoracion:
+                summary: Cambiar valoración
+                value:
+                  valoracion: 4
+                  editada: true
+      responses:
+        "200":
+          description: OK - Reseña actualizada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResenaOutDto"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
     delete:
       tags: [Resenas]
       summary: Eliminar reseña
@@ -389,6 +719,28 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/RutaOutDto"
+              examples:
+                lista_rutas:
+                  summary: Lista de rutas
+                  value:
+                    - id: 1
+                      titulo: "Ruta Cultural - Casco Histórico"
+                      dificultad: "Fácil"
+                      distanciaKm: 3.5
+                      duracionMinutos: 90
+                      publica: true
+                      fechaRealizacion: "2024-03-15"
+                      usuarioId: 1
+                      puntosIds: [ 1, 2, 3 ]
+                    - id: 2
+                      titulo: "Ruta Verde - Parques"
+                      dificultad: "Moderada"
+                      distanciaKm: 8.0
+                      duracionMinutos: 180
+                      publica: true
+                      fechaRealizacion: "2024-03-20"
+                      usuarioId: 1
+                      puntosIds: [ 1, 4, 5 ]
         "400":
           $ref: "#/components/responses/BadRequest"
         "500":
@@ -403,6 +755,27 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/RutaInDto"
+            examples:
+              ruta_casco_historico:
+                summary: Ruta por el Casco Histórico
+                value:
+                  titulo: "Ruta Cultural - Casco Histórico de Zaragoza"
+                  dificultad: "Fácil"
+                  distanciaKm: 3.5
+                  duracionMinutos: 90
+                  fechaRealizacion: "2024-03-15"
+                  publica: true
+                  usuarioId: 1
+              ruta_parques:
+                summary: Ruta por Parques
+                value:
+                  titulo: "Ruta Verde - Parques de Zaragoza"
+                  dificultad: "Moderada"
+                  distanciaKm: 8.0
+                  duracionMinutos: 180
+                  fechaRealizacion: "2024-03-20"
+                  publica: true
+                  usuarioId: 1
       responses:
         "201":
           description: Created
@@ -462,6 +835,45 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
+    patch:
+      tags: [ Rutas ]
+      summary: Actualización parcial de ruta
+      parameters:
+        - $ref: "#/components/parameters/IdPathParam"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+            examples:
+              hacer_privada:
+                summary: Cambiar a privada
+                value:
+                  publica: false
+              actualizar_duracion:
+                summary: Actualizar duración
+                value:
+                  duracionMinutos: 120
+              cambiar_dificultad:
+                summary: Cambiar dificultad
+                value:
+                  dificultad: "Difícil"
+      responses:
+        "200":
+          description: OK - Ruta actualizada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RutaOutDto"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
     delete:
       tags: [Rutas]
       summary: Eliminar ruta
@@ -505,6 +917,22 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/UsuarioOutDto"
+              examples:
+                lista_usuarios:
+                  summary: Lista de usuarios
+                  value:
+                    - id: 1
+                      username: "juan_perez"
+                      email: "juan.perez@example.com"
+                      esPremium: false
+                      nivelExperiencia: 5
+                      fechaRegistro: "2024-02-09"
+                    - id: 2
+                      username: "maria_garcia"
+                      email: "maria.garcia@example.com"
+                      esPremium: true
+                      nivelExperiencia: 10
+                      fechaRegistro: "2024-01-05"
         "400":
           $ref: "#/components/responses/BadRequest"
         "500":
@@ -519,6 +947,25 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/UsuarioInDto"
+            examples:
+              usuario_basico:
+                summary: Usuario básico
+                value:
+                  username: "juan_perez"
+                  email: "juan.perez@example.com"
+                  password: "password123"
+                  esPremium: false
+                  nivelExperiencia: 1
+                  fechaRegistro: "2024-02-09"
+              usuario_premium:
+                summary: Usuario premium
+                value:
+                  username: "maria_garcia"
+                  email: "maria.garcia@example.com"
+                  password: "securepass456"
+                  esPremium: true
+                  nivelExperiencia: 10
+                  fechaRegistro: "2024-01-05"
       responses:
         "201":
           description: Created
@@ -576,6 +1023,45 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
+    patch:
+      tags: [ Usuarios ]
+      summary: Actualización parcial de usuario
+      parameters:
+        - $ref: "#/components/parameters/IdPathParam"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+            examples:
+              activar_premium:
+                summary: Activar premium
+                value:
+                  esPremium: true
+              subir_nivel:
+                summary: Incrementar nivel
+                value:
+                  nivelExperiencia: 15
+              cambiar_email:
+                summary: Cambiar email
+                value:
+                  email: "nuevo.email@example.com"
+      responses:
+        "200":
+          description: OK - Usuario actualizado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UsuarioOutDto"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
     delete:
       tags: [Usuarios]
       summary: Eliminar usuario
@@ -603,45 +1089,64 @@ components:
 
   responses:
     BadRequest:
-      description: Bad Request
+      description: Petición incorrecta (error de validación)
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            badRequest:
+            validation_error:
+              summary: Error de validación
+              description: Ejemplo cuando faltan campos obligatorios
               value:
+                message: "Error de validación"
                 code: 400
-                title: bad-request
-                message: Validation error
                 errors:
-                  field: "must not be blank"
+                  nombre: "nombre is mandatory"
+                  costePromedio: "costePromedio must be >= 0"
+            invalid_range:
+              summary: Valor fuera de rango
+              description: Ejemplo cuando un valor numérico está fuera del rango permitido
+              value:
+                message: "Error de validación"
+                code: 400
+                errors:
+                  latitud: "latitud must be between -90 and 90"
+                  longitud: "longitud must be between -180 and 180"
     NotFound:
-      description: Not Found
+      description: Recurso no encontrado
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            notFound:
+            categoria_not_found:
+              summary: Categoría no encontrada
               value:
+                message: "La categoria no existe"
                 code: 404
-                title: not-found
-                message: Resource not found
-                errors: {}
+            punto_not_found:
+              summary: Punto de interés no encontrado
+              value:
+                message: "El punto de interés no existe"
+                code: 404
     InternalServerError:
-      description: Internal Server Error
+      description: Error interno del servidor
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            serverError:
+            database_error:
+              summary: Error de base de datos
               value:
+                message: "Error interno del servidor"
                 code: 500
-                title: internal-server-error
-                message: Unexpected error
-                errors: {}
+            unexpected_error:
+              summary: Error inesperado
+              value:
+                message: "Ha ocurrido un error inesperado"
+                code: 500
 
   schemas:
     ErrorResponse:
