@@ -131,4 +131,3 @@ Visualizar en Swagger Editor: https://editor.swagger.io/
 ## 📄 Licencia
 
 Este proyecto es parte de la asignatura **Acceso a Datos** (Centro San Valero).
-\`\`\`
