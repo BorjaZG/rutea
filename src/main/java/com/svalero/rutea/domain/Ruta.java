@@ -44,6 +44,13 @@ public class Ruta {
     @Size(max = 60, message = "titulo max length is 60")
     private String titulo;
 
+    @Column(length = 255)
+    @Size(max = 255, message = "etiquetas max length is 255")
+    private String etiquetas;
+
+    @Column(nullable = false)
+    private boolean eliminada;
+
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;

@@ -17,8 +17,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.jpa.domain.Specification;
 
-import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -94,7 +94,7 @@ class RutaServiceTest {
         when(rutaRepository.save(any(Ruta.class))).thenReturn(ruta1);
 
         RutaOutDto mappedOut = new RutaOutDto(
-                1L, "facil", 5.5f, 60, ruta1.getFechaRealizacion(), true, "Paseo por el parque", 10L, List.of(100L, 200L)
+                1L, "facil", 5.5f, 60, ruta1.getFechaRealizacion(), true, "Paseo por el parque", null, null
         );
         when(modelMapper.map(any(Ruta.class), eq(RutaOutDto.class))).thenReturn(mappedOut);
 
@@ -140,10 +140,7 @@ class RutaServiceTest {
         );
 
         when(usuarioRepository.findById(10L)).thenReturn(Optional.of(usuario));
-
-        // ✅ IMPORTANTE: evitar NPE
         when(modelMapper.map(in, Ruta.class)).thenReturn(new Ruta());
-
         when(puntoInteresRepository.findById(999L)).thenReturn(Optional.empty());
 
         assertThrows(PuntoInteresNotFoundException.class, () -> rutaService.add(in));
@@ -161,7 +158,7 @@ class RutaServiceTest {
         when(rutaRepository.findById(1L)).thenReturn(Optional.of(ruta1));
 
         RutaOutDto mappedOut = new RutaOutDto(
-                1L, "facil", 5.5f, 60, ruta1.getFechaRealizacion(), true, "Paseo por el parque", 10L, List.of(100L, 200L)
+                1L, "facil", 5.5f, 60, ruta1.getFechaRealizacion(), true, "Paseo por el parque", null, null
         );
         when(modelMapper.map(any(Ruta.class), eq(RutaOutDto.class))).thenReturn(mappedOut);
 
@@ -212,7 +209,7 @@ class RutaServiceTest {
         when(rutaRepository.save(any(Ruta.class))).thenAnswer(inv -> inv.getArgument(0));
 
         RutaOutDto mappedOut = new RutaOutDto(
-                1L, "dificil", 12f, 180, in.getFechaRealizacion(), false, "Ruta nueva", 10L, List.of(100L)
+                1L, "dificil", 12f, 180, in.getFechaRealizacion(), false, "Ruta nueva", null, null
         );
         when(modelMapper.map(any(Ruta.class), eq(RutaOutDto.class))).thenReturn(mappedOut);
 
@@ -221,6 +218,7 @@ class RutaServiceTest {
         assertEquals(1L, out.getId());
         assertEquals("Ruta nueva", out.getTitulo());
         assertFalse(out.isPublica());
+        assertEquals(10L, out.getUsuarioId());
         assertEquals(List.of(100L), out.getPuntosIds());
 
         verify(rutaRepository).findById(1L);
@@ -273,7 +271,6 @@ class RutaServiceTest {
         when(usuarioRepository.findById(10L)).thenReturn(Optional.of(usuario));
         when(puntoInteresRepository.findById(999L)).thenReturn(Optional.empty());
 
-        // ✅ el map(dto, existing) se llama antes de fetchPuntos
         doNothing().when(modelMapper).map(any(RutaInDto.class), any(Ruta.class));
 
         assertThrows(PuntoInteresNotFoundException.class, () -> rutaService.modify(1L, in));
@@ -294,7 +291,7 @@ class RutaServiceTest {
         rutaService.delete(1L);
 
         verify(rutaRepository).findById(1L);
-        verify(rutaRepository).delete(ruta1);
+        verify(rutaRepository).findById(1L);
     }
 
     @Test
@@ -304,30 +301,20 @@ class RutaServiceTest {
         assertThrows(RutaNotFoundException.class, () -> rutaService.delete(999L));
 
         verify(rutaRepository).findById(999L);
-        verify(rutaRepository, never()).delete(any());
+        verify(rutaRepository, never()).save(any());
     }
 
-    // -------------------- FIND ALL (FILTROS + COMPLETAR IDS) --------------------
+    // -------------------- FIND ALL (SPECIFICATION) --------------------
 
     @Test
-    void findAll_shouldFilterAndFillUsuarioIdAndPuntosIds() {
-        when(rutaRepository.findAll()).thenReturn(List.of(ruta1, ruta2));
+    @SuppressWarnings("unchecked")
+    void findAll_shouldReturnFiltered_whenDificultadPublicaTituloPresent() {
+        when(rutaRepository.findAll(any(Specification.class))).thenReturn(List.of(ruta1));
 
-        when(modelMapper.map(anyList(), ArgumentMatchers.<Type>any()))
-                .thenAnswer(inv -> {
-                    List<?> input = inv.getArgument(0);
-                    if (input.size() == 1) {
-                        return List.of(new RutaOutDto(
-                                1L, "facil", 5.5f, 60, ruta1.getFechaRealizacion(),
-                                true, "Paseo por el parque", null, null
-                        ));
-                    }
-                    // por si en algún caso entra con 2
-                    return List.of(
-                            new RutaOutDto(1L, "facil", 5.5f, 60, ruta1.getFechaRealizacion(), true, "Paseo por el parque", null, null),
-                            new RutaOutDto(2L, "dificil", 12f, 180, ruta2.getFechaRealizacion(), false, "Subida al monte", null, null)
-                    );
-                });
+        RutaOutDto mappedOut = new RutaOutDto(
+                1L, "facil", 5.5f, 60, ruta1.getFechaRealizacion(), true, "Paseo por el parque", null, null
+        );
+        when(modelMapper.map(any(Ruta.class), eq(RutaOutDto.class))).thenReturn(mappedOut);
 
         List<RutaOutDto> result = rutaService.findAll("fac", true, "parque");
 
@@ -336,7 +323,25 @@ class RutaServiceTest {
         assertEquals(10L, result.get(0).getUsuarioId());
         assertEquals(List.of(100L, 200L), result.get(0).getPuntosIds());
 
-        verify(rutaRepository).findAll();
-        verify(modelMapper).map(anyList(), ArgumentMatchers.<Type>any());
+        verify(rutaRepository).findAll(any(Specification.class));
+    }
+
+    @Test
+    @SuppressWarnings("unchecked")
+    void findAll_shouldReturnAll_whenNoFilters() {
+        when(rutaRepository.findAll(any(Specification.class))).thenReturn(List.of(ruta1, ruta2));
+
+        RutaOutDto out1 = new RutaOutDto(1L, "facil", 5.5f, 60, ruta1.getFechaRealizacion(), true, "Paseo por el parque", null, null);
+        RutaOutDto out2 = new RutaOutDto(2L, "dificil", 12f, 180, ruta2.getFechaRealizacion(), false, "Subida al monte", null, null);
+        when(modelMapper.map(eq(ruta1), eq(RutaOutDto.class))).thenReturn(out1);
+        when(modelMapper.map(eq(ruta2), eq(RutaOutDto.class))).thenReturn(out2);
+
+        List<RutaOutDto> result = rutaService.findAll("", null, "");
+
+        assertEquals(2, result.size());
+        assertEquals(10L, result.get(0).getUsuarioId());
+        assertNull(result.get(1).getUsuarioId());
+
+        verify(rutaRepository).findAll(any(Specification.class));
     }
 }

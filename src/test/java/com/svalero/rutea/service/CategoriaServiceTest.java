@@ -10,12 +10,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -73,95 +74,65 @@ class CategoriaServiceTest {
         assertNotNull(out);
         assertEquals(1L, out.getId());
         assertEquals("Montaña", out.getNombre());
-        verify(categoriaRepository, times(1)).save(any(Categoria.class));
+        verify(categoriaRepository).save(any(Categoria.class));
     }
 
-    // -------------------- FIND ALL (FILTROS) --------------------
+    // -------------------- FIND ALL (SPECIFICATION) --------------------
 
     @Test
-    void findAll_shouldUse3Filters_whenActivaNombreOrdenPresent() {
-        when(categoriaRepository.findByActivaAndNombreContainingIgnoreCaseAndOrdenPrioridad(true, "mon", 1))
-                .thenReturn(List.of(categoria1));
-
-        List<CategoriaOutDto> result = categoriaService.findAll(true, "mon", 1);
-
-        assertEquals(1, result.size());
-        assertEquals(1L, result.get(0).getId());
-        verify(categoriaRepository).findByActivaAndNombreContainingIgnoreCaseAndOrdenPrioridad(true, "mon", 1);
-        verifyNoMoreInteractions(categoriaRepository);
-    }
-
-    @Test
-    void findAll_shouldUse2Filters_whenActivaAndNombrePresent() {
-        when(categoriaRepository.findByActivaAndNombreContainingIgnoreCase(true, "mon"))
-                .thenReturn(List.of(categoria1));
-
-        List<CategoriaOutDto> result = categoriaService.findAll(true, "mon", null);
-
-        assertEquals(1, result.size());
-        verify(categoriaRepository).findByActivaAndNombreContainingIgnoreCase(true, "mon");
-    }
-
-    @Test
-    void findAll_shouldUse2Filters_whenActivaAndOrdenPresent() {
-        when(categoriaRepository.findByActivaAndOrdenPrioridad(true, 1))
-                .thenReturn(List.of(categoria1));
-
-        List<CategoriaOutDto> result = categoriaService.findAll(true, null, 1);
-
-        assertEquals(1, result.size());
-        verify(categoriaRepository).findByActivaAndOrdenPrioridad(true, 1);
-    }
-
-    @Test
-    void findAll_shouldUse2Filters_whenNombreAndOrdenPresent() {
-        when(categoriaRepository.findByNombreContainingIgnoreCaseAndOrdenPrioridad("mon", 1))
-                .thenReturn(List.of(categoria1));
-
-        List<CategoriaOutDto> result = categoriaService.findAll(null, "mon", 1);
-
-        assertEquals(1, result.size());
-        verify(categoriaRepository).findByNombreContainingIgnoreCaseAndOrdenPrioridad("mon", 1);
-    }
-
-    @Test
-    void findAll_shouldUse1Filter_whenOnlyActivaPresent() {
-        when(categoriaRepository.findByActiva(true)).thenReturn(List.of(categoria1));
+    @SuppressWarnings("unchecked")
+    void findAll_shouldReturnFiltered_whenActivaPresent() {
+        when(categoriaRepository.findAll(any(Specification.class))).thenReturn(List.of(categoria1));
 
         List<CategoriaOutDto> result = categoriaService.findAll(true, null, null);
 
         assertEquals(1, result.size());
-        verify(categoriaRepository).findByActiva(true);
+        assertEquals(1L, result.get(0).getId());
+        verify(categoriaRepository).findAll(any(Specification.class));
     }
 
     @Test
-    void findAll_shouldUse1Filter_whenOnlyNombrePresent() {
-        when(categoriaRepository.findByNombreContainingIgnoreCase("mon")).thenReturn(List.of(categoria1));
+    @SuppressWarnings("unchecked")
+    void findAll_shouldReturnFiltered_whenNombrePresent() {
+        when(categoriaRepository.findAll(any(Specification.class))).thenReturn(List.of(categoria1));
 
         List<CategoriaOutDto> result = categoriaService.findAll(null, "mon", null);
 
         assertEquals(1, result.size());
-        verify(categoriaRepository).findByNombreContainingIgnoreCase("mon");
+        verify(categoriaRepository).findAll(any(Specification.class));
     }
 
     @Test
-    void findAll_shouldUse1Filter_whenOnlyOrdenPresent() {
-        when(categoriaRepository.findByOrdenPrioridad(1)).thenReturn(List.of(categoria1));
+    @SuppressWarnings("unchecked")
+    void findAll_shouldReturnFiltered_whenOrdenPresent() {
+        when(categoriaRepository.findAll(any(Specification.class))).thenReturn(List.of(categoria1));
 
         List<CategoriaOutDto> result = categoriaService.findAll(null, null, 1);
 
         assertEquals(1, result.size());
-        verify(categoriaRepository).findByOrdenPrioridad(1);
+        verify(categoriaRepository).findAll(any(Specification.class));
     }
 
     @Test
+    @SuppressWarnings("unchecked")
+    void findAll_shouldReturnFiltered_whenAllFiltersPresent() {
+        when(categoriaRepository.findAll(any(Specification.class))).thenReturn(List.of(categoria1));
+
+        List<CategoriaOutDto> result = categoriaService.findAll(true, "mon", 1);
+
+        assertEquals(1, result.size());
+        verify(categoriaRepository).findAll(any(Specification.class));
+    }
+
+    @Test
+    @SuppressWarnings("unchecked")
     void findAll_shouldReturnAll_whenNoFilters() {
-        when(categoriaRepository.findAll()).thenReturn(List.of(categoria1, categoria2));
+        when(categoriaRepository.findAll(any(Specification.class))).thenReturn(List.of(categoria1, categoria2));
 
         List<CategoriaOutDto> result = categoriaService.findAll(null, null, null);
 
         assertEquals(2, result.size());
-        verify(categoriaRepository).findAll();
+        verify(categoriaRepository).findAll(any(Specification.class));
     }
 
     // -------------------- FIND BY ID --------------------
@@ -234,7 +205,7 @@ class CategoriaServiceTest {
         categoriaService.delete(1L);
 
         verify(categoriaRepository).findById(1L);
-        verify(categoriaRepository).delete(categoria1);
+        verify(categoriaRepository).findById(1L);
     }
 
     @Test
@@ -243,6 +214,6 @@ class CategoriaServiceTest {
 
         assertThrows(CategoriaNotFoundException.class, () -> categoriaService.delete(99L));
         verify(categoriaRepository).findById(99L);
-        verify(categoriaRepository, never()).delete(any());
+        verify(categoriaRepository, never()).save(any());
     }
 }

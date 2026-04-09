@@ -2,19 +2,18 @@ package com.svalero.rutea.controller;
 
 import com.svalero.rutea.dto.UsuarioInDto;
 import com.svalero.rutea.dto.UsuarioOutDto;
-import com.svalero.rutea.exception.ErrorResponse;
 import com.svalero.rutea.exception.UsuarioNotFoundException;
 import com.svalero.rutea.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 public class UsuarioController {
@@ -26,9 +25,9 @@ public class UsuarioController {
 
     @GetMapping("/usuarios")
     public ResponseEntity<List<UsuarioOutDto>> getAll(
-            @RequestParam(value = "premium", required = false) Boolean premium,
-            @RequestParam(value = "nivelExperiencia", required = false) Integer nivelExperiencia,
-            @RequestParam(value = "username", required = false, defaultValue = "") String username
+            @RequestParam(required = false) Boolean premium,
+            @RequestParam(required = false) Integer nivelExperiencia,
+            @RequestParam(required = false, defaultValue = "") String username
     ) {
         logger.debug("GET /usuarios - Filtros: premium={}, nivelExperiencia={}, username={}",
                 premium, nivelExperiencia, username);
@@ -44,8 +43,7 @@ public class UsuarioController {
     @PostMapping("/usuarios")
     public ResponseEntity<UsuarioOutDto> add(@Valid @RequestBody UsuarioInDto usuarioInDto) {
         logger.debug("POST /usuarios - {}", usuarioInDto.getUsername());
-        UsuarioOutDto created = usuarioService.add(usuarioInDto);
-        return new ResponseEntity<>(created, HttpStatus.CREATED);
+        return new ResponseEntity<>(usuarioService.add(usuarioInDto), HttpStatus.CREATED);
     }
 
     @PutMapping("/usuarios/{id}")
@@ -55,16 +53,6 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.modify(id, usuarioInDto));
     }
 
-    /**
-     * PATCH /usuarios/{id} - Actualización parcial de usuario
-     * Permite modificar solo los campos especificados en el body
-     *
-     * Ejemplo de request body:
-     * {
-     *   "esPremium": true,
-     *   "nivelExperiencia": 15
-     * }
-     */
     @PatchMapping("/usuarios/{id}")
     public ResponseEntity<UsuarioOutDto> patch(
             @PathVariable long id,
@@ -78,26 +66,5 @@ public class UsuarioController {
         logger.debug("DELETE /usuarios/{}", id);
         usuarioService.delete(id);
         return ResponseEntity.noContent().build();
-    }
-
-    @ExceptionHandler(UsuarioNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleException(UsuarioNotFoundException e) {
-        logger.warn("Usuario no encontrado: {}", e.getMessage());
-        ErrorResponse errorResponse = ErrorResponse.notFound("El usuario no existe");
-        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> handleException(MethodArgumentNotValidException e) {
-        logger.warn("Error de validación en request");
-        Map<String, String> errors = new HashMap<>();
-        e.getBindingResult().getAllErrors().forEach(error -> {
-            String field = ((FieldError) error).getField();
-            String msg = error.getDefaultMessage();
-            errors.put(field, msg);
-        });
-
-        ErrorResponse errorResponse = ErrorResponse.validationError(errors);
-        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 }

@@ -8,13 +8,15 @@ import com.svalero.rutea.repository.CategoriaRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 
 @Service
+@Transactional
 public class CategoriaService {
 
     private static final Logger logger = LoggerFactory.getLogger(CategoriaService.class);
@@ -24,15 +26,9 @@ public class CategoriaService {
 
     public CategoriaOutDto add(CategoriaInDto dto) {
         logger.info("Creando nueva categoría: {}", dto.getNombre());
-        try {
-            Categoria categoria = toEntity(dto);
-            Categoria saved = categoriaRepository.save(categoria);
-            logger.info("Categoría creada exitosamente con ID: {}", saved.getId());
-            return toOutDto(saved);
-        } catch (Exception e) {
-            logger.error("Error al crear categoría: {}", e.getMessage(), e);
-            throw e;
-        }
+        Categoria saved = categoriaRepository.save(toEntity(dto));
+        logger.info("Categoría creada exitosamente con ID: {}", saved.getId());
+        return toOutDto(saved);
     }
 
     public void delete(long id) throws CategoriaNotFoundException {
@@ -46,50 +42,32 @@ public class CategoriaService {
         logger.info("Categoría eliminada exitosamente: ID {}", id);
     }
 
-    // Filtros (combinables): activa + nombre + ordenPrioridad
+    @Transactional(readOnly = true)
     public List<CategoriaOutDto> findAll(Boolean activa, String nombre, Integer ordenPrioridad) {
         logger.debug("Buscando categorías con filtros: activa={}, nombre={}, ordenPrioridad={}",
                 activa, nombre, ordenPrioridad);
 
-        boolean hasActiva = (activa != null);
-        boolean hasNombre = (nombre != null && !nombre.isBlank());
-        boolean hasOrden = (ordenPrioridad != null);
+        Specification<Categoria> spec = Specification.where(null);
 
-        List<Categoria> categorias;
+        if (activa != null)
+            spec = spec.and((root, query, cb) -> cb.equal(root.get("activa"), activa));
 
-        // 3 campos
-        if (hasActiva && hasNombre && hasOrden) {
-            categorias = categoriaRepository
-                    .findByActivaAndNombreContainingIgnoreCaseAndOrdenPrioridad(activa, nombre, ordenPrioridad);
-
-            // 2 campos
-        } else if (hasActiva && hasNombre) {
-            categorias = categoriaRepository
-                    .findByActivaAndNombreContainingIgnoreCase(activa, nombre);
-        } else if (hasActiva && hasOrden) {
-            categorias = categoriaRepository
-                    .findByActivaAndOrdenPrioridad(activa, ordenPrioridad);
-        } else if (hasNombre && hasOrden) {
-            categorias = categoriaRepository
-                    .findByNombreContainingIgnoreCaseAndOrdenPrioridad(nombre, ordenPrioridad);
-
-            // 1 campo
-        } else if (hasActiva) {
-            categorias = categoriaRepository.findByActiva(activa);
-        } else if (hasNombre) {
-            categorias = categoriaRepository.findByNombreContainingIgnoreCase(nombre);
-        } else if (hasOrden) {
-            categorias = categoriaRepository.findByOrdenPrioridad(ordenPrioridad);
-
-            // sin filtros
-        } else {
-            categorias = categoriaRepository.findAll();
+        if (nombre != null && !nombre.isBlank()) {
+            String pattern = "%" + nombre.toLowerCase() + "%";
+            spec = spec.and((root, query, cb) -> cb.like(cb.lower(root.get("nombre")), pattern));
         }
 
-        logger.info("Se encontraron {} categorías", categorias.size());
-        return categorias.stream().map(this::toOutDto).toList();
+        if (ordenPrioridad != null)
+            spec = spec.and((root, query, cb) -> cb.equal(root.get("ordenPrioridad"), ordenPrioridad));
+
+        List<CategoriaOutDto> result = categoriaRepository.findAll(spec).stream()
+                .map(this::toOutDto)
+                .toList();
+        logger.info("Se encontraron {} categorías", result.size());
+        return result;
     }
 
+    @Transactional(readOnly = true)
     public CategoriaOutDto findById(long id) throws CategoriaNotFoundException {
         logger.debug("Buscando categoría por ID: {}", id);
         Categoria categoria = categoriaRepository.findById(id)
@@ -108,7 +86,6 @@ public class CategoriaService {
                     return new CategoriaNotFoundException();
                 });
 
-        // Actualización controlada (sin tocar relaciones)
         existing.setActiva(dto.isActiva());
         existing.setCostePromedio(dto.getCostePromedio());
         existing.setDescripcion(dto.getDescripcion());
@@ -121,18 +98,8 @@ public class CategoriaService {
         return toOutDto(saved);
     }
 
-    /**
-     * Operación PATCH - Actualización parcial de categoría
-     * Permite modificar solo los campos especificados
-     *
-     * @param id ID de la categoría
-     * @param updates Map con los campos a actualizar
-     * @return CategoriaOutDto actualizado
-     * @throws CategoriaNotFoundException si no existe la categoría
-     */
     public CategoriaOutDto patch(long id, Map<String, Object> updates) throws CategoriaNotFoundException {
         logger.info("Aplicando PATCH a categoría ID: {} con {} campos", id, updates.size());
-        logger.debug("Campos a actualizar: {}", updates.keySet());
 
         Categoria categoria = categoriaRepository.findById(id)
                 .orElseThrow(() -> {
@@ -140,38 +107,46 @@ public class CategoriaService {
                     return new CategoriaNotFoundException();
                 });
 
-        updates.forEach((campo, valor) -> {
-            try {
-                Field field = Categoria.class.getDeclaredField(campo);
-                field.setAccessible(true);
-
-                // Convertir tipos según necesidad
-                if (field.getType() == boolean.class && valor instanceof Boolean) {
-                    field.setBoolean(categoria, (Boolean) valor);
-                } else if (field.getType() == float.class && valor instanceof Number) {
-                    field.setFloat(categoria, ((Number) valor).floatValue());
-                } else if (field.getType() == int.class && valor instanceof Number) {
-                    field.setInt(categoria, ((Number) valor).intValue());
-                } else {
-                    field.set(categoria, valor);
-                }
-
-                logger.debug("Campo actualizado: {} = {}", campo, valor);
-            } catch (NoSuchFieldException e) {
-                logger.warn("Campo no existe en Categoria: {}", campo);
-                throw new RuntimeException("Campo no válido: " + campo);
-            } catch (IllegalAccessException e) {
-                logger.error("Error de acceso al campo {}: {}", campo, e.getMessage());
-                throw new RuntimeException("Error actualizando campo: " + campo, e);
+        for (Map.Entry<String, Object> entry : updates.entrySet()) {
+            String campo = entry.getKey();
+            Object valor = entry.getValue();
+            switch (campo) {
+                case "activa":
+                    categoria.setActiva((Boolean) valor);
+                    logger.debug("Campo actualizado: activa = {}", valor);
+                    break;
+                case "costePromedio":
+                    categoria.setCostePromedio(((Number) valor).floatValue());
+                    logger.debug("Campo actualizado: costePromedio = {}", valor);
+                    break;
+                case "descripcion":
+                    categoria.setDescripcion((String) valor);
+                    logger.debug("Campo actualizado: descripcion");
+                    break;
+                case "iconoUrl":
+                    categoria.setIconoUrl((String) valor);
+                    logger.debug("Campo actualizado: iconoUrl");
+                    break;
+                case "nombre":
+                    categoria.setNombre((String) valor);
+                    logger.debug("Campo actualizado: nombre = {}", valor);
+                    break;
+                case "ordenPrioridad":
+                    categoria.setOrdenPrioridad(((Number) valor).intValue());
+                    logger.debug("Campo actualizado: ordenPrioridad = {}", valor);
+                    break;
+                case "id":
+                    logger.debug("Ignorando campo 'id' en PATCH");
+                    break;
+                default:
+                    logger.warn("Campo desconocido ignorado en PATCH: {}", campo);
             }
-        });
+        }
 
         Categoria updated = categoriaRepository.save(categoria);
         logger.info("Categoría actualizada exitosamente con PATCH: ID {}", id);
         return toOutDto(updated);
     }
-
-    // ----------------- Mappers manuales -----------------
 
     private Categoria toEntity(CategoriaInDto dto) {
         return Categoria.builder()

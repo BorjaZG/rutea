@@ -6,17 +6,19 @@ import com.svalero.rutea.dto.UsuarioOutDto;
 import com.svalero.rutea.exception.UsuarioNotFoundException;
 import com.svalero.rutea.repository.UsuarioRepository;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
 @Service
+@Transactional
 public class UsuarioService {
 
     private static final Logger logger = LoggerFactory.getLogger(UsuarioService.class);
@@ -28,15 +30,10 @@ public class UsuarioService {
 
     public UsuarioOutDto add(UsuarioInDto usuarioInDto) {
         logger.info("Creando nuevo usuario: {}", usuarioInDto.getUsername());
-        try {
-            Usuario usuario = modelMapper.map(usuarioInDto, Usuario.class);
-            Usuario saved = usuarioRepository.save(usuario);
-            logger.info("Usuario creado exitosamente con ID: {}", saved.getId());
-            return modelMapper.map(saved, UsuarioOutDto.class);
-        } catch (Exception e) {
-            logger.error("Error al crear usuario: {}", e.getMessage(), e);
-            throw e;
-        }
+        Usuario usuario = modelMapper.map(usuarioInDto, Usuario.class);
+        Usuario saved = usuarioRepository.save(usuario);
+        logger.info("Usuario creado exitosamente con ID: {}", saved.getId());
+        return toOutDto(saved);
     }
 
     public void delete(long id) throws UsuarioNotFoundException {
@@ -50,47 +47,32 @@ public class UsuarioService {
         logger.info("Usuario eliminado exitosamente: ID {}", id);
     }
 
-    // Filtros (hasta 3): premium + nivelExperiencia + username
+    @Transactional(readOnly = true)
     public List<UsuarioOutDto> findAll(Boolean premium, Integer nivelExperiencia, String username) {
         logger.debug("Buscando usuarios con filtros: premium={}, nivelExperiencia={}, username={}",
                 premium, nivelExperiencia, username);
 
-        boolean hasPremium = (premium != null);
-        boolean hasNivel = (nivelExperiencia != null);
-        boolean hasUsername = (username != null && !username.isBlank());
+        Specification<Usuario> spec = Specification.where(null);
 
-        List<Usuario> usuarios;
+        if (premium != null)
+            spec = spec.and((root, query, cb) -> cb.equal(root.get("esPremium"), premium));
 
-        // 3 campos
-        if (hasPremium && hasNivel && hasUsername) {
-            usuarios = usuarioRepository.findByEsPremiumAndNivelExperienciaAndUsernameContainingIgnoreCase(
-                    premium, nivelExperiencia, username);
+        if (nivelExperiencia != null)
+            spec = spec.and((root, query, cb) -> cb.equal(root.get("nivelExperiencia"), nivelExperiencia));
 
-            // 2 campos
-        } else if (hasPremium && hasNivel) {
-            usuarios = usuarioRepository.findByEsPremiumAndNivelExperiencia(premium, nivelExperiencia);
-        } else if (hasPremium && hasUsername) {
-            usuarios = usuarioRepository.findByEsPremiumAndUsernameContainingIgnoreCase(premium, username);
-        } else if (hasNivel && hasUsername) {
-            usuarios = usuarioRepository.findByNivelExperienciaAndUsernameContainingIgnoreCase(nivelExperiencia, username);
-
-            // 1 campo
-        } else if (hasPremium) {
-            usuarios = usuarioRepository.findByEsPremium(premium);
-        } else if (hasNivel) {
-            usuarios = usuarioRepository.findByNivelExperiencia(nivelExperiencia);
-        } else if (hasUsername) {
-            usuarios = usuarioRepository.findByUsernameContainingIgnoreCase(username);
-
-            // sin filtros
-        } else {
-            usuarios = usuarioRepository.findAll();
+        if (username != null && !username.isBlank()) {
+            String pattern = "%" + username.toLowerCase() + "%";
+            spec = spec.and((root, query, cb) -> cb.like(cb.lower(root.get("username")), pattern));
         }
 
-        logger.info("Se encontraron {} usuarios", usuarios.size());
-        return modelMapper.map(usuarios, new TypeToken<List<UsuarioOutDto>>() {}.getType());
+        List<UsuarioOutDto> result = usuarioRepository.findAll(spec).stream()
+                .map(this::toOutDto)
+                .toList();
+        logger.info("Se encontraron {} usuarios", result.size());
+        return result;
     }
 
+    @Transactional(readOnly = true)
     public UsuarioOutDto findById(long id) throws UsuarioNotFoundException {
         logger.debug("Buscando usuario por ID: {}", id);
         Usuario usuario = usuarioRepository.findById(id)
@@ -98,7 +80,7 @@ public class UsuarioService {
                     logger.error("Usuario no encontrado: ID {}", id);
                     return new UsuarioNotFoundException();
                 });
-        return modelMapper.map(usuario, UsuarioOutDto.class);
+        return toOutDto(usuario);
     }
 
     public UsuarioOutDto modify(long id, UsuarioInDto usuarioInDto) throws UsuarioNotFoundException {
@@ -114,16 +96,11 @@ public class UsuarioService {
 
         Usuario saved = usuarioRepository.save(existing);
         logger.info("Usuario modificado exitosamente: ID {}", id);
-        return modelMapper.map(saved, UsuarioOutDto.class);
+        return toOutDto(saved);
     }
 
-    /**
-     * Operación PATCH - Actualización parcial de usuario
-     * Permite modificar cualquier atributo especificado
-     */
     public UsuarioOutDto patch(long id, Map<String, Object> updates) throws UsuarioNotFoundException {
         logger.info("Aplicando PATCH a usuario ID: {} con {} campos", id, updates.size());
-        logger.debug("Campos a actualizar: {}", updates.keySet());
 
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> {
@@ -131,54 +108,49 @@ public class UsuarioService {
                     return new UsuarioNotFoundException();
                 });
 
-        // Actualizar campos usando setters
-        updates.forEach((campo, valor) -> {
+        for (Map.Entry<String, Object> entry : updates.entrySet()) {
+            String campo = entry.getKey();
+            Object valor = entry.getValue();
             switch (campo) {
                 case "email":
                     usuario.setEmail((String) valor);
                     logger.debug("Campo actualizado: email = {}", valor);
                     break;
-
                 case "esPremium":
                     usuario.setEsPremium((Boolean) valor);
                     logger.debug("Campo actualizado: esPremium = {}", valor);
                     break;
-
                 case "fechaRegistro":
-                    if (valor instanceof String) {
-                        usuario.setFechaRegistro(LocalDate.parse((String) valor));
-                    } else if (valor instanceof LocalDate) {
-                        usuario.setFechaRegistro((LocalDate) valor);
-                    }
+                    if (valor instanceof String s)
+                        usuario.setFechaRegistro(LocalDate.parse(s));
                     logger.debug("Campo actualizado: fechaRegistro = {}", valor);
                     break;
-
                 case "nivelExperiencia":
                     usuario.setNivelExperiencia(((Number) valor).intValue());
                     logger.debug("Campo actualizado: nivelExperiencia = {}", valor);
                     break;
-
                 case "password":
                     usuario.setPassword((String) valor);
                     logger.debug("Campo actualizado: password = ****");
                     break;
-
                 case "username":
                     usuario.setUsername((String) valor);
                     logger.debug("Campo actualizado: username = {}", valor);
                     break;
-
                 case "id":
                     logger.debug("Ignorando campo 'id' en PATCH");
                     break;
-
                 default:
-                    logger.warn("Campo desconocido: {}", campo);
+                    logger.warn("Campo desconocido ignorado en PATCH: {}", campo);
             }
-        });
+        }
 
         Usuario updated = usuarioRepository.save(usuario);
         logger.info("Usuario actualizado exitosamente con PATCH: ID {}", id);
-        return modelMapper.map(updated, UsuarioOutDto.class);
+        return toOutDto(updated);
+    }
+
+    private UsuarioOutDto toOutDto(Usuario usuario) {
+        return modelMapper.map(usuario, UsuarioOutDto.class);
     }
 }
