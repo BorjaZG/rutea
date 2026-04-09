@@ -2505,3 +2505,629 @@
 2026-04-09 11:19:08.550 [SpringApplicationShutdownHook] DEBUG o.s.w.c.s.GenericWebApplicationContext - Closing org.springframework.web.context.support.GenericWebApplicationContext@37f71e8, started on Thu Apr 09 11:19:07 CEST 2026
 2026-04-09 11:19:08.550 [SpringApplicationShutdownHook] DEBUG o.s.w.c.s.GenericWebApplicationContext - Closing org.springframework.web.context.support.GenericWebApplicationContext@2119b989, started on Thu Apr 09 11:19:07 CEST 2026
 2026-04-09 11:19:08.550 [SpringApplicationShutdownHook] DEBUG o.s.w.c.s.GenericWebApplicationContext - Closing org.springframework.web.context.support.GenericWebApplicationContext@26f7b114, started on Thu Apr 09 11:19:07 CEST 2026
+2026-04-09 11:27:15.041 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2026-04-09 11:27:15.058 [main] INFO  c.s.r.c.UsuarioControllerTest - Starting UsuarioControllerTest using Java 17.0.18 with PID 13762 (started by borja in /home/borja/IdeaProjects/rutea)
+2026-04-09 11:27:15.058 [main] DEBUG c.s.r.c.UsuarioControllerTest - Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-04-09 11:27:15.058 [main] INFO  c.s.r.c.UsuarioControllerTest - No active profile set, falling back to 1 default profile: "default"
+2026-04-09 11:27:15.066 [main] DEBUG o.s.w.c.s.GenericWebApplicationContext - Refreshing org.springframework.web.context.support.GenericWebApplicationContext@1ded7b14
+2026-04-09 11:27:15.997 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 8 mappings in 'requestMappingHandlerMapping'
+2026-04-09 11:27:16.060 [main] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2026-04-09 11:27:16.080 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2026-04-09 11:27:16.097 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2026-04-09 11:27:16.125 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2026-04-09 11:27:16.125 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2026-04-09 11:27:16.126 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+2026-04-09 11:27:16.140 [main] INFO  c.s.r.c.UsuarioControllerTest - Started UsuarioControllerTest in 1.278 seconds (process running for 1.791)
+2026-04-09 11:27:16.173 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.UsuarioController#delete(long)
+2026-04-09 11:27:16.182 [main] DEBUG c.s.r.controller.UsuarioController - DELETE /usuarios/1
+2026-04-09 11:27:16.198 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.198 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Nothing to write: null body
+2026-04-09 11:27:16.229 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.UsuarioController#modify(long, UsuarioInDto)
+2026-04-09 11:27:16.246 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [UsuarioInDto(email=b@b.com, esPremium=false, fechaRegistro=2026-04-09, nivelExperiencia=5, password= (truncated)...]
+2026-04-09 11:27:16.287 [main] DEBUG c.s.r.controller.UsuarioController - PUT /usuarios/99
+2026-04-09 11:27:16.290 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleNotFound(Exception)
+2026-04-09 11:27:16.293 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.295 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=404, title=not-found, message=Resource not found, errors={})]
+2026-04-09 11:27:16.300 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.svalero.rutea.exception.UsuarioNotFoundException]
+2026-04-09 11:27:16.319 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.UsuarioController#add(UsuarioInDto)
+2026-04-09 11:27:16.320 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [UsuarioInDto(email=no-es-email, esPremium=false, fechaRegistro=null, nivelExperiencia=-1, password=1 (truncated)...]
+2026-04-09 11:27:16.325 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleValidation(MethodArgumentNotValidException)
+2026-04-09 11:27:16.326 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.326 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=400, title=bad-request, message=Validation error, errors={password=password lengt (truncated)...]
+2026-04-09 11:27:16.327 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<com.svalero.rutea.dto.UsuarioOutDto> com.svalero.rutea.controller.UsuarioController.add(com.svalero.rutea.dto.UsuarioInDto) with 5 errors: [Field error in object 'usuarioInDto' on field 'password': rejected value [123]; codes [Size.usuarioInDto.password,Size.password,Size.java.lang.String,Size]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [usuarioInDto.password,password]; arguments []; default message [password],255,6]; default message [password length must be between 6 and 255]] [Field error in object 'usuarioInDto' on field 'nivelExperiencia': rejected value [-1]; codes [Min.usuarioInDto.nivelExperiencia,Min.nivelExperiencia,Min.int,Min]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [usuarioInDto.nivelExperiencia,nivelExperiencia]; arguments []; default message [nivelExperiencia],0]; default message [nivelExperiencia must be >= 0]] [Field error in object 'usuarioInDto' on field 'fechaRegistro': rejected value [null]; codes [NotNull.usuarioInDto.fechaRegistro,NotNull.fechaRegistro,NotNull.java.time.LocalDate,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [usuarioInDto.fechaRegistro,fechaRegistro]; arguments []; default message [fechaRegistro]]; default message [fechaRegistro is mandatory]] [Field error in object 'usuarioInDto' on field 'email': rejected value [no-es-email]; codes [Email.usuarioInDto.email,Email.email,Email.java.lang.String,Email]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [usuarioInDto.email,email]; arguments []; default message [email],[Ljakarta.validation.constraints.Pattern$Flag;@43b4ec0c,.*]; default message [email must be valid]] [Field error in object 'usuarioInDto' on field 'username': rejected value []; codes [NotBlank.usuarioInDto.username,NotBlank.username,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [usuarioInDto.username,username]; arguments []; default message [username]]; default message [username is mandatory]] ]
+2026-04-09 11:27:16.333 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.UsuarioController#modify(long, UsuarioInDto)
+2026-04-09 11:27:16.333 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [UsuarioInDto(email=, esPremium=false, fechaRegistro=null, nivelExperiencia=-2, password=1, username= (truncated)...]
+2026-04-09 11:27:16.334 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleValidation(MethodArgumentNotValidException)
+2026-04-09 11:27:16.335 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.335 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=400, title=bad-request, message=Validation error, errors={password=password lengt (truncated)...]
+2026-04-09 11:27:16.335 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [1] in public org.springframework.http.ResponseEntity<com.svalero.rutea.dto.UsuarioOutDto> com.svalero.rutea.controller.UsuarioController.modify(long,com.svalero.rutea.dto.UsuarioInDto) throws com.svalero.rutea.exception.UsuarioNotFoundException with 5 errors: [Field error in object 'usuarioInDto' on field 'fechaRegistro': rejected value [null]; codes [NotNull.usuarioInDto.fechaRegistro,NotNull.fechaRegistro,NotNull.java.time.LocalDate,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [usuarioInDto.fechaRegistro,fechaRegistro]; arguments []; default message [fechaRegistro]]; default message [fechaRegistro is mandatory]] [Field error in object 'usuarioInDto' on field 'email': rejected value []; codes [NotBlank.usuarioInDto.email,NotBlank.email,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [usuarioInDto.email,email]; arguments []; default message [email]]; default message [email is mandatory]] [Field error in object 'usuarioInDto' on field 'password': rejected value [1]; codes [Size.usuarioInDto.password,Size.password,Size.java.lang.String,Size]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [usuarioInDto.password,password]; arguments []; default message [password],255,6]; default message [password length must be between 6 and 255]] [Field error in object 'usuarioInDto' on field 'username': rejected value []; codes [NotBlank.usuarioInDto.username,NotBlank.username,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [usuarioInDto.username,username]; arguments []; default message [username]]; default message [username is mandatory]] [Field error in object 'usuarioInDto' on field 'nivelExperiencia': rejected value [-2]; codes [Min.usuarioInDto.nivelExperiencia,Min.nivelExperiencia,Min.int,Min]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [usuarioInDto.nivelExperiencia,nivelExperiencia]; arguments []; default message [nivelExperiencia],0]; default message [nivelExperiencia must be >= 0]] ]
+2026-04-09 11:27:16.342 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.UsuarioController#add(UsuarioInDto)
+2026-04-09 11:27:16.342 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [UsuarioInDto(email=a@a.com, esPremium=true, fechaRegistro=2026-04-09, nivelExperiencia=2, password=1 (truncated)...]
+2026-04-09 11:27:16.343 [main] DEBUG c.s.r.controller.UsuarioController - POST /usuarios - borja
+2026-04-09 11:27:16.345 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.347 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [UsuarioOutDto(id=1, email=a@a.com, esPremium=true, fechaRegistro=2026-04-09, nivelExperiencia=2, use (truncated)...]
+2026-04-09 11:27:16.352 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.UsuarioController#modify(long, UsuarioInDto)
+2026-04-09 11:27:16.352 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [UsuarioInDto(email=b@b.com, esPremium=false, fechaRegistro=2026-04-09, nivelExperiencia=5, password= (truncated)...]
+2026-04-09 11:27:16.353 [main] DEBUG c.s.r.controller.UsuarioController - PUT /usuarios/1
+2026-04-09 11:27:16.353 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.353 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [UsuarioOutDto(id=1, email=b@b.com, esPremium=false, fechaRegistro=2026-04-09, nivelExperiencia=5, us (truncated)...]
+2026-04-09 11:27:16.357 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.UsuarioController#get(long)
+2026-04-09 11:27:16.359 [main] DEBUG o.s.web.method.HandlerMethod - Could not resolve parameter [0] in public org.springframework.http.ResponseEntity<com.svalero.rutea.dto.UsuarioOutDto> com.svalero.rutea.controller.UsuarioController.get(long) throws com.svalero.rutea.exception.UsuarioNotFoundException: Failed to convert value of type 'java.lang.String' to required type 'long'; For input string: "abc"
+2026-04-09 11:27:16.359 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleTypeMismatch(MethodArgumentTypeMismatchException)
+2026-04-09 11:27:16.359 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.359 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=400, title=bad-request, message=Validation error, errors={id=Invalid value: abc})]
+2026-04-09 11:27:16.360 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'long'; For input string: "abc"]
+2026-04-09 11:27:16.364 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.UsuarioController#delete(long)
+2026-04-09 11:27:16.364 [main] DEBUG c.s.r.controller.UsuarioController - DELETE /usuarios/99
+2026-04-09 11:27:16.364 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleNotFound(Exception)
+2026-04-09 11:27:16.365 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.365 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=404, title=not-found, message=Resource not found, errors={})]
+2026-04-09 11:27:16.365 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.svalero.rutea.exception.UsuarioNotFoundException]
+2026-04-09 11:27:16.369 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.UsuarioController#delete(long)
+2026-04-09 11:27:16.369 [main] DEBUG o.s.web.method.HandlerMethod - Could not resolve parameter [0] in public org.springframework.http.ResponseEntity<java.lang.Void> com.svalero.rutea.controller.UsuarioController.delete(long) throws com.svalero.rutea.exception.UsuarioNotFoundException: Failed to convert value of type 'java.lang.String' to required type 'long'; For input string: "abc"
+2026-04-09 11:27:16.369 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleTypeMismatch(MethodArgumentTypeMismatchException)
+2026-04-09 11:27:16.370 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.370 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=400, title=bad-request, message=Validation error, errors={id=Invalid value: abc})]
+2026-04-09 11:27:16.370 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'long'; For input string: "abc"]
+2026-04-09 11:27:16.374 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.UsuarioController#get(long)
+2026-04-09 11:27:16.375 [main] DEBUG c.s.r.controller.UsuarioController - GET /usuarios/99
+2026-04-09 11:27:16.375 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleNotFound(Exception)
+2026-04-09 11:27:16.376 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.376 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=404, title=not-found, message=Resource not found, errors={})]
+2026-04-09 11:27:16.376 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.svalero.rutea.exception.UsuarioNotFoundException]
+2026-04-09 11:27:16.380 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.UsuarioController#get(long)
+2026-04-09 11:27:16.380 [main] DEBUG c.s.r.controller.UsuarioController - GET /usuarios/1
+2026-04-09 11:27:16.380 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.380 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [UsuarioOutDto(id=1, email=a@a.com, esPremium=false, fechaRegistro=2026-04-09, nivelExperiencia=0, us (truncated)...]
+2026-04-09 11:27:16.384 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.UsuarioController#getAll(Boolean, Integer, String)
+2026-04-09 11:27:16.385 [main] DEBUG o.s.web.method.HandlerMethod - Could not resolve parameter [1] in public org.springframework.http.ResponseEntity<java.util.List<com.svalero.rutea.dto.UsuarioOutDto>> com.svalero.rutea.controller.UsuarioController.getAll(java.lang.Boolean,java.lang.Integer,java.lang.String): Failed to convert value of type 'java.lang.String' to required type 'java.lang.Integer'; For input string: "abc"
+2026-04-09 11:27:16.386 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleTypeMismatch(MethodArgumentTypeMismatchException)
+2026-04-09 11:27:16.386 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.386 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=400, title=bad-request, message=Validation error, errors={nivelExperiencia=Invali (truncated)...]
+2026-04-09 11:27:16.386 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.lang.Integer'; For input string: "abc"]
+2026-04-09 11:27:16.392 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.UsuarioController#getAll(Boolean, Integer, String)
+2026-04-09 11:27:16.395 [main] DEBUG c.s.r.controller.UsuarioController - GET /usuarios - Filtros: premium=true, nivelExperiencia=3, username=bor
+2026-04-09 11:27:16.396 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.396 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[UsuarioOutDto(id=1, email=a@a.com, esPremium=true, fechaRegistro=2026-04-09, nivelExperiencia=3, us (truncated)...]
+2026-04-09 11:27:16.407 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.svalero.rutea.controller.ResenaControllerTest]: ResenaControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-04-09 11:27:16.422 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.svalero.rutea.RuteaApplication for test class com.svalero.rutea.controller.ResenaControllerTest
+2026-04-09 11:27:16.443 [main] INFO  c.s.r.c.ResenaControllerTest - Starting ResenaControllerTest using Java 17.0.18 with PID 13762 (started by borja in /home/borja/IdeaProjects/rutea)
+2026-04-09 11:27:16.444 [main] DEBUG c.s.r.c.ResenaControllerTest - Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-04-09 11:27:16.444 [main] INFO  c.s.r.c.ResenaControllerTest - No active profile set, falling back to 1 default profile: "default"
+2026-04-09 11:27:16.446 [main] DEBUG o.s.w.c.s.GenericWebApplicationContext - Refreshing org.springframework.web.context.support.GenericWebApplicationContext@752494dd
+2026-04-09 11:27:16.619 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 8 mappings in 'requestMappingHandlerMapping'
+2026-04-09 11:27:16.633 [main] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2026-04-09 11:27:16.637 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2026-04-09 11:27:16.638 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2026-04-09 11:27:16.644 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2026-04-09 11:27:16.644 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2026-04-09 11:27:16.644 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2026-04-09 11:27:16.648 [main] INFO  c.s.r.c.ResenaControllerTest - Started ResenaControllerTest in 0.224 seconds (process running for 2.299)
+2026-04-09 11:27:16.651 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.ResenaController#delete(long)
+2026-04-09 11:27:16.652 [main] DEBUG c.s.r.controller.ResenaController - DELETE /resenas/1
+2026-04-09 11:27:16.653 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.654 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Nothing to write: null body
+2026-04-09 11:27:16.660 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.ResenaController#add(ResenaInDto)
+2026-04-09 11:27:16.664 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [ResenaInDto(comentario=Ok, editada=false, fechaPublicacion=null, likes=0, titulo=null, valoracion=4, (truncated)...]
+2026-04-09 11:27:16.669 [main] DEBUG c.s.r.controller.ResenaController - POST /resenas - valoracion: 4
+2026-04-09 11:27:16.670 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleNotFound(Exception)
+2026-04-09 11:27:16.675 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.675 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=404, title=not-found, message=Resource not found, errors={})]
+2026-04-09 11:27:16.676 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.svalero.rutea.exception.UsuarioNotFoundException]
+2026-04-09 11:27:16.680 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.ResenaController#add(ResenaInDto)
+2026-04-09 11:27:16.681 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [ResenaInDto(comentario=, editada=false, fechaPublicacion=null, likes=-1, titulo=null, valoracion=6,  (truncated)...]
+2026-04-09 11:27:16.682 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleValidation(MethodArgumentNotValidException)
+2026-04-09 11:27:16.683 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.683 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=400, title=bad-request, message=Validation error, errors={puntoId=puntoId is mand (truncated)...]
+2026-04-09 11:27:16.684 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<com.svalero.rutea.dto.ResenaOutDto> com.svalero.rutea.controller.ResenaController.add(com.svalero.rutea.dto.ResenaInDto) throws com.svalero.rutea.exception.PuntoInteresNotFoundException,com.svalero.rutea.exception.UsuarioNotFoundException with 5 errors: [Field error in object 'resenaInDto' on field 'comentario': rejected value []; codes [NotBlank.resenaInDto.comentario,NotBlank.comentario,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [resenaInDto.comentario,comentario]; arguments []; default message [comentario]]; default message [comentario is mandatory]] [Field error in object 'resenaInDto' on field 'puntoId': rejected value [null]; codes [NotNull.resenaInDto.puntoId,NotNull.puntoId,NotNull.java.lang.Long,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [resenaInDto.puntoId,puntoId]; arguments []; default message [puntoId]]; default message [puntoId is mandatory]] [Field error in object 'resenaInDto' on field 'valoracion': rejected value [6]; codes [Max.resenaInDto.valoracion,Max.valoracion,Max.int,Max]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [resenaInDto.valoracion,valoracion]; arguments []; default message [valoracion],5]; default message [valoracion must be between 1 and 5]] [Field error in object 'resenaInDto' on field 'likes': rejected value [-1]; codes [PositiveOrZero.resenaInDto.likes,PositiveOrZero.likes,PositiveOrZero.int,PositiveOrZero]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [resenaInDto.likes,likes]; arguments []; default message [likes]]; default message [likes must be >= 0]] [Field error in object 'resenaInDto' on field 'usuarioId': rejected value [null]; codes [NotNull.resenaInDto.usuarioId,NotNull.usuarioId,NotNull.java.lang.Long,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [resenaInDto.usuarioId,usuarioId]; arguments []; default message [usuarioId]]; default message [usuarioId is mandatory]] ]
+2026-04-09 11:27:16.688 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.ResenaController#modify(long, ResenaInDto)
+2026-04-09 11:27:16.689 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [ResenaInDto(comentario=, editada=false, fechaPublicacion=null, likes=-5, titulo=t, valoracion=0, pun (truncated)...]
+2026-04-09 11:27:16.690 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleValidation(MethodArgumentNotValidException)
+2026-04-09 11:27:16.690 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.690 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=400, title=bad-request, message=Validation error, errors={puntoId=puntoId is mand (truncated)...]
+2026-04-09 11:27:16.690 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [1] in public org.springframework.http.ResponseEntity<com.svalero.rutea.dto.ResenaOutDto> com.svalero.rutea.controller.ResenaController.modify(long,com.svalero.rutea.dto.ResenaInDto) throws com.svalero.rutea.exception.ResenaNotFoundException,com.svalero.rutea.exception.PuntoInteresNotFoundException,com.svalero.rutea.exception.UsuarioNotFoundException with 5 errors: [Field error in object 'resenaInDto' on field 'usuarioId': rejected value [null]; codes [NotNull.resenaInDto.usuarioId,NotNull.usuarioId,NotNull.java.lang.Long,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [resenaInDto.usuarioId,usuarioId]; arguments []; default message [usuarioId]]; default message [usuarioId is mandatory]] [Field error in object 'resenaInDto' on field 'comentario': rejected value []; codes [NotBlank.resenaInDto.comentario,NotBlank.comentario,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [resenaInDto.comentario,comentario]; arguments []; default message [comentario]]; default message [comentario is mandatory]] [Field error in object 'resenaInDto' on field 'likes': rejected value [-5]; codes [PositiveOrZero.resenaInDto.likes,PositiveOrZero.likes,PositiveOrZero.int,PositiveOrZero]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [resenaInDto.likes,likes]; arguments []; default message [likes]]; default message [likes must be >= 0]] [Field error in object 'resenaInDto' on field 'puntoId': rejected value [null]; codes [NotNull.resenaInDto.puntoId,NotNull.puntoId,NotNull.java.lang.Long,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [resenaInDto.puntoId,puntoId]; arguments []; default message [puntoId]]; default message [puntoId is mandatory]] [Field error in object 'resenaInDto' on field 'valoracion': rejected value [0]; codes [Min.resenaInDto.valoracion,Min.valoracion,Min.int,Min]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [resenaInDto.valoracion,valoracion]; arguments []; default message [valoracion],1]; default message [valoracion must be between 1 and 5]] ]
+2026-04-09 11:27:16.694 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.ResenaController#add(ResenaInDto)
+2026-04-09 11:27:16.694 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [ResenaInDto(comentario=Muy buena, editada=false, fechaPublicacion=2026-04-09, likes=0, titulo=Título (truncated)...]
+2026-04-09 11:27:16.695 [main] DEBUG c.s.r.controller.ResenaController - POST /resenas - valoracion: 5
+2026-04-09 11:27:16.697 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.699 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ResenaOutDto(id=1, comentario=Muy buena, editada=false, fechaPublicacion=2026-04-09, likes=0, titulo (truncated)...]
+2026-04-09 11:27:16.703 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.ResenaController#modify(long, ResenaInDto)
+2026-04-09 11:27:16.704 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [ResenaInDto(comentario=Editada, editada=true, fechaPublicacion=2026-04-09, likes=5, titulo=Nuevo, va (truncated)...]
+2026-04-09 11:27:16.704 [main] DEBUG c.s.r.controller.ResenaController - PUT /resenas/1
+2026-04-09 11:27:16.705 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.705 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ResenaOutDto(id=1, comentario=Editada, editada=true, fechaPublicacion=2026-04-09, likes=5, titulo=Nu (truncated)...]
+2026-04-09 11:27:16.709 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.ResenaController#get(long)
+2026-04-09 11:27:16.709 [main] DEBUG o.s.web.method.HandlerMethod - Could not resolve parameter [0] in public org.springframework.http.ResponseEntity<com.svalero.rutea.dto.ResenaOutDto> com.svalero.rutea.controller.ResenaController.get(long) throws com.svalero.rutea.exception.ResenaNotFoundException: Failed to convert value of type 'java.lang.String' to required type 'long'; For input string: "abc"
+2026-04-09 11:27:16.709 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleTypeMismatch(MethodArgumentTypeMismatchException)
+2026-04-09 11:27:16.710 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.710 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=400, title=bad-request, message=Validation error, errors={id=Invalid value: abc})]
+2026-04-09 11:27:16.710 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'long'; For input string: "abc"]
+2026-04-09 11:27:16.713 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.ResenaController#delete(long)
+2026-04-09 11:27:16.713 [main] DEBUG c.s.r.controller.ResenaController - DELETE /resenas/99
+2026-04-09 11:27:16.713 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleNotFound(Exception)
+2026-04-09 11:27:16.713 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.714 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=404, title=not-found, message=Resource not found, errors={})]
+2026-04-09 11:27:16.714 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.svalero.rutea.exception.ResenaNotFoundException]
+2026-04-09 11:27:16.717 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.ResenaController#delete(long)
+2026-04-09 11:27:16.718 [main] DEBUG o.s.web.method.HandlerMethod - Could not resolve parameter [0] in public org.springframework.http.ResponseEntity<java.lang.Void> com.svalero.rutea.controller.ResenaController.delete(long) throws com.svalero.rutea.exception.ResenaNotFoundException: Failed to convert value of type 'java.lang.String' to required type 'long'; For input string: "abc"
+2026-04-09 11:27:16.718 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleTypeMismatch(MethodArgumentTypeMismatchException)
+2026-04-09 11:27:16.718 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.718 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=400, title=bad-request, message=Validation error, errors={id=Invalid value: abc})]
+2026-04-09 11:27:16.719 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'long'; For input string: "abc"]
+2026-04-09 11:27:16.722 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.ResenaController#modify(long, ResenaInDto)
+2026-04-09 11:27:16.723 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [ResenaInDto(comentario=X, editada=false, fechaPublicacion=null, likes=0, titulo=null, valoracion=4,  (truncated)...]
+2026-04-09 11:27:16.723 [main] DEBUG c.s.r.controller.ResenaController - PUT /resenas/1
+2026-04-09 11:27:16.724 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleNotFound(Exception)
+2026-04-09 11:27:16.724 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.724 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=404, title=not-found, message=Resource not found, errors={})]
+2026-04-09 11:27:16.724 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.svalero.rutea.exception.UsuarioNotFoundException]
+2026-04-09 11:27:16.727 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.ResenaController#add(ResenaInDto)
+2026-04-09 11:27:16.728 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [ResenaInDto(comentario=Ok, editada=false, fechaPublicacion=null, likes=0, titulo=null, valoracion=4, (truncated)...]
+2026-04-09 11:27:16.728 [main] DEBUG c.s.r.controller.ResenaController - POST /resenas - valoracion: 4
+2026-04-09 11:27:16.728 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleNotFound(Exception)
+2026-04-09 11:27:16.729 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.729 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=404, title=not-found, message=Resource not found, errors={})]
+2026-04-09 11:27:16.729 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.svalero.rutea.exception.PuntoInteresNotFoundException]
+2026-04-09 11:27:16.733 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.ResenaController#modify(long, ResenaInDto)
+2026-04-09 11:27:16.734 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [ResenaInDto(comentario=X, editada=false, fechaPublicacion=null, likes=0, titulo=null, valoracion=4,  (truncated)...]
+2026-04-09 11:27:16.734 [main] DEBUG c.s.r.controller.ResenaController - PUT /resenas/99
+2026-04-09 11:27:16.735 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleNotFound(Exception)
+2026-04-09 11:27:16.735 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.735 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=404, title=not-found, message=Resource not found, errors={})]
+2026-04-09 11:27:16.735 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.svalero.rutea.exception.ResenaNotFoundException]
+2026-04-09 11:27:16.739 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.ResenaController#get(long)
+2026-04-09 11:27:16.739 [main] DEBUG c.s.r.controller.ResenaController - GET /resenas/99
+2026-04-09 11:27:16.740 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleNotFound(Exception)
+2026-04-09 11:27:16.740 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.740 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=404, title=not-found, message=Resource not found, errors={})]
+2026-04-09 11:27:16.740 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.svalero.rutea.exception.ResenaNotFoundException]
+2026-04-09 11:27:16.743 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.ResenaController#get(long)
+2026-04-09 11:27:16.744 [main] DEBUG c.s.r.controller.ResenaController - GET /resenas/1
+2026-04-09 11:27:16.744 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.744 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ResenaOutDto(id=1, comentario=Comentario, editada=false, fechaPublicacion=2026-04-09, likes=0, titul (truncated)...]
+2026-04-09 11:27:16.747 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.ResenaController#getAll(Boolean, Integer, Integer)
+2026-04-09 11:27:16.748 [main] DEBUG o.s.web.method.HandlerMethod - Could not resolve parameter [1] in public org.springframework.http.ResponseEntity<java.util.List<com.svalero.rutea.dto.ResenaOutDto>> com.svalero.rutea.controller.ResenaController.getAll(java.lang.Boolean,java.lang.Integer,java.lang.Integer): Failed to convert value of type 'java.lang.String' to required type 'java.lang.Integer'; For input string: "abc"
+2026-04-09 11:27:16.748 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleTypeMismatch(MethodArgumentTypeMismatchException)
+2026-04-09 11:27:16.749 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.749 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=400, title=bad-request, message=Validation error, errors={likes=Invalid value: ab (truncated)...]
+2026-04-09 11:27:16.749 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.lang.Integer'; For input string: "abc"]
+2026-04-09 11:27:16.752 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.ResenaController#modify(long, ResenaInDto)
+2026-04-09 11:27:16.753 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [ResenaInDto(comentario=X, editada=false, fechaPublicacion=null, likes=0, titulo=null, valoracion=4,  (truncated)...]
+2026-04-09 11:27:16.753 [main] DEBUG c.s.r.controller.ResenaController - PUT /resenas/1
+2026-04-09 11:27:16.754 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleNotFound(Exception)
+2026-04-09 11:27:16.754 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.754 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=404, title=not-found, message=Resource not found, errors={})]
+2026-04-09 11:27:16.754 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.svalero.rutea.exception.PuntoInteresNotFoundException]
+2026-04-09 11:27:16.757 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.ResenaController#getAll(Boolean, Integer, Integer)
+2026-04-09 11:27:16.758 [main] DEBUG c.s.r.controller.ResenaController - GET /resenas - Filtros: editada=true, likes=10, valoracion=5
+2026-04-09 11:27:16.759 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.759 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[ResenaOutDto(id=1, comentario=Muy bien, editada=true, fechaPublicacion=2026-04-09, likes=10, titulo (truncated)...]
+2026-04-09 11:27:16.764 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.svalero.rutea.controller.PuntoInteresControllerTest]: PuntoInteresControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-04-09 11:27:16.770 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.svalero.rutea.RuteaApplication for test class com.svalero.rutea.controller.PuntoInteresControllerTest
+2026-04-09 11:27:16.781 [main] INFO  c.s.r.c.PuntoInteresControllerTest - Starting PuntoInteresControllerTest using Java 17.0.18 with PID 13762 (started by borja in /home/borja/IdeaProjects/rutea)
+2026-04-09 11:27:16.782 [main] DEBUG c.s.r.c.PuntoInteresControllerTest - Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-04-09 11:27:16.782 [main] INFO  c.s.r.c.PuntoInteresControllerTest - No active profile set, falling back to 1 default profile: "default"
+2026-04-09 11:27:16.782 [main] DEBUG o.s.w.c.s.GenericWebApplicationContext - Refreshing org.springframework.web.context.support.GenericWebApplicationContext@59831016
+2026-04-09 11:27:16.878 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 8 mappings in 'requestMappingHandlerMapping'
+2026-04-09 11:27:16.890 [main] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2026-04-09 11:27:16.893 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2026-04-09 11:27:16.894 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2026-04-09 11:27:16.897 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2026-04-09 11:27:16.897 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2026-04-09 11:27:16.898 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+2026-04-09 11:27:16.900 [main] INFO  c.s.r.c.PuntoInteresControllerTest - Started PuntoInteresControllerTest in 0.128 seconds (process running for 2.552)
+2026-04-09 11:27:16.905 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.PuntoInteresController#getAll(Long, Boolean, Boolean, String, Float)
+2026-04-09 11:27:16.906 [main] DEBUG c.s.r.c.PuntoInteresController - GET /puntos - Filtros: categoriaId=null, abiertoActualmente=false, nombre=, puntuacionMedia=null
+2026-04-09 11:27:16.906 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.910 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[PuntoInteresOutDto(id=1, abiertoActualmente=false, fechaCreacion=null, latitud=0.0, longitud=0.0, n (truncated)...]
+2026-04-09 11:27:16.915 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.PuntoInteresController#delete(long)
+2026-04-09 11:27:16.915 [main] DEBUG c.s.r.c.PuntoInteresController - DELETE /puntos/1
+2026-04-09 11:27:16.916 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.916 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Nothing to write: null body
+2026-04-09 11:27:16.921 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.PuntoInteresController#add(PuntoInteresInDto)
+2026-04-09 11:27:16.925 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [PuntoInteresInDto(abiertoActualmente=true, fechaCreacion=null, latitud=200.0, longitud=-999.0, nombr (truncated)...]
+2026-04-09 11:27:16.933 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleValidation(MethodArgumentNotValidException)
+2026-04-09 11:27:16.934 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.934 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=400, title=bad-request, message=Validation error, errors={puntuacionMedia=puntuac (truncated)...]
+2026-04-09 11:27:16.935 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<com.svalero.rutea.dto.PuntoInteresOutDto> com.svalero.rutea.controller.PuntoInteresController.add(com.svalero.rutea.dto.PuntoInteresInDto) throws com.svalero.rutea.exception.CategoriaNotFoundException with 5 errors: [Field error in object 'puntoInteresInDto' on field 'puntuacionMedia': rejected value [6.0]; codes [DecimalMax.puntoInteresInDto.puntuacionMedia,DecimalMax.puntuacionMedia,DecimalMax.float,DecimalMax]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [puntoInteresInDto.puntuacionMedia,puntuacionMedia]; arguments []; default message [puntuacionMedia],true,5.0]; default message [puntuacionMedia must be between 0 and 5]] [Field error in object 'puntoInteresInDto' on field 'latitud': rejected value [200.0]; codes [DecimalMax.puntoInteresInDto.latitud,DecimalMax.latitud,DecimalMax.double,DecimalMax]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [puntoInteresInDto.latitud,latitud]; arguments []; default message [latitud],true,90.0]; default message [latitud must be between -90 and 90]] [Field error in object 'puntoInteresInDto' on field 'nombre': rejected value []; codes [NotBlank.puntoInteresInDto.nombre,NotBlank.nombre,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [puntoInteresInDto.nombre,nombre]; arguments []; default message [nombre]]; default message [nombre is mandatory]] [Field error in object 'puntoInteresInDto' on field 'longitud': rejected value [-999.0]; codes [DecimalMin.puntoInteresInDto.longitud,DecimalMin.longitud,DecimalMin.double,DecimalMin]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [puntoInteresInDto.longitud,longitud]; arguments []; default message [longitud],true,-180.0]; default message [longitud must be between -180 and 180]] [Field error in object 'puntoInteresInDto' on field 'categoriaId': rejected value [null]; codes [NotNull.puntoInteresInDto.categoriaId,NotNull.categoriaId,NotNull.java.lang.Long,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [puntoInteresInDto.categoriaId,categoriaId]; arguments []; default message [categoriaId]]; default message [categoriaId is mandatory]] ]
+2026-04-09 11:27:16.938 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.PuntoInteresController#modify(long, PuntoInteresInDto)
+2026-04-09 11:27:16.939 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [PuntoInteresInDto(abiertoActualmente=true, fechaCreacion=null, latitud=1000.0, longitud=0.0, nombre= (truncated)...]
+2026-04-09 11:27:16.940 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleValidation(MethodArgumentNotValidException)
+2026-04-09 11:27:16.940 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.941 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=400, title=bad-request, message=Validation error, errors={puntuacionMedia=puntuac (truncated)...]
+2026-04-09 11:27:16.941 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [1] in public org.springframework.http.ResponseEntity<com.svalero.rutea.dto.PuntoInteresOutDto> com.svalero.rutea.controller.PuntoInteresController.modify(long,com.svalero.rutea.dto.PuntoInteresInDto) throws com.svalero.rutea.exception.PuntoInteresNotFoundException,com.svalero.rutea.exception.CategoriaNotFoundException with 4 errors: [Field error in object 'puntoInteresInDto' on field 'latitud': rejected value [1000.0]; codes [DecimalMax.puntoInteresInDto.latitud,DecimalMax.latitud,DecimalMax.double,DecimalMax]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [puntoInteresInDto.latitud,latitud]; arguments []; default message [latitud],true,90.0]; default message [latitud must be between -90 and 90]] [Field error in object 'puntoInteresInDto' on field 'nombre': rejected value []; codes [NotBlank.puntoInteresInDto.nombre,NotBlank.nombre,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [puntoInteresInDto.nombre,nombre]; arguments []; default message [nombre]]; default message [nombre is mandatory]] [Field error in object 'puntoInteresInDto' on field 'puntuacionMedia': rejected value [-1.0]; codes [DecimalMin.puntoInteresInDto.puntuacionMedia,DecimalMin.puntuacionMedia,DecimalMin.float,DecimalMin]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [puntoInteresInDto.puntuacionMedia,puntuacionMedia]; arguments []; default message [puntuacionMedia],true,0.0]; default message [puntuacionMedia must be between 0 and 5]] [Field error in object 'puntoInteresInDto' on field 'categoriaId': rejected value [null]; codes [NotNull.puntoInteresInDto.categoriaId,NotNull.categoriaId,NotNull.java.lang.Long,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [puntoInteresInDto.categoriaId,categoriaId]; arguments []; default message [categoriaId]]; default message [categoriaId is mandatory]] ]
+2026-04-09 11:27:16.944 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.PuntoInteresController#add(PuntoInteresInDto)
+2026-04-09 11:27:16.945 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [PuntoInteresInDto(abiertoActualmente=true, fechaCreacion=2026-04-09T11:27:16.943706131, latitud=41.0 (truncated)...]
+2026-04-09 11:27:16.945 [main] DEBUG c.s.r.c.PuntoInteresController - POST /puntos - Parque
+2026-04-09 11:27:16.946 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.947 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [PuntoInteresOutDto(id=10, abiertoActualmente=true, fechaCreacion=2026-04-09T11:27:16.943706131, lati (truncated)...]
+2026-04-09 11:27:16.950 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.PuntoInteresController#modify(long, PuntoInteresInDto)
+2026-04-09 11:27:16.951 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [PuntoInteresInDto(abiertoActualmente=false, fechaCreacion=null, latitud=40.0, longitud=-0.7, nombre= (truncated)...]
+2026-04-09 11:27:16.951 [main] DEBUG c.s.r.c.PuntoInteresController - PUT /puntos/1
+2026-04-09 11:27:16.952 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.952 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [PuntoInteresOutDto(id=1, abiertoActualmente=false, fechaCreacion=null, latitud=40.0, longitud=-0.7,  (truncated)...]
+2026-04-09 11:27:16.955 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.PuntoInteresController#get(long)
+2026-04-09 11:27:16.956 [main] DEBUG o.s.web.method.HandlerMethod - Could not resolve parameter [0] in public org.springframework.http.ResponseEntity<com.svalero.rutea.dto.PuntoInteresOutDto> com.svalero.rutea.controller.PuntoInteresController.get(long) throws com.svalero.rutea.exception.PuntoInteresNotFoundException: Failed to convert value of type 'java.lang.String' to required type 'long'; For input string: "abc"
+2026-04-09 11:27:16.956 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleTypeMismatch(MethodArgumentTypeMismatchException)
+2026-04-09 11:27:16.956 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.956 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=400, title=bad-request, message=Validation error, errors={id=Invalid value: abc})]
+2026-04-09 11:27:16.956 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'long'; For input string: "abc"]
+2026-04-09 11:27:16.959 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.PuntoInteresController#modify(long, PuntoInteresInDto)
+2026-04-09 11:27:16.960 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [PuntoInteresInDto(abiertoActualmente=true, fechaCreacion=null, latitud=41.0, longitud=-0.8, nombre=P (truncated)...]
+2026-04-09 11:27:16.960 [main] DEBUG c.s.r.c.PuntoInteresController - PUT /puntos/1
+2026-04-09 11:27:16.961 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleNotFound(Exception)
+2026-04-09 11:27:16.961 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.961 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=404, title=not-found, message=Resource not found, errors={})]
+2026-04-09 11:27:16.961 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.svalero.rutea.exception.CategoriaNotFoundException]
+2026-04-09 11:27:16.964 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.PuntoInteresController#add(PuntoInteresInDto)
+2026-04-09 11:27:16.965 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [PuntoInteresInDto(abiertoActualmente=true, fechaCreacion=null, latitud=41.0, longitud=-0.8, nombre=P (truncated)...]
+2026-04-09 11:27:16.965 [main] DEBUG c.s.r.c.PuntoInteresController - POST /puntos - Parque
+2026-04-09 11:27:16.966 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleNotFound(Exception)
+2026-04-09 11:27:16.966 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.966 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=404, title=not-found, message=Resource not found, errors={})]
+2026-04-09 11:27:16.966 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.svalero.rutea.exception.CategoriaNotFoundException]
+2026-04-09 11:27:16.970 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.PuntoInteresController#delete(long)
+2026-04-09 11:27:16.971 [main] DEBUG c.s.r.c.PuntoInteresController - DELETE /puntos/99
+2026-04-09 11:27:16.971 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleNotFound(Exception)
+2026-04-09 11:27:16.971 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.971 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=404, title=not-found, message=Resource not found, errors={})]
+2026-04-09 11:27:16.971 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.svalero.rutea.exception.PuntoInteresNotFoundException]
+2026-04-09 11:27:16.974 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.PuntoInteresController#delete(long)
+2026-04-09 11:27:16.975 [main] DEBUG o.s.web.method.HandlerMethod - Could not resolve parameter [0] in public org.springframework.http.ResponseEntity<java.lang.Void> com.svalero.rutea.controller.PuntoInteresController.delete(long) throws com.svalero.rutea.exception.PuntoInteresNotFoundException: Failed to convert value of type 'java.lang.String' to required type 'long'; For input string: "abc"
+2026-04-09 11:27:16.975 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleTypeMismatch(MethodArgumentTypeMismatchException)
+2026-04-09 11:27:16.975 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.975 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=400, title=bad-request, message=Validation error, errors={id=Invalid value: abc})]
+2026-04-09 11:27:16.975 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'long'; For input string: "abc"]
+2026-04-09 11:27:16.979 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.PuntoInteresController#get(long)
+2026-04-09 11:27:16.979 [main] DEBUG c.s.r.c.PuntoInteresController - GET /puntos/99
+2026-04-09 11:27:16.979 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleNotFound(Exception)
+2026-04-09 11:27:16.980 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.980 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=404, title=not-found, message=Resource not found, errors={})]
+2026-04-09 11:27:16.980 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.svalero.rutea.exception.PuntoInteresNotFoundException]
+2026-04-09 11:27:16.983 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.PuntoInteresController#getAll(Long, Boolean, Boolean, String, Float)
+2026-04-09 11:27:16.983 [main] DEBUG c.s.r.c.PuntoInteresController - GET /puntos - Filtros: categoriaId=1, abiertoActualmente=true, nombre=par, puntuacionMedia=4.5
+2026-04-09 11:27:16.983 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.983 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[PuntoInteresOutDto(id=10, abiertoActualmente=true, fechaCreacion=2026-04-09T11:27:16.982368253, lat (truncated)...]
+2026-04-09 11:27:16.987 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.PuntoInteresController#get(long)
+2026-04-09 11:27:16.988 [main] DEBUG c.s.r.c.PuntoInteresController - GET /puntos/1
+2026-04-09 11:27:16.988 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.988 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [PuntoInteresOutDto(id=1, abiertoActualmente=true, fechaCreacion=null, latitud=41.0, longitud=-0.8, n (truncated)...]
+2026-04-09 11:27:16.991 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.PuntoInteresController#getAll(Long, Boolean, Boolean, String, Float)
+2026-04-09 11:27:16.991 [main] DEBUG o.s.web.method.HandlerMethod - Could not resolve parameter [4] in public org.springframework.http.ResponseEntity<java.util.List<com.svalero.rutea.dto.PuntoInteresOutDto>> com.svalero.rutea.controller.PuntoInteresController.getAll(java.lang.Long,java.lang.Boolean,java.lang.Boolean,java.lang.String,java.lang.Float): Failed to convert value of type 'java.lang.String' to required type 'java.lang.Float'; For input string: "abc"
+2026-04-09 11:27:16.992 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleTypeMismatch(MethodArgumentTypeMismatchException)
+2026-04-09 11:27:16.992 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.992 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=400, title=bad-request, message=Validation error, errors={puntuacionMedia=Invalid (truncated)...]
+2026-04-09 11:27:16.992 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.lang.Float'; For input string: "abc"]
+2026-04-09 11:27:16.995 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.PuntoInteresController#modify(long, PuntoInteresInDto)
+2026-04-09 11:27:16.996 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [PuntoInteresInDto(abiertoActualmente=true, fechaCreacion=null, latitud=41.0, longitud=-0.8, nombre=P (truncated)...]
+2026-04-09 11:27:16.996 [main] DEBUG c.s.r.c.PuntoInteresController - PUT /puntos/99
+2026-04-09 11:27:16.996 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleNotFound(Exception)
+2026-04-09 11:27:16.996 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:16.997 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=404, title=not-found, message=Resource not found, errors={})]
+2026-04-09 11:27:16.997 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.svalero.rutea.exception.PuntoInteresNotFoundException]
+2026-04-09 11:27:17.001 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.svalero.rutea.controller.RutaControllerTest]: RutaControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-04-09 11:27:17.005 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.svalero.rutea.RuteaApplication for test class com.svalero.rutea.controller.RutaControllerTest
+2026-04-09 11:27:17.015 [main] INFO  c.s.r.controller.RutaControllerTest - Starting RutaControllerTest using Java 17.0.18 with PID 13762 (started by borja in /home/borja/IdeaProjects/rutea)
+2026-04-09 11:27:17.015 [main] DEBUG c.s.r.controller.RutaControllerTest - Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-04-09 11:27:17.016 [main] INFO  c.s.r.controller.RutaControllerTest - No active profile set, falling back to 1 default profile: "default"
+2026-04-09 11:27:17.016 [main] DEBUG o.s.w.c.s.GenericWebApplicationContext - Refreshing org.springframework.web.context.support.GenericWebApplicationContext@76eee0b1
+2026-04-09 11:27:17.106 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 8 mappings in 'requestMappingHandlerMapping'
+2026-04-09 11:27:17.118 [main] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2026-04-09 11:27:17.120 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2026-04-09 11:27:17.122 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2026-04-09 11:27:17.126 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2026-04-09 11:27:17.126 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2026-04-09 11:27:17.126 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2026-04-09 11:27:17.128 [main] INFO  c.s.r.controller.RutaControllerTest - Started RutaControllerTest in 0.121 seconds (process running for 2.78)
+2026-04-09 11:27:17.131 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.RutaController#delete(long)
+2026-04-09 11:27:17.131 [main] DEBUG c.s.rutea.controller.RutaController - DELETE /v1/rutas/1
+2026-04-09 11:27:17.132 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:17.132 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Nothing to write: null body
+2026-04-09 11:27:17.137 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.RutaController#add(RutaInDto)
+2026-04-09 11:27:17.141 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [RutaInDto(dificultad=facil, distanciaKm=1.0, duracionMinutos=10, fechaRealizacion=2026-04-09, public (truncated)...]
+2026-04-09 11:27:17.146 [main] DEBUG c.s.rutea.controller.RutaController - POST /v1/rutas - Ruta
+2026-04-09 11:27:17.147 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleNotFound(Exception)
+2026-04-09 11:27:17.149 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:17.149 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=404, title=not-found, message=Resource not found, errors={})]
+2026-04-09 11:27:17.150 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.svalero.rutea.exception.UsuarioNotFoundException]
+2026-04-09 11:27:17.155 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.RutaController#add(RutaInDto)
+2026-04-09 11:27:17.156 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [RutaInDto(dificultad=x, distanciaKm=-1.0, duracionMinutos=-5, fechaRealizacion=null, publica=true, t (truncated)...]
+2026-04-09 11:27:17.157 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleValidation(MethodArgumentNotValidException)
+2026-04-09 11:27:17.158 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:17.158 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=400, title=bad-request, message=Validation error, errors={fechaRealizacion=fechaR (truncated)...]
+2026-04-09 11:27:17.158 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<com.svalero.rutea.dto.RutaOutDto> com.svalero.rutea.controller.RutaController.add(com.svalero.rutea.dto.RutaInDto) throws com.svalero.rutea.exception.UsuarioNotFoundException,com.svalero.rutea.exception.PuntoInteresNotFoundException with 5 errors: [Field error in object 'rutaInDto' on field 'titulo': rejected value []; codes [NotBlank.rutaInDto.titulo,NotBlank.titulo,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [rutaInDto.titulo,titulo]; arguments []; default message [titulo]]; default message [titulo is mandatory]] [Field error in object 'rutaInDto' on field 'duracionMinutos': rejected value [-5]; codes [Min.rutaInDto.duracionMinutos,Min.duracionMinutos,Min.int,Min]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [rutaInDto.duracionMinutos,duracionMinutos]; arguments []; default message [duracionMinutos],0]; default message [duracionMinutos must be >= 0]] [Field error in object 'rutaInDto' on field 'usuarioId': rejected value [null]; codes [NotNull.rutaInDto.usuarioId,NotNull.usuarioId,NotNull.java.lang.Long,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [rutaInDto.usuarioId,usuarioId]; arguments []; default message [usuarioId]]; default message [usuarioId is mandatory]] [Field error in object 'rutaInDto' on field 'fechaRealizacion': rejected value [null]; codes [NotNull.rutaInDto.fechaRealizacion,NotNull.fechaRealizacion,NotNull.java.time.LocalDate,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [rutaInDto.fechaRealizacion,fechaRealizacion]; arguments []; default message [fechaRealizacion]]; default message [fechaRealizacion is mandatory]] [Field error in object 'rutaInDto' on field 'distanciaKm': rejected value [-1.0]; codes [PositiveOrZero.rutaInDto.distanciaKm,PositiveOrZero.distanciaKm,PositiveOrZero.float,PositiveOrZero]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [rutaInDto.distanciaKm,distanciaKm]; arguments []; default message [distanciaKm]]; default message [distanciaKm must be >= 0]] ]
+2026-04-09 11:27:17.162 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.RutaController#modify(long, RutaInDto)
+2026-04-09 11:27:17.163 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [RutaInDto(dificultad=null, distanciaKm=-1.0, duracionMinutos=-1, fechaRealizacion=null, publica=true (truncated)...]
+2026-04-09 11:27:17.163 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleValidation(MethodArgumentNotValidException)
+2026-04-09 11:27:17.164 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:17.164 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=400, title=bad-request, message=Validation error, errors={fechaRealizacion=fechaR (truncated)...]
+2026-04-09 11:27:17.164 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [1] in public org.springframework.http.ResponseEntity<com.svalero.rutea.dto.RutaOutDto> com.svalero.rutea.controller.RutaController.modify(long,com.svalero.rutea.dto.RutaInDto) throws com.svalero.rutea.exception.RutaNotFoundException,com.svalero.rutea.exception.UsuarioNotFoundException,com.svalero.rutea.exception.PuntoInteresNotFoundException with 5 errors: [Field error in object 'rutaInDto' on field 'usuarioId': rejected value [null]; codes [NotNull.rutaInDto.usuarioId,NotNull.usuarioId,NotNull.java.lang.Long,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [rutaInDto.usuarioId,usuarioId]; arguments []; default message [usuarioId]]; default message [usuarioId is mandatory]] [Field error in object 'rutaInDto' on field 'titulo': rejected value []; codes [NotBlank.rutaInDto.titulo,NotBlank.titulo,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [rutaInDto.titulo,titulo]; arguments []; default message [titulo]]; default message [titulo is mandatory]] [Field error in object 'rutaInDto' on field 'fechaRealizacion': rejected value [null]; codes [NotNull.rutaInDto.fechaRealizacion,NotNull.fechaRealizacion,NotNull.java.time.LocalDate,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [rutaInDto.fechaRealizacion,fechaRealizacion]; arguments []; default message [fechaRealizacion]]; default message [fechaRealizacion is mandatory]] [Field error in object 'rutaInDto' on field 'duracionMinutos': rejected value [-1]; codes [Min.rutaInDto.duracionMinutos,Min.duracionMinutos,Min.int,Min]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [rutaInDto.duracionMinutos,duracionMinutos]; arguments []; default message [duracionMinutos],0]; default message [duracionMinutos must be >= 0]] [Field error in object 'rutaInDto' on field 'distanciaKm': rejected value [-1.0]; codes [PositiveOrZero.rutaInDto.distanciaKm,PositiveOrZero.distanciaKm,PositiveOrZero.float,PositiveOrZero]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [rutaInDto.distanciaKm,distanciaKm]; arguments []; default message [distanciaKm]]; default message [distanciaKm must be >= 0]] ]
+2026-04-09 11:27:17.169 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.RutaController#add(RutaInDto)
+2026-04-09 11:27:17.169 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [RutaInDto(dificultad=facil, distanciaKm=5.5, duracionMinutos=60, fechaRealizacion=2026-04-09, public (truncated)...]
+2026-04-09 11:27:17.170 [main] DEBUG c.s.rutea.controller.RutaController - POST /v1/rutas - Paseo por el parque
+2026-04-09 11:27:17.171 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:17.174 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [RutaOutDto(id=1, dificultad=facil, distanciaKm=5.5, duracionMinutos=60, fechaRealizacion=2026-04-09, (truncated)...]
+2026-04-09 11:27:17.178 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.RutaController#modify(long, RutaInDto)
+2026-04-09 11:27:17.178 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [RutaInDto(dificultad=dificil, distanciaKm=12.0, duracionMinutos=180, fechaRealizacion=2026-04-09, pu (truncated)...]
+2026-04-09 11:27:17.179 [main] DEBUG c.s.rutea.controller.RutaController - PUT /v1/rutas/1
+2026-04-09 11:27:17.179 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:17.179 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [RutaOutDto(id=1, dificultad=dificil, distanciaKm=12.0, duracionMinutos=180, fechaRealizacion=2026-04 (truncated)...]
+2026-04-09 11:27:17.183 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.RutaController#get(long)
+2026-04-09 11:27:17.183 [main] DEBUG o.s.web.method.HandlerMethod - Could not resolve parameter [0] in public org.springframework.http.ResponseEntity<com.svalero.rutea.dto.RutaOutDto> com.svalero.rutea.controller.RutaController.get(long) throws com.svalero.rutea.exception.RutaNotFoundException: Failed to convert value of type 'java.lang.String' to required type 'long'; For input string: "abc"
+2026-04-09 11:27:17.183 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleTypeMismatch(MethodArgumentTypeMismatchException)
+2026-04-09 11:27:17.183 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:17.183 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=400, title=bad-request, message=Validation error, errors={id=Invalid value: abc})]
+2026-04-09 11:27:17.184 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'long'; For input string: "abc"]
+2026-04-09 11:27:17.187 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.RutaController#modify(long, RutaInDto)
+2026-04-09 11:27:17.187 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [RutaInDto(dificultad=x, distanciaKm=1.0, duracionMinutos=1, fechaRealizacion=2026-04-09, publica=tru (truncated)...]
+2026-04-09 11:27:17.188 [main] DEBUG c.s.rutea.controller.RutaController - PUT /v1/rutas/1
+2026-04-09 11:27:17.188 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleNotFound(Exception)
+2026-04-09 11:27:17.189 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:17.189 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=404, title=not-found, message=Resource not found, errors={})]
+2026-04-09 11:27:17.189 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.svalero.rutea.exception.PuntoInteresNotFoundException]
+2026-04-09 11:27:17.192 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.RutaController#add(RutaInDto)
+2026-04-09 11:27:17.192 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [RutaInDto(dificultad=facil, distanciaKm=1.0, duracionMinutos=10, fechaRealizacion=2026-04-09, public (truncated)...]
+2026-04-09 11:27:17.193 [main] DEBUG c.s.rutea.controller.RutaController - POST /v1/rutas - Ruta
+2026-04-09 11:27:17.193 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleNotFound(Exception)
+2026-04-09 11:27:17.193 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:17.193 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=404, title=not-found, message=Resource not found, errors={})]
+2026-04-09 11:27:17.193 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.svalero.rutea.exception.PuntoInteresNotFoundException]
+2026-04-09 11:27:17.196 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.RutaController#delete(long)
+2026-04-09 11:27:17.197 [main] DEBUG c.s.rutea.controller.RutaController - DELETE /v1/rutas/99
+2026-04-09 11:27:17.197 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleNotFound(Exception)
+2026-04-09 11:27:17.197 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:17.197 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=404, title=not-found, message=Resource not found, errors={})]
+2026-04-09 11:27:17.197 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.svalero.rutea.exception.RutaNotFoundException]
+2026-04-09 11:27:17.200 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.RutaController#delete(long)
+2026-04-09 11:27:17.201 [main] DEBUG o.s.web.method.HandlerMethod - Could not resolve parameter [0] in public org.springframework.http.ResponseEntity<java.lang.Void> com.svalero.rutea.controller.RutaController.delete(long) throws com.svalero.rutea.exception.RutaNotFoundException: Failed to convert value of type 'java.lang.String' to required type 'long'; For input string: "abc"
+2026-04-09 11:27:17.201 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleTypeMismatch(MethodArgumentTypeMismatchException)
+2026-04-09 11:27:17.201 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:17.201 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=400, title=bad-request, message=Validation error, errors={id=Invalid value: abc})]
+2026-04-09 11:27:17.201 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'long'; For input string: "abc"]
+2026-04-09 11:27:17.204 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.RutaController#modify(long, RutaInDto)
+2026-04-09 11:27:17.205 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [RutaInDto(dificultad=x, distanciaKm=1.0, duracionMinutos=1, fechaRealizacion=2026-04-09, publica=tru (truncated)...]
+2026-04-09 11:27:17.205 [main] DEBUG c.s.rutea.controller.RutaController - PUT /v1/rutas/1
+2026-04-09 11:27:17.205 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleNotFound(Exception)
+2026-04-09 11:27:17.205 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:17.206 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=404, title=not-found, message=Resource not found, errors={})]
+2026-04-09 11:27:17.206 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.svalero.rutea.exception.UsuarioNotFoundException]
+2026-04-09 11:27:17.209 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.RutaController#get(long)
+2026-04-09 11:27:17.209 [main] DEBUG c.s.rutea.controller.RutaController - GET /v1/rutas/99
+2026-04-09 11:27:17.209 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleNotFound(Exception)
+2026-04-09 11:27:17.209 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:17.209 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=404, title=not-found, message=Resource not found, errors={})]
+2026-04-09 11:27:17.210 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.svalero.rutea.exception.RutaNotFoundException]
+2026-04-09 11:27:17.212 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.RutaController#get(long)
+2026-04-09 11:27:17.212 [main] DEBUG c.s.rutea.controller.RutaController - GET /v1/rutas/1
+2026-04-09 11:27:17.212 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:17.213 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [RutaOutDto(id=1, dificultad=media, distanciaKm=10.0, duracionMinutos=120, fechaRealizacion=2026-04-0 (truncated)...]
+2026-04-09 11:27:17.215 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.RutaController#getAll(String, Boolean, String)
+2026-04-09 11:27:17.216 [main] DEBUG o.s.web.method.HandlerMethod - Could not resolve parameter [1] in public org.springframework.http.ResponseEntity<java.util.List<com.svalero.rutea.dto.RutaOutDto>> com.svalero.rutea.controller.RutaController.getAll(java.lang.String,java.lang.Boolean,java.lang.String): Failed to convert value of type 'java.lang.String' to required type 'java.lang.Boolean'; Invalid boolean value [abc]
+2026-04-09 11:27:17.216 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleTypeMismatch(MethodArgumentTypeMismatchException)
+2026-04-09 11:27:17.216 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:17.216 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=400, title=bad-request, message=Validation error, errors={publica=Invalid value:  (truncated)...]
+2026-04-09 11:27:17.216 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.lang.Boolean'; Invalid boolean value [abc]]
+2026-04-09 11:27:17.220 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.RutaController#modify(long, RutaInDto)
+2026-04-09 11:27:17.221 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [RutaInDto(dificultad=x, distanciaKm=1.0, duracionMinutos=1, fechaRealizacion=2026-04-09, publica=tru (truncated)...]
+2026-04-09 11:27:17.222 [main] DEBUG c.s.rutea.controller.RutaController - PUT /v1/rutas/99
+2026-04-09 11:27:17.222 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleNotFound(Exception)
+2026-04-09 11:27:17.222 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:17.222 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=404, title=not-found, message=Resource not found, errors={})]
+2026-04-09 11:27:17.223 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.svalero.rutea.exception.RutaNotFoundException]
+2026-04-09 11:27:17.227 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.RutaController#getAll(String, Boolean, String)
+2026-04-09 11:27:17.228 [main] DEBUG c.s.rutea.controller.RutaController - GET /v1/rutas - Filtros: dificultad=facil, publica=true, titulo=paseo
+2026-04-09 11:27:17.229 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:17.229 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[RutaOutDto(id=1, dificultad=facil, distanciaKm=5.5, duracionMinutos=60, fechaRealizacion=2026-04-09 (truncated)...]
+2026-04-09 11:27:17.234 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.svalero.rutea.controller.CategoriaControllerTest]: CategoriaControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-04-09 11:27:17.245 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.svalero.rutea.RuteaApplication for test class com.svalero.rutea.controller.CategoriaControllerTest
+2026-04-09 11:27:17.260 [main] INFO  c.s.r.c.CategoriaControllerTest - Starting CategoriaControllerTest using Java 17.0.18 with PID 13762 (started by borja in /home/borja/IdeaProjects/rutea)
+2026-04-09 11:27:17.261 [main] DEBUG c.s.r.c.CategoriaControllerTest - Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-04-09 11:27:17.261 [main] INFO  c.s.r.c.CategoriaControllerTest - No active profile set, falling back to 1 default profile: "default"
+2026-04-09 11:27:17.262 [main] DEBUG o.s.w.c.s.GenericWebApplicationContext - Refreshing org.springframework.web.context.support.GenericWebApplicationContext@7e1ce99c
+2026-04-09 11:27:17.404 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 8 mappings in 'requestMappingHandlerMapping'
+2026-04-09 11:27:17.417 [main] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2026-04-09 11:27:17.421 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2026-04-09 11:27:17.422 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2026-04-09 11:27:17.427 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2026-04-09 11:27:17.427 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2026-04-09 11:27:17.427 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2026-04-09 11:27:17.431 [main] INFO  c.s.r.c.CategoriaControllerTest - Started CategoriaControllerTest in 0.184 seconds (process running for 3.082)
+2026-04-09 11:27:17.434 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.CategoriaController#delete(long)
+2026-04-09 11:27:17.436 [main] DEBUG c.s.r.controller.CategoriaController - DELETE /categorias/1
+2026-04-09 11:27:17.438 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:17.438 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Nothing to write: null body
+2026-04-09 11:27:17.443 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.CategoriaController#delete(long)
+2026-04-09 11:27:17.443 [main] DEBUG c.s.r.controller.CategoriaController - DELETE /categorias/99
+2026-04-09 11:27:17.444 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleNotFound(Exception)
+2026-04-09 11:27:17.446 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:17.447 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=404, title=not-found, message=Resource not found, errors={})]
+2026-04-09 11:27:17.448 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.svalero.rutea.exception.CategoriaNotFoundException]
+2026-04-09 11:27:17.452 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.CategoriaController#add(CategoriaInDto)
+2026-04-09 11:27:17.457 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [CategoriaInDto(activa=false, costePromedio=0.0, descripcion=null, iconoUrl=null, nombre=, ordenPrior (truncated)...]
+2026-04-09 11:27:17.462 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleValidation(MethodArgumentNotValidException)
+2026-04-09 11:27:17.462 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:17.462 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=400, title=bad-request, message=Validation error, errors={nombre=nombre is mandat (truncated)...]
+2026-04-09 11:27:17.463 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<com.svalero.rutea.dto.CategoriaOutDto> com.svalero.rutea.controller.CategoriaController.add(com.svalero.rutea.dto.CategoriaInDto): [Field error in object 'categoriaInDto' on field 'nombre': rejected value []; codes [NotBlank.categoriaInDto.nombre,NotBlank.nombre,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [categoriaInDto.nombre,nombre]; arguments []; default message [nombre]]; default message [nombre is mandatory]] ]
+2026-04-09 11:27:17.466 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.CategoriaController#modify(long, CategoriaInDto)
+2026-04-09 11:27:17.466 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [CategoriaInDto(activa=false, costePromedio=0.0, descripcion=null, iconoUrl=null, nombre=, ordenPrior (truncated)...]
+2026-04-09 11:27:17.467 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleValidation(MethodArgumentNotValidException)
+2026-04-09 11:27:17.467 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:17.467 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=400, title=bad-request, message=Validation error, errors={nombre=nombre is mandat (truncated)...]
+2026-04-09 11:27:17.468 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [1] in public org.springframework.http.ResponseEntity<com.svalero.rutea.dto.CategoriaOutDto> com.svalero.rutea.controller.CategoriaController.modify(long,com.svalero.rutea.dto.CategoriaInDto) throws com.svalero.rutea.exception.CategoriaNotFoundException: [Field error in object 'categoriaInDto' on field 'nombre': rejected value []; codes [NotBlank.categoriaInDto.nombre,NotBlank.nombre,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [categoriaInDto.nombre,nombre]; arguments []; default message [nombre]]; default message [nombre is mandatory]] ]
+2026-04-09 11:27:17.472 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.CategoriaController#add(CategoriaInDto)
+2026-04-09 11:27:17.472 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [CategoriaInDto(activa=true, costePromedio=0.0, descripcion=null, iconoUrl=null, nombre=Montaña, orde (truncated)...]
+2026-04-09 11:27:17.473 [main] DEBUG c.s.r.controller.CategoriaController - POST /categorias - Montaña
+2026-04-09 11:27:17.475 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:17.479 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [CategoriaOutDto(id=1, activa=true, costePromedio=0.0, descripcion=null, iconoUrl=null, nombre=Montañ (truncated)...]
+2026-04-09 11:27:17.484 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.CategoriaController#modify(long, CategoriaInDto)
+2026-04-09 11:27:17.484 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [CategoriaInDto(activa=true, costePromedio=0.0, descripcion=null, iconoUrl=null, nombre=X, ordenPrior (truncated)...]
+2026-04-09 11:27:17.485 [main] DEBUG c.s.r.controller.CategoriaController - PUT /categorias/1
+2026-04-09 11:27:17.485 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:17.485 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [CategoriaOutDto(id=1, activa=true, costePromedio=0.0, descripcion=null, iconoUrl=null, nombre=X, ord (truncated)...]
+2026-04-09 11:27:17.490 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.CategoriaController#modify(long, CategoriaInDto)
+2026-04-09 11:27:17.491 [main] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [CategoriaInDto(activa=true, costePromedio=0.0, descripcion=null, iconoUrl=null, nombre=X, ordenPrior (truncated)...]
+2026-04-09 11:27:17.491 [main] DEBUG c.s.r.controller.CategoriaController - PUT /categorias/99
+2026-04-09 11:27:17.492 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleNotFound(Exception)
+2026-04-09 11:27:17.492 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:17.492 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=404, title=not-found, message=Resource not found, errors={})]
+2026-04-09 11:27:17.492 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.svalero.rutea.exception.CategoriaNotFoundException]
+2026-04-09 11:27:17.496 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.CategoriaController#get(long)
+2026-04-09 11:27:17.496 [main] DEBUG o.s.web.method.HandlerMethod - Could not resolve parameter [0] in public org.springframework.http.ResponseEntity<com.svalero.rutea.dto.CategoriaOutDto> com.svalero.rutea.controller.CategoriaController.get(long) throws com.svalero.rutea.exception.CategoriaNotFoundException: Failed to convert value of type 'java.lang.String' to required type 'long'; For input string: "abc"
+2026-04-09 11:27:17.497 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleTypeMismatch(MethodArgumentTypeMismatchException)
+2026-04-09 11:27:17.497 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:17.497 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=400, title=bad-request, message=Validation error, errors={id=Invalid value: abc})]
+2026-04-09 11:27:17.497 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'long'; For input string: "abc"]
+2026-04-09 11:27:17.500 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.CategoriaController#delete(long)
+2026-04-09 11:27:17.501 [main] DEBUG o.s.web.method.HandlerMethod - Could not resolve parameter [0] in public org.springframework.http.ResponseEntity<java.lang.Void> com.svalero.rutea.controller.CategoriaController.delete(long) throws com.svalero.rutea.exception.CategoriaNotFoundException: Failed to convert value of type 'java.lang.String' to required type 'long'; For input string: "abc"
+2026-04-09 11:27:17.501 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleTypeMismatch(MethodArgumentTypeMismatchException)
+2026-04-09 11:27:17.501 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:17.501 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=400, title=bad-request, message=Validation error, errors={id=Invalid value: abc})]
+2026-04-09 11:27:17.502 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'long'; For input string: "abc"]
+2026-04-09 11:27:17.505 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.CategoriaController#modify(long, CategoriaInDto)
+2026-04-09 11:27:17.505 [main] DEBUG o.s.web.method.HandlerMethod - Could not resolve parameter [0] in public org.springframework.http.ResponseEntity<com.svalero.rutea.dto.CategoriaOutDto> com.svalero.rutea.controller.CategoriaController.modify(long,com.svalero.rutea.dto.CategoriaInDto) throws com.svalero.rutea.exception.CategoriaNotFoundException: Failed to convert value of type 'java.lang.String' to required type 'long'; For input string: "abc"
+2026-04-09 11:27:17.505 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleTypeMismatch(MethodArgumentTypeMismatchException)
+2026-04-09 11:27:17.505 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:17.505 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=400, title=bad-request, message=Validation error, errors={id=Invalid value: abc})]
+2026-04-09 11:27:17.506 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'long'; For input string: "abc"]
+2026-04-09 11:27:17.509 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.CategoriaController#get(long)
+2026-04-09 11:27:17.509 [main] DEBUG c.s.r.controller.CategoriaController - GET /categorias/1
+2026-04-09 11:27:17.509 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:17.510 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [CategoriaOutDto(id=1, activa=false, costePromedio=0.0, descripcion=null, iconoUrl=null, nombre=Monta (truncated)...]
+2026-04-09 11:27:17.513 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.CategoriaController#get(long)
+2026-04-09 11:27:17.513 [main] DEBUG c.s.r.controller.CategoriaController - GET /categorias/99
+2026-04-09 11:27:17.514 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleNotFound(Exception)
+2026-04-09 11:27:17.514 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:17.514 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=404, title=not-found, message=Resource not found, errors={})]
+2026-04-09 11:27:17.514 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.svalero.rutea.exception.CategoriaNotFoundException]
+2026-04-09 11:27:17.517 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.CategoriaController#getAll(Boolean, String, Integer)
+2026-04-09 11:27:17.518 [main] DEBUG o.s.web.method.HandlerMethod - Could not resolve parameter [2] in public org.springframework.http.ResponseEntity<java.util.List<com.svalero.rutea.dto.CategoriaOutDto>> com.svalero.rutea.controller.CategoriaController.getAll(java.lang.Boolean,java.lang.String,java.lang.Integer): Failed to convert value of type 'java.lang.String' to required type 'java.lang.Integer'; For input string: "abc"
+2026-04-09 11:27:17.518 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleTypeMismatch(MethodArgumentTypeMismatchException)
+2026-04-09 11:27:17.518 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:17.518 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=400, title=bad-request, message=Validation error, errors={ordenPrioridad=Invalid  (truncated)...]
+2026-04-09 11:27:17.518 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.lang.Integer'; For input string: "abc"]
+2026-04-09 11:27:17.521 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.CategoriaController#getAll(Boolean, String, Integer)
+2026-04-09 11:27:17.522 [main] DEBUG c.s.r.controller.CategoriaController - GET /categorias - Filtros: activa=true, nombre=mon, ordenPrioridad=1
+2026-04-09 11:27:17.522 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-04-09 11:27:17.523 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[CategoriaOutDto(id=1, activa=true, costePromedio=0.0, descripcion=null, iconoUrl=null, nombre=Monta (truncated)...]
+2026-04-09 11:27:17.787 [main] INFO  c.s.rutea.service.ResenaService - Modificando reseña ID: 999
+2026-04-09 11:27:17.787 [main] ERROR c.s.rutea.service.ResenaService - Reseña no encontrada para modificación: ID 999
+2026-04-09 11:27:17.795 [main] DEBUG c.s.rutea.service.ResenaService - Buscando reseña por ID: 1
+2026-04-09 11:27:17.799 [main] INFO  c.s.rutea.service.ResenaService - Creando nueva reseña para punto ID: 10
+2026-04-09 11:27:17.799 [main] ERROR c.s.rutea.service.ResenaService - Usuario no encontrado: ID 999
+2026-04-09 11:27:17.802 [main] INFO  c.s.rutea.service.ResenaService - Creando nueva reseña para punto ID: 10
+2026-04-09 11:27:17.802 [main] INFO  c.s.rutea.service.ResenaService - Reseña creada exitosamente con ID: 1
+2026-04-09 11:27:17.806 [main] INFO  c.s.rutea.service.ResenaService - Eliminando reseña ID: 999
+2026-04-09 11:27:17.807 [main] ERROR c.s.rutea.service.ResenaService - Reseña no encontrada para eliminación: ID 999
+2026-04-09 11:27:17.809 [main] INFO  c.s.rutea.service.ResenaService - Modificando reseña ID: 1
+2026-04-09 11:27:17.809 [main] ERROR c.s.rutea.service.ResenaService - Punto de interés no encontrado: ID 999
+2026-04-09 11:27:17.811 [main] INFO  c.s.rutea.service.ResenaService - Eliminando reseña ID: 1
+2026-04-09 11:27:17.811 [main] INFO  c.s.rutea.service.ResenaService - Reseña eliminada exitosamente: ID 1
+2026-04-09 11:27:17.814 [main] INFO  c.s.rutea.service.ResenaService - Modificando reseña ID: 1
+2026-04-09 11:27:17.814 [main] ERROR c.s.rutea.service.ResenaService - Usuario no encontrado: ID 999
+2026-04-09 11:27:17.817 [main] INFO  c.s.rutea.service.ResenaService - Modificando reseña ID: 1
+2026-04-09 11:27:17.817 [main] INFO  c.s.rutea.service.ResenaService - Reseña modificada exitosamente: ID 1
+2026-04-09 11:27:17.820 [main] DEBUG c.s.rutea.service.ResenaService - Buscando reseña por ID: 999
+2026-04-09 11:27:17.820 [main] ERROR c.s.rutea.service.ResenaService - Reseña no encontrada: ID 999
+2026-04-09 11:27:17.822 [main] INFO  c.s.rutea.service.ResenaService - Creando nueva reseña para punto ID: 999
+2026-04-09 11:27:17.822 [main] ERROR c.s.rutea.service.ResenaService - Punto de interés no encontrado: ID 999
+2026-04-09 11:27:17.824 [main] DEBUG c.s.rutea.service.ResenaService - Buscando reseñas con filtros: editada=null, likes=null, valoracion=null
+2026-04-09 11:27:17.825 [main] INFO  c.s.rutea.service.ResenaService - Se encontraron 2 reseñas
+2026-04-09 11:27:17.827 [main] DEBUG c.s.rutea.service.ResenaService - Buscando reseñas con filtros: editada=false, likes=10, valoracion=5
+2026-04-09 11:27:17.828 [main] INFO  c.s.rutea.service.ResenaService - Se encontraron 1 reseñas
+2026-04-09 11:27:17.831 [main] DEBUG c.s.rutea.service.UsuarioService - Buscando usuario por ID: 1
+2026-04-09 11:27:17.834 [main] DEBUG c.s.rutea.service.UsuarioService - Buscando usuarios con filtros: premium=null, nivelExperiencia=0, username=
+2026-04-09 11:27:17.834 [main] INFO  c.s.rutea.service.UsuarioService - Se encontraron 1 usuarios
+2026-04-09 11:27:17.837 [main] INFO  c.s.rutea.service.UsuarioService - Modificando usuario ID: 1
+2026-04-09 11:27:17.837 [main] INFO  c.s.rutea.service.UsuarioService - Usuario modificado exitosamente: ID 1
+2026-04-09 11:27:17.839 [main] DEBUG c.s.rutea.service.UsuarioService - Buscando usuarios con filtros: premium=true, nivelExperiencia=null, username=
+2026-04-09 11:27:17.839 [main] INFO  c.s.rutea.service.UsuarioService - Se encontraron 1 usuarios
+2026-04-09 11:27:17.841 [main] INFO  c.s.rutea.service.UsuarioService - Eliminando usuario ID: 99
+2026-04-09 11:27:17.841 [main] ERROR c.s.rutea.service.UsuarioService - Usuario no encontrado para eliminación: ID 99
+2026-04-09 11:27:17.843 [main] INFO  c.s.rutea.service.UsuarioService - Eliminando usuario ID: 1
+2026-04-09 11:27:17.843 [main] INFO  c.s.rutea.service.UsuarioService - Usuario eliminado exitosamente: ID 1
+2026-04-09 11:27:17.845 [main] DEBUG c.s.rutea.service.UsuarioService - Buscando usuarios con filtros: premium=null, nivelExperiencia=null, username=bor
+2026-04-09 11:27:17.845 [main] INFO  c.s.rutea.service.UsuarioService - Se encontraron 1 usuarios
+2026-04-09 11:27:17.846 [main] DEBUG c.s.rutea.service.UsuarioService - Buscando usuario por ID: 99
+2026-04-09 11:27:17.847 [main] ERROR c.s.rutea.service.UsuarioService - Usuario no encontrado: ID 99
+2026-04-09 11:27:17.848 [main] INFO  c.s.rutea.service.UsuarioService - Modificando usuario ID: 99
+2026-04-09 11:27:17.848 [main] ERROR c.s.rutea.service.UsuarioService - Usuario no encontrado para modificación: ID 99
+2026-04-09 11:27:17.850 [main] DEBUG c.s.rutea.service.UsuarioService - Buscando usuarios con filtros: premium=null, nivelExperiencia=null, username=
+2026-04-09 11:27:17.850 [main] INFO  c.s.rutea.service.UsuarioService - Se encontraron 2 usuarios
+2026-04-09 11:27:17.851 [main] INFO  c.s.rutea.service.UsuarioService - Creando nuevo usuario: borja
+2026-04-09 11:27:17.851 [main] INFO  c.s.rutea.service.UsuarioService - Usuario creado exitosamente con ID: 1
+2026-04-09 11:27:17.853 [main] DEBUG c.s.rutea.service.UsuarioService - Buscando usuarios con filtros: premium=true, nivelExperiencia=3, username=bor
+2026-04-09 11:27:17.853 [main] INFO  c.s.rutea.service.UsuarioService - Se encontraron 1 usuarios
+2026-04-09 11:27:17.889 [main] DEBUG c.s.rutea.service.CategoriaService - Buscando categorías con filtros: activa=null, nombre=null, ordenPrioridad=1
+2026-04-09 11:27:17.889 [main] INFO  c.s.rutea.service.CategoriaService - Se encontraron 1 categorías
+2026-04-09 11:27:17.891 [main] DEBUG c.s.rutea.service.CategoriaService - Buscando categoría por ID: 1
+2026-04-09 11:27:17.892 [main] INFO  c.s.rutea.service.CategoriaService - Modificando categoría ID: 1
+2026-04-09 11:27:17.892 [main] INFO  c.s.rutea.service.CategoriaService - Categoría modificada exitosamente: ID 1
+2026-04-09 11:27:17.894 [main] INFO  c.s.rutea.service.CategoriaService - Eliminando categoría ID: 99
+2026-04-09 11:27:17.894 [main] ERROR c.s.rutea.service.CategoriaService - Categoría no encontrada para eliminación: ID 99
+2026-04-09 11:27:17.895 [main] INFO  c.s.rutea.service.CategoriaService - Eliminando categoría ID: 1
+2026-04-09 11:27:17.895 [main] INFO  c.s.rutea.service.CategoriaService - Categoría eliminada exitosamente: ID 1
+2026-04-09 11:27:17.896 [main] DEBUG c.s.rutea.service.CategoriaService - Buscando categorías con filtros: activa=true, nombre=null, ordenPrioridad=null
+2026-04-09 11:27:17.897 [main] INFO  c.s.rutea.service.CategoriaService - Se encontraron 1 categorías
+2026-04-09 11:27:17.898 [main] DEBUG c.s.rutea.service.CategoriaService - Buscando categoría por ID: 99
+2026-04-09 11:27:17.898 [main] ERROR c.s.rutea.service.CategoriaService - Categoría no encontrada: ID 99
+2026-04-09 11:27:17.899 [main] DEBUG c.s.rutea.service.CategoriaService - Buscando categorías con filtros: activa=null, nombre=mon, ordenPrioridad=null
+2026-04-09 11:27:17.899 [main] INFO  c.s.rutea.service.CategoriaService - Se encontraron 1 categorías
+2026-04-09 11:27:17.901 [main] INFO  c.s.rutea.service.CategoriaService - Modificando categoría ID: 99
+2026-04-09 11:27:17.901 [main] ERROR c.s.rutea.service.CategoriaService - Categoría no encontrada para modificación: ID 99
+2026-04-09 11:27:17.902 [main] DEBUG c.s.rutea.service.CategoriaService - Buscando categorías con filtros: activa=null, nombre=null, ordenPrioridad=null
+2026-04-09 11:27:17.902 [main] INFO  c.s.rutea.service.CategoriaService - Se encontraron 2 categorías
+2026-04-09 11:27:17.903 [main] INFO  c.s.rutea.service.CategoriaService - Creando nueva categoría: Montaña
+2026-04-09 11:27:17.903 [main] INFO  c.s.rutea.service.CategoriaService - Categoría creada exitosamente con ID: 1
+2026-04-09 11:27:17.904 [main] DEBUG c.s.rutea.service.CategoriaService - Buscando categorías con filtros: activa=true, nombre=mon, ordenPrioridad=1
+2026-04-09 11:27:17.905 [main] INFO  c.s.rutea.service.CategoriaService - Se encontraron 1 categorías
+2026-04-09 11:27:17.940 [main] DEBUG c.svalero.rutea.service.RutaService - Buscando ruta por ID: 1
+2026-04-09 11:27:17.943 [main] INFO  c.svalero.rutea.service.RutaService - Creando nueva ruta: Ruta
+2026-04-09 11:27:17.944 [main] ERROR c.svalero.rutea.service.RutaService - Usuario no encontrado: ID 999
+2026-04-09 11:27:17.946 [main] INFO  c.svalero.rutea.service.RutaService - Eliminando ruta ID: 999
+2026-04-09 11:27:17.946 [main] ERROR c.svalero.rutea.service.RutaService - Ruta no encontrada para eliminación: ID 999
+2026-04-09 11:27:17.948 [main] INFO  c.svalero.rutea.service.RutaService - Modificando ruta ID: 999
+2026-04-09 11:27:17.949 [main] ERROR c.svalero.rutea.service.RutaService - Ruta no encontrada para modificación: ID 999
+2026-04-09 11:27:17.952 [main] INFO  c.svalero.rutea.service.RutaService - Modificando ruta ID: 1
+2026-04-09 11:27:17.952 [main] ERROR c.svalero.rutea.service.RutaService - Punto de interés no encontrado: ID 999
+2026-04-09 11:27:17.955 [main] INFO  c.svalero.rutea.service.RutaService - Eliminando ruta ID: 1
+2026-04-09 11:27:17.955 [main] INFO  c.svalero.rutea.service.RutaService - Ruta eliminada exitosamente: ID 1
+2026-04-09 11:27:17.957 [main] INFO  c.svalero.rutea.service.RutaService - Modificando ruta ID: 1
+2026-04-09 11:27:17.957 [main] ERROR c.svalero.rutea.service.RutaService - Usuario no encontrado: ID 999
+2026-04-09 11:27:17.959 [main] INFO  c.svalero.rutea.service.RutaService - Creando nueva ruta: Ruta
+2026-04-09 11:27:17.960 [main] ERROR c.svalero.rutea.service.RutaService - Punto de interés no encontrado: ID 999
+2026-04-09 11:27:17.962 [main] INFO  c.svalero.rutea.service.RutaService - Creando nueva ruta: Paseo por el parque
+2026-04-09 11:27:17.962 [main] INFO  c.svalero.rutea.service.RutaService - Ruta creada exitosamente con ID: 1
+2026-04-09 11:27:17.965 [main] INFO  c.svalero.rutea.service.RutaService - Modificando ruta ID: 1
+2026-04-09 11:27:17.965 [main] INFO  c.svalero.rutea.service.RutaService - Ruta modificada exitosamente: ID 1
+2026-04-09 11:27:17.967 [main] DEBUG c.svalero.rutea.service.RutaService - Buscando ruta por ID: 999
+2026-04-09 11:27:17.967 [main] ERROR c.svalero.rutea.service.RutaService - Ruta no encontrada: ID 999
+2026-04-09 11:27:17.969 [main] DEBUG c.svalero.rutea.service.RutaService - Buscando rutas con filtros: dificultad=fac, publica=true, titulo=parque
+2026-04-09 11:27:17.970 [main] INFO  c.svalero.rutea.service.RutaService - Se encontraron 1 rutas
+2026-04-09 11:27:17.972 [main] DEBUG c.svalero.rutea.service.RutaService - Buscando rutas con filtros: dificultad=, publica=null, titulo=
+2026-04-09 11:27:17.973 [main] INFO  c.svalero.rutea.service.RutaService - Se encontraron 2 rutas
+2026-04-09 11:27:17.976 [main] DEBUG c.s.r.service.PuntoInteresService - Buscando punto de interés por ID: 10
+2026-04-09 11:27:17.979 [main] INFO  c.s.r.service.PuntoInteresService - Modificando punto de interés ID: 10
+2026-04-09 11:27:17.980 [main] INFO  c.s.r.service.PuntoInteresService - Punto de interés modificado exitosamente: ID 10
+2026-04-09 11:27:17.982 [main] INFO  c.s.r.service.PuntoInteresService - Eliminando punto de interés ID: 999
+2026-04-09 11:27:17.982 [main] ERROR c.s.r.service.PuntoInteresService - Punto de interés no encontrado para eliminación: ID 999
+2026-04-09 11:27:17.984 [main] INFO  c.s.r.service.PuntoInteresService - Creando nuevo punto de interés: X
+2026-04-09 11:27:17.984 [main] ERROR c.s.r.service.PuntoInteresService - Categoría no encontrada: ID 99
+2026-04-09 11:27:17.986 [main] INFO  c.s.r.service.PuntoInteresService - Modificando punto de interés ID: 999
+2026-04-09 11:27:17.986 [main] ERROR c.s.r.service.PuntoInteresService - Punto de interés no encontrado para modificación: ID 999
+2026-04-09 11:27:17.987 [main] INFO  c.s.r.service.PuntoInteresService - Eliminando punto de interés ID: 10
+2026-04-09 11:27:17.988 [main] INFO  c.s.r.service.PuntoInteresService - Punto de interés eliminado exitosamente: ID 10
+2026-04-09 11:27:17.990 [main] INFO  c.s.r.service.PuntoInteresService - Creando nuevo punto de interés: Parque Grande
+2026-04-09 11:27:17.990 [main] INFO  c.s.r.service.PuntoInteresService - Punto de interés creado exitosamente con ID: 10
+2026-04-09 11:27:17.992 [main] DEBUG c.s.r.service.PuntoInteresService - Buscando punto de interés por ID: 999
+2026-04-09 11:27:17.992 [main] ERROR c.s.r.service.PuntoInteresService - Punto de interés no encontrado: ID 999
+2026-04-09 11:27:17.993 [main] INFO  c.s.r.service.PuntoInteresService - Modificando punto de interés ID: 10
+2026-04-09 11:27:17.994 [main] ERROR c.s.r.service.PuntoInteresService - Categoría no encontrada: ID 99
+2026-04-09 11:27:17.995 [main] DEBUG c.s.r.service.PuntoInteresService - Buscando puntos de interés con filtros: categoriaId=null, abiertoActualmente=null, nombre=null, puntuacionMedia=null
+2026-04-09 11:27:17.996 [main] INFO  c.s.r.service.PuntoInteresService - Se encontraron 2 puntos de interés
+2026-04-09 11:27:17.997 [main] DEBUG c.s.r.service.PuntoInteresService - Buscando puntos de interés con filtros: categoriaId=1, abiertoActualmente=true, nombre=parque, puntuacionMedia=4.5
+2026-04-09 11:27:17.998 [main] INFO  c.s.r.service.PuntoInteresService - Se encontraron 1 puntos de interés
+2026-04-09 11:27:18.003 [SpringApplicationShutdownHook] DEBUG o.s.w.c.s.GenericWebApplicationContext - Closing org.springframework.web.context.support.GenericWebApplicationContext@1ded7b14, started on Thu Apr 09 11:27:15 CEST 2026
+2026-04-09 11:27:18.006 [SpringApplicationShutdownHook] DEBUG o.s.w.c.s.GenericWebApplicationContext - Closing org.springframework.web.context.support.GenericWebApplicationContext@752494dd, started on Thu Apr 09 11:27:16 CEST 2026
+2026-04-09 11:27:18.006 [SpringApplicationShutdownHook] DEBUG o.s.w.c.s.GenericWebApplicationContext - Closing org.springframework.web.context.support.GenericWebApplicationContext@59831016, started on Thu Apr 09 11:27:16 CEST 2026
+2026-04-09 11:27:18.007 [SpringApplicationShutdownHook] DEBUG o.s.w.c.s.GenericWebApplicationContext - Closing org.springframework.web.context.support.GenericWebApplicationContext@76eee0b1, started on Thu Apr 09 11:27:17 CEST 2026
+2026-04-09 11:27:18.007 [SpringApplicationShutdownHook] DEBUG o.s.w.c.s.GenericWebApplicationContext - Closing org.springframework.web.context.support.GenericWebApplicationContext@7e1ce99c, started on Thu Apr 09 11:27:17 CEST 2026

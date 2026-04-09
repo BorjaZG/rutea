@@ -1,0 +1,39 @@
+name: rutea
+
+services:
+
+  rutea-db:
+    image: mariadb:11.3.2
+    container_name: rutea-db
+    env_file: .env
+    environment:
+      MYSQL_USER: ${MARIADB_USER}
+      MYSQL_DATABASE: ${MARIADB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MYSQL_PASSWORD: ${RUTEA_DATABASE_PASSWORD}
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - network-rutea
+
+  rutea-api:
+    image: rutea-api
+    container_name: rutea-api
+    depends_on:
+      rutea-db:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: ${PROFILE}
+      RUTEA_DATABASE_PASSWORD: ${RUTEA_DATABASE_PASSWORD}
+    ports:
+      - "8080:8080"
+    networks:
+      - network-rutea
+
+networks:
+  network-rutea:
+    driver: bridge

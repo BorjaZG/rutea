@@ -1,13 +1,20 @@
 name: rutea
+
 services:
-  db:
+
+  rutea-db:
     image: mariadb:11.3.2
     container_name: rutea-db
+    env_file: .env
     environment:
-      MYSQL_USER: 'rutea_user'
-      MYSQL_PASSWORD: 'rutea_password'
-      MYSQL_DATABASE: 'rutea'
-      MYSQL_PORT: 3306
-      MYSQL_ROOT_PASSWORD: 'rootpassword'
+      MYSQL_USER: ${MARIADB_USER}
+      MYSQL_DATABASE: ${MARIADB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MYSQL_PASSWORD: ${RUTEA_DATABASE_PASSWORD}
     ports:
       - "3306:3306"
+    # volumes:
+    #   - rutea-db-data:/var/lib/mysql
+
+# volumes:
+#   rutea-db-data:
