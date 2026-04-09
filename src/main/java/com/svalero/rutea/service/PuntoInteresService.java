@@ -9,10 +9,10 @@ import com.svalero.rutea.exception.PuntoInteresNotFoundException;
 import com.svalero.rutea.repository.CategoriaRepository;
 import com.svalero.rutea.repository.PuntoInteresRepository;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-@Transactional  // ← IMPORTANTE: A nivel de clase
+@Transactional
 public class PuntoInteresService {
 
     private static final Logger logger = LoggerFactory.getLogger(PuntoInteresService.class);
@@ -35,25 +35,19 @@ public class PuntoInteresService {
 
     public PuntoInteresOutDto add(PuntoInteresInDto dto) throws CategoriaNotFoundException {
         logger.info("Creando nuevo punto de interés: {}", dto.getNombre());
-        try {
-            Categoria categoria = categoriaRepository.findById(dto.getCategoriaId())
-                    .orElseThrow(() -> {
-                        logger.error("Categoría no encontrada: ID {}", dto.getCategoriaId());
-                        return new CategoriaNotFoundException();
-                    });
 
-            PuntoInteres punto = modelMapper.map(dto, PuntoInteres.class);
-            punto.setCategoria(categoria);
+        Categoria categoria = categoriaRepository.findById(dto.getCategoriaId())
+                .orElseThrow(() -> {
+                    logger.error("Categoría no encontrada: ID {}", dto.getCategoriaId());
+                    return new CategoriaNotFoundException();
+                });
 
-            PuntoInteres saved = puntoInteresRepository.save(punto);
-            logger.info("Punto de interés creado exitosamente con ID: {}", saved.getId());
-            return toOutDto(saved);
-        } catch (CategoriaNotFoundException e) {
-            throw e;
-        } catch (Exception e) {
-            logger.error("Error al crear punto de interés: {}", e.getMessage(), e);
-            throw e;
-        }
+        PuntoInteres punto = modelMapper.map(dto, PuntoInteres.class);
+        punto.setCategoria(categoria);
+
+        PuntoInteres saved = puntoInteresRepository.save(punto);
+        logger.info("Punto de interés creado exitosamente con ID: {}", saved.getId());
+        return toOutDto(saved);
     }
 
     public void delete(long id) throws PuntoInteresNotFoundException {
@@ -72,37 +66,27 @@ public class PuntoInteresService {
         logger.debug("Buscando puntos de interés con filtros: categoriaId={}, abiertoActualmente={}, nombre={}, puntuacionMedia={}",
                 categoriaId, abiertoActualmente, nombre, puntuacionMedia);
 
-        List<PuntoInteres> puntos = puntoInteresRepository.findAll();
+        Specification<PuntoInteres> spec = Specification.where(null);
 
-        if (categoriaId != null) {
-            puntos = puntos.stream()
-                    .filter(p -> p.getCategoria() != null && p.getCategoria().getId() == categoriaId)
-                    .toList();
-        }
+        if (categoriaId != null)
+            spec = spec.and((root, query, cb) -> cb.equal(root.get("categoria").get("id"), categoriaId));
 
-        if (abiertoActualmente != null) {
-            puntos = puntos.stream()
-                    .filter(p -> p.isAbiertoActualmente() == abiertoActualmente)
-                    .toList();
-        }
+        if (abiertoActualmente != null)
+            spec = spec.and((root, query, cb) -> cb.equal(root.get("abiertoActualmente"), abiertoActualmente));
 
         if (nombre != null && !nombre.isBlank()) {
-            String safe = nombre.toLowerCase();
-            puntos = puntos.stream()
-                    .filter(p -> p.getNombre() != null && p.getNombre().toLowerCase().contains(safe))
-                    .toList();
+            String pattern = "%" + nombre.toLowerCase() + "%";
+            spec = spec.and((root, query, cb) -> cb.like(cb.lower(root.get("nombre")), pattern));
         }
 
-        if (puntuacionMedia != null) {
-            final double eps = 0.0001;
-            double target = puntuacionMedia.doubleValue();
-            puntos = puntos.stream()
-                    .filter(p -> Math.abs(p.getPuntuacionMedia() - target) < eps)
-                    .toList();
-        }
+        if (puntuacionMedia != null)
+            spec = spec.and((root, query, cb) -> cb.equal(root.get("puntuacionMedia"), puntuacionMedia));
 
-        logger.info("Se encontraron {} puntos de interés", puntos.size());
-        return modelMapper.map(puntos, new TypeToken<List<PuntoInteresOutDto>>() {}.getType());
+        List<PuntoInteresOutDto> result = puntoInteresRepository.findAll(spec).stream()
+                .map(this::toOutDto)
+                .toList();
+        logger.info("Se encontraron {} puntos de interés", result.size());
+        return result;
     }
 
     @Transactional(readOnly = true)
@@ -141,13 +125,9 @@ public class PuntoInteresService {
         return toOutDto(saved);
     }
 
-    /**
-     * Operación PATCH - Actualización parcial de punto de interés
-     */
     public PuntoInteresOutDto patch(long id, Map<String, Object> updates)
-            throws PuntoInteresNotFoundException {
+            throws PuntoInteresNotFoundException, CategoriaNotFoundException {
         logger.info("Aplicando PATCH a punto de interés ID: {} con {} campos", id, updates.size());
-        logger.debug("Campos a actualizar: {}", updates.keySet());
 
         PuntoInteres punto = puntoInteresRepository.findById(id)
                 .orElseThrow(() -> {
@@ -155,70 +135,66 @@ public class PuntoInteresService {
                     return new PuntoInteresNotFoundException();
                 });
 
-        // Actualizar campos usando setters
-        updates.forEach((campo, valor) -> {
+        for (Map.Entry<String, Object> entry : updates.entrySet()) {
+            String campo = entry.getKey();
+            Object valor = entry.getValue();
             switch (campo) {
                 case "categoriaId":
-                    if (valor != null && valor instanceof Number) {
-                        long catId = ((Number) valor).longValue();
+                    if (valor instanceof Number n) {
+                        long catId = n.longValue();
                         Categoria categoria = categoriaRepository.findById(catId)
-                                .orElseThrow(() -> new RuntimeException("Categoría no encontrada: " + catId));
+                                .orElseThrow(() -> {
+                                    logger.error("Categoría no encontrada: ID {}", catId);
+                                    return new CategoriaNotFoundException();
+                                });
                         punto.setCategoria(categoria);
                         logger.debug("Relación categoría actualizada: ID {}", catId);
                     }
                     break;
-
                 case "nombre":
                     punto.setNombre((String) valor);
                     logger.debug("Campo actualizado: nombre = {}", valor);
                     break;
-
                 case "latitud":
                     punto.setLatitud(((Number) valor).doubleValue());
                     logger.debug("Campo actualizado: latitud = {}", valor);
                     break;
-
                 case "longitud":
                     punto.setLongitud(((Number) valor).doubleValue());
                     logger.debug("Campo actualizado: longitud = {}", valor);
                     break;
-
                 case "abiertoActualmente":
                     punto.setAbiertoActualmente((Boolean) valor);
                     logger.debug("Campo actualizado: abiertoActualmente = {}", valor);
                     break;
-
                 case "puntuacionMedia":
                     punto.setPuntuacionMedia(((Number) valor).floatValue());
                     logger.debug("Campo actualizado: puntuacionMedia = {}", valor);
                     break;
-
                 case "fechaCreacion":
-                    if (valor instanceof String) {
-                        punto.setFechaCreacion(LocalDateTime.parse((String) valor));
-                    }
+                    if (valor instanceof String s)
+                        punto.setFechaCreacion(LocalDateTime.parse(s));
                     logger.debug("Campo actualizado: fechaCreacion = {}", valor);
                     break;
-
                 case "id":
                     logger.debug("Ignorando campo 'id' en PATCH");
                     break;
-
                 default:
-                    logger.warn("Campo desconocido: {}", campo);
+                    logger.warn("Campo desconocido ignorado en PATCH: {}", campo);
             }
-        });
+        }
 
-        // Guardar y hacer flush para forzar la sincronización
-        PuntoInteres updated = puntoInteresRepository.saveAndFlush(punto);
+        PuntoInteres updated = puntoInteresRepository.save(punto);
         logger.info("Punto de interés actualizado exitosamente con PATCH: ID {}", id);
-
         return toOutDto(updated);
     }
 
     private PuntoInteresOutDto toOutDto(PuntoInteres punto) {
         PuntoInteresOutDto out = modelMapper.map(punto, PuntoInteresOutDto.class);
-        out.setCategoriaId(punto.getCategoria() != null ? punto.getCategoria().getId() : null);
+        if (punto.getCategoria() != null) {
+            out.setCategoriaId(punto.getCategoria().getId());
+            out.setCategoriaNombre(punto.getCategoria().getNombre());
+        }
         return out;
     }
 }

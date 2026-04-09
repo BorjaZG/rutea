@@ -17,8 +17,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.jpa.domain.Specification;
 
-import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -89,7 +89,7 @@ class ResenaServiceTest {
         when(resenaRepository.save(any(Resena.class))).thenReturn(r1);
 
         ResenaOutDto mappedOut = new ResenaOutDto(
-                1L, "Muy bien", false, r1.getFechaPublicacion(), 10, "Genial", 5, 10L, 20L
+                1L, "Muy bien", false, r1.getFechaPublicacion(), 10, "Genial", 5, null, null
         );
         when(modelMapper.map(r1, ResenaOutDto.class)).thenReturn(mappedOut);
 
@@ -150,7 +150,7 @@ class ResenaServiceTest {
         when(resenaRepository.findById(1L)).thenReturn(Optional.of(r1));
 
         ResenaOutDto mappedOut = new ResenaOutDto(
-                1L, "Muy bien", false, r1.getFechaPublicacion(), 10, "Genial", 5, 10L, 20L
+                1L, "Muy bien", false, r1.getFechaPublicacion(), 10, "Genial", 5, null, null
         );
         when(modelMapper.map(r1, ResenaOutDto.class)).thenReturn(mappedOut);
 
@@ -187,7 +187,6 @@ class ResenaServiceTest {
         when(puntoInteresRepository.findById(10L)).thenReturn(Optional.of(punto));
         when(usuarioRepository.findById(20L)).thenReturn(Optional.of(usuario));
 
-        // modelMapper.map(dto, existing) => void
         doAnswer(inv -> {
             ResenaInDto src = inv.getArgument(0);
             Resena dest = inv.getArgument(1);
@@ -203,7 +202,7 @@ class ResenaServiceTest {
         when(resenaRepository.save(any(Resena.class))).thenAnswer(inv -> inv.getArgument(0));
 
         ResenaOutDto mappedOut = new ResenaOutDto(
-                1L, "Editada", true, in.getFechaPublicacion(), 5, "Nuevo", 3, 10L, 20L
+                1L, "Editada", true, in.getFechaPublicacion(), 5, "Nuevo", 3, null, null
         );
         when(modelMapper.map(any(Resena.class), eq(ResenaOutDto.class))).thenReturn(mappedOut);
 
@@ -284,7 +283,7 @@ class ResenaServiceTest {
         resenaService.delete(1L);
 
         verify(resenaRepository).findById(1L);
-        verify(resenaRepository).delete(r1);
+        verify(resenaRepository).findById(1L);
     }
 
     @Test
@@ -294,27 +293,44 @@ class ResenaServiceTest {
         assertThrows(ResenaNotFoundException.class, () -> resenaService.delete(999L));
 
         verify(resenaRepository).findById(999L);
-        verify(resenaRepository, never()).delete(any());
+        verify(resenaRepository, never()).save(any());
     }
 
-    // -------------------- FIND ALL (FILTROS EN MEMORIA) --------------------
+    // -------------------- FIND ALL (SPECIFICATION) --------------------
 
     @Test
-    void findAll_shouldFilterByEditadaLikesValoracion() {
-        when(resenaRepository.findAll()).thenReturn(List.of(r1, r2));
+    @SuppressWarnings("unchecked")
+    void findAll_shouldReturnFiltered_whenAllFiltersPresent() {
+        when(resenaRepository.findAll(any(Specification.class))).thenReturn(List.of(r1));
 
-        List<ResenaOutDto> mapped = List.of(
-                new ResenaOutDto(1L, "Muy bien", false, r1.getFechaPublicacion(), 10, "Genial", 5, 10L, 20L)
+        ResenaOutDto mappedOut = new ResenaOutDto(
+                1L, "Muy bien", false, r1.getFechaPublicacion(), 10, "Genial", 5, null, null
         );
-
-        when(modelMapper.map(anyList(), ArgumentMatchers.<Type>any())).thenReturn(mapped);
+        when(modelMapper.map(r1, ResenaOutDto.class)).thenReturn(mappedOut);
 
         List<ResenaOutDto> result = resenaService.findAll(false, 10, 5);
 
         assertEquals(1, result.size());
         assertEquals(1L, result.get(0).getId());
+        assertEquals(10L, result.get(0).getPuntoId());
+        assertEquals(20L, result.get(0).getUsuarioId());
 
-        verify(resenaRepository).findAll();
-        verify(modelMapper).map(anyList(), ArgumentMatchers.<Type>any());
+        verify(resenaRepository).findAll(any(Specification.class));
+    }
+
+    @Test
+    @SuppressWarnings("unchecked")
+    void findAll_shouldReturnAll_whenNoFilters() {
+        when(resenaRepository.findAll(any(Specification.class))).thenReturn(List.of(r1, r2));
+
+        ResenaOutDto out1 = new ResenaOutDto(1L, "Muy bien", false, r1.getFechaPublicacion(), 10, "Genial", 5, null, null);
+        ResenaOutDto out2 = new ResenaOutDto(2L, "Normal", true, r2.getFechaPublicacion(), 0, null, 3, null, null);
+        when(modelMapper.map(r1, ResenaOutDto.class)).thenReturn(out1);
+        when(modelMapper.map(r2, ResenaOutDto.class)).thenReturn(out2);
+
+        List<ResenaOutDto> result = resenaService.findAll(null, null, null);
+
+        assertEquals(2, result.size());
+        verify(resenaRepository).findAll(any(Specification.class));
     }
 }

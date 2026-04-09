@@ -12,17 +12,19 @@ import com.svalero.rutea.repository.PuntoInteresRepository;
 import com.svalero.rutea.repository.ResenaRepository;
 import com.svalero.rutea.repository.UsuarioRepository;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
 @Service
+@Transactional
 public class ResenaService {
 
     private static final Logger logger = LoggerFactory.getLogger(ResenaService.class);
@@ -36,35 +38,28 @@ public class ResenaService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public ResenaOutDto add(ResenaInDto dto)
-            throws PuntoInteresNotFoundException, UsuarioNotFoundException {
+    public ResenaOutDto add(ResenaInDto dto) throws PuntoInteresNotFoundException, UsuarioNotFoundException {
         logger.info("Creando nueva reseña para punto ID: {}", dto.getPuntoId());
-        try {
-            PuntoInteres punto = puntoInteresRepository.findById(dto.getPuntoId())
-                    .orElseThrow(() -> {
-                        logger.error("Punto de interés no encontrado: ID {}", dto.getPuntoId());
-                        return new PuntoInteresNotFoundException();
-                    });
 
-            Usuario usuario = usuarioRepository.findById(dto.getUsuarioId())
-                    .orElseThrow(() -> {
-                        logger.error("Usuario no encontrado: ID {}", dto.getUsuarioId());
-                        return new UsuarioNotFoundException();
-                    });
+        PuntoInteres punto = puntoInteresRepository.findById(dto.getPuntoId())
+                .orElseThrow(() -> {
+                    logger.error("Punto de interés no encontrado: ID {}", dto.getPuntoId());
+                    return new PuntoInteresNotFoundException();
+                });
 
-            Resena resena = modelMapper.map(dto, Resena.class);
-            resena.setPunto(punto);
-            resena.setUsuario(usuario);
+        Usuario usuario = usuarioRepository.findById(dto.getUsuarioId())
+                .orElseThrow(() -> {
+                    logger.error("Usuario no encontrado: ID {}", dto.getUsuarioId());
+                    return new UsuarioNotFoundException();
+                });
 
-            Resena saved = resenaRepository.save(resena);
-            logger.info("Reseña creada exitosamente con ID: {}", saved.getId());
-            return toOutDto(saved);
-        } catch (PuntoInteresNotFoundException | UsuarioNotFoundException e) {
-            throw e;
-        } catch (Exception e) {
-            logger.error("Error al crear reseña: {}", e.getMessage(), e);
-            throw e;
-        }
+        Resena resena = modelMapper.map(dto, Resena.class);
+        resena.setPunto(punto);
+        resena.setUsuario(usuario);
+
+        Resena saved = resenaRepository.save(resena);
+        logger.info("Reseña creada exitosamente con ID: {}", saved.getId());
+        return toOutDto(saved);
     }
 
     public void delete(long id) throws ResenaNotFoundException {
@@ -78,35 +73,30 @@ public class ResenaService {
         logger.info("Reseña eliminada exitosamente: ID {}", id);
     }
 
-    // NUEVO: Filtros (hasta 3): editada + likes + valoracion
+    @Transactional(readOnly = true)
     public List<ResenaOutDto> findAll(Boolean editada, Integer likes, Integer valoracion) {
         logger.debug("Buscando reseñas con filtros: editada={}, likes={}, valoracion={}",
                 editada, likes, valoracion);
 
-        List<Resena> resenas = resenaRepository.findAll();
+        Specification<Resena> spec = Specification.where(null);
 
-        if (editada != null) {
-            resenas = resenas.stream()
-                    .filter(r -> r.isEditada() == editada)
-                    .toList();
-        }
+        if (editada != null)
+            spec = spec.and((root, query, cb) -> cb.equal(root.get("editada"), editada));
 
-        if (likes != null) {
-            resenas = resenas.stream()
-                    .filter(r -> r.getLikes() == likes)
-                    .toList();
-        }
+        if (likes != null)
+            spec = spec.and((root, query, cb) -> cb.equal(root.get("likes"), likes));
 
-        if (valoracion != null) {
-            resenas = resenas.stream()
-                    .filter(r -> r.getValoracion() == valoracion)
-                    .toList();
-        }
+        if (valoracion != null)
+            spec = spec.and((root, query, cb) -> cb.equal(root.get("valoracion"), valoracion));
 
-        logger.info("Se encontraron {} reseñas", resenas.size());
-        return modelMapper.map(resenas, new TypeToken<List<ResenaOutDto>>() {}.getType());
+        List<ResenaOutDto> result = resenaRepository.findAll(spec).stream()
+                .map(this::toOutDto)
+                .toList();
+        logger.info("Se encontraron {} reseñas", result.size());
+        return result;
     }
 
+    @Transactional(readOnly = true)
     public ResenaOutDto findById(long id) throws ResenaNotFoundException {
         logger.debug("Buscando reseña por ID: {}", id);
         Resena resena = resenaRepository.findById(id)
@@ -149,12 +139,9 @@ public class ResenaService {
         return toOutDto(saved);
     }
 
-    /**
-     * Operación PATCH - Actualización parcial de reseña
-     */
-    public ResenaOutDto patch(long id, Map<String, Object> updates) throws ResenaNotFoundException {
+    public ResenaOutDto patch(long id, Map<String, Object> updates)
+            throws ResenaNotFoundException, PuntoInteresNotFoundException, UsuarioNotFoundException {
         logger.info("Aplicando PATCH a reseña ID: {} con {} campos", id, updates.size());
-        logger.debug("Campos a actualizar: {}", updates.keySet());
 
         Resena resena = resenaRepository.findById(id)
                 .orElseThrow(() -> {
@@ -162,71 +149,66 @@ public class ResenaService {
                     return new ResenaNotFoundException();
                 });
 
-        // Actualizar campos usando setters
-        updates.forEach((campo, valor) -> {
+        for (Map.Entry<String, Object> entry : updates.entrySet()) {
+            String campo = entry.getKey();
+            Object valor = entry.getValue();
             switch (campo) {
                 case "puntoId":
-                    if (valor != null && valor instanceof Number) {
-                        long puntoId = ((Number) valor).longValue();
+                    if (valor instanceof Number n) {
+                        long puntoId = n.longValue();
                         PuntoInteres punto = puntoInteresRepository.findById(puntoId)
-                                .orElseThrow(() -> new RuntimeException("Punto no encontrado: " + puntoId));
+                                .orElseThrow(() -> {
+                                    logger.error("Punto de interés no encontrado: ID {}", puntoId);
+                                    return new PuntoInteresNotFoundException();
+                                });
                         resena.setPunto(punto);
                         logger.debug("Relación punto actualizada: ID {}", puntoId);
                     }
                     break;
-
                 case "usuarioId":
-                    if (valor != null && valor instanceof Number) {
-                        long userId = ((Number) valor).longValue();
+                    if (valor instanceof Number n) {
+                        long userId = n.longValue();
                         Usuario usuario = usuarioRepository.findById(userId)
-                                .orElseThrow(() -> new RuntimeException("Usuario no encontrado: " + userId));
+                                .orElseThrow(() -> {
+                                    logger.error("Usuario no encontrado: ID {}", userId);
+                                    return new UsuarioNotFoundException();
+                                });
                         resena.setUsuario(usuario);
                         logger.debug("Relación usuario actualizada: ID {}", userId);
                     }
                     break;
-
                 case "comentario":
                     resena.setComentario((String) valor);
                     logger.debug("Campo actualizado: comentario");
                     break;
-
                 case "editada":
                     resena.setEditada((Boolean) valor);
                     logger.debug("Campo actualizado: editada = {}", valor);
                     break;
-
                 case "fechaPublicacion":
-                    if (valor instanceof String) {
-                        resena.setFechaPublicacion(LocalDate.parse((String) valor));
-                    } else if (valor instanceof LocalDate) {
-                        resena.setFechaPublicacion((LocalDate) valor);
-                    }
+                    if (valor instanceof String s)
+                        resena.setFechaPublicacion(LocalDate.parse(s));
                     logger.debug("Campo actualizado: fechaPublicacion = {}", valor);
                     break;
-
                 case "likes":
                     resena.setLikes(((Number) valor).intValue());
                     logger.debug("Campo actualizado: likes = {}", valor);
                     break;
-
                 case "titulo":
                     resena.setTitulo((String) valor);
-                    logger.debug("Campo actualizado: titulo = {}", valor);
+                    logger.debug("Campo actualizado: titulo");
                     break;
-
                 case "valoracion":
                     resena.setValoracion(((Number) valor).intValue());
                     logger.debug("Campo actualizado: valoracion = {}", valor);
                     break;
-
                 case "id":
                     logger.debug("Ignorando campo 'id' en PATCH");
                     break;
-
                 default:
-                    logger.warn("Campo desconocido: {}", campo);
+                    logger.warn("Campo desconocido ignorado en PATCH: {}", campo);
             }
-        });
+        }
 
         Resena updated = resenaRepository.save(resena);
         logger.info("Reseña actualizada exitosamente con PATCH: ID {}", id);

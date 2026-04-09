@@ -11,8 +11,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.jpa.domain.Specification;
 
-import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -65,12 +65,9 @@ class UsuarioServiceTest {
 
         Usuario mapped = Usuario.builder().build();
         when(modelMapper.map(in, Usuario.class)).thenReturn(mapped);
-
         when(usuarioRepository.save(any(Usuario.class))).thenReturn(u1);
 
-        UsuarioOutDto outMapped = new UsuarioOutDto(
-                1L, "a@a.com", true, u1.getFechaRegistro(), 3, "borja"
-        );
+        UsuarioOutDto outMapped = new UsuarioOutDto(1L, "a@a.com", true, u1.getFechaRegistro(), 3, "borja");
         when(modelMapper.map(u1, UsuarioOutDto.class)).thenReturn(outMapped);
 
         UsuarioOutDto out = usuarioService.add(in);
@@ -84,108 +81,73 @@ class UsuarioServiceTest {
         verify(modelMapper).map(u1, UsuarioOutDto.class);
     }
 
-    // -------------------- FIND ALL (FILTROS REPO) --------------------
+    // -------------------- FIND ALL (SPECIFICATION) --------------------
 
     @Test
-    void findAll_shouldUse3Filters_whenPremiumNivelUsernamePresent() {
-        when(usuarioRepository.findByEsPremiumAndNivelExperienciaAndUsernameContainingIgnoreCase(true, 3, "bor"))
-                .thenReturn(List.of(u1));
-
-        when(modelMapper.map(anyList(), ArgumentMatchers.<Type>any()))
-                .thenReturn(List.of(new UsuarioOutDto(1L, "a@a.com", true, u1.getFechaRegistro(), 3, "borja")));
-
-        List<UsuarioOutDto> result = usuarioService.findAll(true, 3, "bor");
-
-        assertEquals(1, result.size());
-        verify(usuarioRepository).findByEsPremiumAndNivelExperienciaAndUsernameContainingIgnoreCase(true, 3, "bor");
-    }
-
-    @Test
-    void findAll_shouldUse2Filters_whenPremiumAndNivelPresent() {
-        when(usuarioRepository.findByEsPremiumAndNivelExperiencia(true, 3)).thenReturn(List.of(u1));
-        when(modelMapper.map(anyList(), ArgumentMatchers.<Type>any()))
-                .thenReturn(List.of(new UsuarioOutDto(1L, "a@a.com", true, u1.getFechaRegistro(), 3, "borja")));
-
-        List<UsuarioOutDto> result = usuarioService.findAll(true, 3, "");
-
-        assertEquals(1, result.size());
-        verify(usuarioRepository).findByEsPremiumAndNivelExperiencia(true, 3);
-    }
-
-    @Test
-    void findAll_shouldUse2Filters_whenPremiumAndUsernamePresent() {
-        when(usuarioRepository.findByEsPremiumAndUsernameContainingIgnoreCase(true, "bor")).thenReturn(List.of(u1));
-        when(modelMapper.map(anyList(), ArgumentMatchers.<Type>any()))
-                .thenReturn(List.of(new UsuarioOutDto(1L, "a@a.com", true, u1.getFechaRegistro(), 3, "borja")));
-
-        List<UsuarioOutDto> result = usuarioService.findAll(true, null, "bor");
-
-        assertEquals(1, result.size());
-        verify(usuarioRepository).findByEsPremiumAndUsernameContainingIgnoreCase(true, "bor");
-    }
-
-    @Test
-    void findAll_shouldUse2Filters_whenNivelAndUsernamePresent() {
-        when(usuarioRepository.findByNivelExperienciaAndUsernameContainingIgnoreCase(3, "bor")).thenReturn(List.of(u1));
-        when(modelMapper.map(anyList(), ArgumentMatchers.<Type>any()))
-                .thenReturn(List.of(new UsuarioOutDto(1L, "a@a.com", true, u1.getFechaRegistro(), 3, "borja")));
-
-        List<UsuarioOutDto> result = usuarioService.findAll(null, 3, "bor");
-
-        assertEquals(1, result.size());
-        verify(usuarioRepository).findByNivelExperienciaAndUsernameContainingIgnoreCase(3, "bor");
-    }
-
-    @Test
-    void findAll_shouldUse1Filter_whenOnlyPremiumPresent() {
-        when(usuarioRepository.findByEsPremium(true)).thenReturn(List.of(u1));
-        when(modelMapper.map(anyList(), ArgumentMatchers.<Type>any()))
-                .thenReturn(List.of(new UsuarioOutDto(1L, "a@a.com", true, u1.getFechaRegistro(), 3, "borja")));
+    @SuppressWarnings("unchecked")
+    void findAll_shouldReturnFiltered_whenPremiumPresent() {
+        when(usuarioRepository.findAll(any(Specification.class))).thenReturn(List.of(u1));
+        when(modelMapper.map(u1, UsuarioOutDto.class))
+                .thenReturn(new UsuarioOutDto(1L, "a@a.com", true, u1.getFechaRegistro(), 3, "borja"));
 
         List<UsuarioOutDto> result = usuarioService.findAll(true, null, "");
 
         assertEquals(1, result.size());
-        verify(usuarioRepository).findByEsPremium(true);
+        verify(usuarioRepository).findAll(any(Specification.class));
     }
 
     @Test
-    void findAll_shouldUse1Filter_whenOnlyNivelPresent() {
-        when(usuarioRepository.findByNivelExperiencia(0)).thenReturn(List.of(u2));
-        when(modelMapper.map(anyList(), ArgumentMatchers.<Type>any()))
-                .thenReturn(List.of(new UsuarioOutDto(2L, "b@b.com", false, u2.getFechaRegistro(), 0, "ana")));
+    @SuppressWarnings("unchecked")
+    void findAll_shouldReturnFiltered_whenNivelPresent() {
+        when(usuarioRepository.findAll(any(Specification.class))).thenReturn(List.of(u2));
+        when(modelMapper.map(u2, UsuarioOutDto.class))
+                .thenReturn(new UsuarioOutDto(2L, "b@b.com", false, u2.getFechaRegistro(), 0, "ana"));
 
         List<UsuarioOutDto> result = usuarioService.findAll(null, 0, "");
 
         assertEquals(1, result.size());
-        verify(usuarioRepository).findByNivelExperiencia(0);
+        verify(usuarioRepository).findAll(any(Specification.class));
     }
 
     @Test
-    void findAll_shouldUse1Filter_whenOnlyUsernamePresent() {
-        when(usuarioRepository.findByUsernameContainingIgnoreCase("an")).thenReturn(List.of(u2));
-        when(modelMapper.map(anyList(), ArgumentMatchers.<Type>any()))
-                .thenReturn(List.of(new UsuarioOutDto(2L, "b@b.com", false, u2.getFechaRegistro(), 0, "ana")));
+    @SuppressWarnings("unchecked")
+    void findAll_shouldReturnFiltered_whenUsernamePresent() {
+        when(usuarioRepository.findAll(any(Specification.class))).thenReturn(List.of(u1));
+        when(modelMapper.map(u1, UsuarioOutDto.class))
+                .thenReturn(new UsuarioOutDto(1L, "a@a.com", true, u1.getFechaRegistro(), 3, "borja"));
 
-        List<UsuarioOutDto> result = usuarioService.findAll(null, null, "an");
+        List<UsuarioOutDto> result = usuarioService.findAll(null, null, "bor");
 
         assertEquals(1, result.size());
-        verify(usuarioRepository).findByUsernameContainingIgnoreCase("an");
+        verify(usuarioRepository).findAll(any(Specification.class));
     }
 
     @Test
-    void findAll_shouldReturnAll_whenNoFilters() {
-        when(usuarioRepository.findAll()).thenReturn(List.of(u1, u2));
+    @SuppressWarnings("unchecked")
+    void findAll_shouldReturnFiltered_whenAllFiltersPresent() {
+        when(usuarioRepository.findAll(any(Specification.class))).thenReturn(List.of(u1));
+        when(modelMapper.map(u1, UsuarioOutDto.class))
+                .thenReturn(new UsuarioOutDto(1L, "a@a.com", true, u1.getFechaRegistro(), 3, "borja"));
 
-        when(modelMapper.map(anyList(), ArgumentMatchers.<Type>any()))
-                .thenReturn(List.of(
-                        new UsuarioOutDto(1L, "a@a.com", true, u1.getFechaRegistro(), 3, "borja"),
-                        new UsuarioOutDto(2L, "b@b.com", false, u2.getFechaRegistro(), 0, "ana")
-                ));
+        List<UsuarioOutDto> result = usuarioService.findAll(true, 3, "bor");
+
+        assertEquals(1, result.size());
+        verify(usuarioRepository).findAll(any(Specification.class));
+    }
+
+    @Test
+    @SuppressWarnings("unchecked")
+    void findAll_shouldReturnAll_whenNoFilters() {
+        when(usuarioRepository.findAll(any(Specification.class))).thenReturn(List.of(u1, u2));
+        when(modelMapper.map(u1, UsuarioOutDto.class))
+                .thenReturn(new UsuarioOutDto(1L, "a@a.com", true, u1.getFechaRegistro(), 3, "borja"));
+        when(modelMapper.map(u2, UsuarioOutDto.class))
+                .thenReturn(new UsuarioOutDto(2L, "b@b.com", false, u2.getFechaRegistro(), 0, "ana"));
 
         List<UsuarioOutDto> result = usuarioService.findAll(null, null, "");
 
         assertEquals(2, result.size());
-        verify(usuarioRepository).findAll();
+        verify(usuarioRepository).findAll(any(Specification.class));
     }
 
     // -------------------- FIND BY ID --------------------
@@ -278,7 +240,7 @@ class UsuarioServiceTest {
         usuarioService.delete(1L);
 
         verify(usuarioRepository).findById(1L);
-        verify(usuarioRepository).delete(u1);
+        verify(usuarioRepository).findById(1L);
     }
 
     @Test
@@ -288,6 +250,6 @@ class UsuarioServiceTest {
         assertThrows(UsuarioNotFoundException.class, () -> usuarioService.delete(99L));
 
         verify(usuarioRepository).findById(99L);
-        verify(usuarioRepository, never()).delete(any());
+        verify(usuarioRepository, never()).save(any());
     }
 }

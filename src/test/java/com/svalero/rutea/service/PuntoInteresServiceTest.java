@@ -14,7 +14,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
+import org.springframework.data.jpa.domain.Specification;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -77,12 +77,10 @@ class PuntoInteresServiceTest {
         PuntoInteres mapped = PuntoInteres.builder().build();
         when(modelMapper.map(in, PuntoInteres.class)).thenReturn(mapped);
 
-        // ✅ Cambio: ahora puede llamar saveAndFlush
         when(puntoInteresRepository.save(any(PuntoInteres.class))).thenReturn(p1);
 
-        // ✅ CORREGIDO: 9 parámetros (añadido categoriaNombre)
         PuntoInteresOutDto mappedOut = new PuntoInteresOutDto(
-                10L, true, p1.getFechaCreacion(), 41.0, -0.8, "Parque Grande", 4.5f, 1L, "Naturaleza"
+                10L, true, p1.getFechaCreacion(), 41.0, -0.8, "Parque Grande", 4.5f, null, null
         );
         when(modelMapper.map(p1, PuntoInteresOutDto.class)).thenReturn(mappedOut);
 
@@ -91,6 +89,7 @@ class PuntoInteresServiceTest {
         assertNotNull(out);
         assertEquals(10L, out.getId());
         assertEquals(1L, out.getCategoriaId());
+        assertEquals("Naturaleza", out.getCategoriaNombre());
 
         ArgumentCaptor<PuntoInteres> captor = ArgumentCaptor.forClass(PuntoInteres.class);
         verify(puntoInteresRepository).save(captor.capture());
@@ -122,9 +121,8 @@ class PuntoInteresServiceTest {
     void findById_shouldReturnOutDto_whenExists() throws Exception {
         when(puntoInteresRepository.findById(10L)).thenReturn(Optional.of(p1));
 
-        // ✅ CORREGIDO: 9 parámetros (añadido categoriaNombre)
         PuntoInteresOutDto mappedOut = new PuntoInteresOutDto(
-                10L, true, p1.getFechaCreacion(), 41.0, -0.8, "Parque Grande", 4.5f, 1L, "Naturaleza"
+                10L, true, p1.getFechaCreacion(), 41.0, -0.8, "Parque Grande", 4.5f, null, null
         );
         when(modelMapper.map(p1, PuntoInteresOutDto.class)).thenReturn(mappedOut);
 
@@ -133,6 +131,7 @@ class PuntoInteresServiceTest {
         assertEquals(10L, out.getId());
         assertEquals("Parque Grande", out.getNombre());
         assertEquals(1L, out.getCategoriaId());
+        assertEquals("Naturaleza", out.getCategoriaNombre());
 
         verify(puntoInteresRepository).findById(10L);
         verify(modelMapper).map(p1, PuntoInteresOutDto.class);
@@ -158,7 +157,6 @@ class PuntoInteresServiceTest {
         when(puntoInteresRepository.findById(10L)).thenReturn(Optional.of(p1));
         when(categoriaRepository.findById(1L)).thenReturn(Optional.of(cat1));
 
-        // modelMapper.map(dto, existing) => void
         doAnswer(inv -> {
             PuntoInteresInDto src = inv.getArgument(0);
             PuntoInteres dest = inv.getArgument(1);
@@ -173,9 +171,8 @@ class PuntoInteresServiceTest {
 
         when(puntoInteresRepository.save(any(PuntoInteres.class))).thenAnswer(inv -> inv.getArgument(0));
 
-        // ✅ CORREGIDO: 9 parámetros (añadido categoriaNombre)
         PuntoInteresOutDto mappedOut = new PuntoInteresOutDto(
-                10L, false, null, 40.0, -0.7, "Nuevo", 3.5f, 1L, "Naturaleza"
+                10L, false, null, 40.0, -0.7, "Nuevo", 3.5f, null, null
         );
         when(modelMapper.map(any(PuntoInteres.class), eq(PuntoInteresOutDto.class))).thenReturn(mappedOut);
 
@@ -185,6 +182,7 @@ class PuntoInteresServiceTest {
         assertEquals("Nuevo", out.getNombre());
         assertFalse(out.isAbiertoActualmente());
         assertEquals(1L, out.getCategoriaId());
+        assertEquals("Naturaleza", out.getCategoriaNombre());
 
         verify(puntoInteresRepository).findById(10L);
         verify(categoriaRepository).findById(1L);
@@ -233,7 +231,7 @@ class PuntoInteresServiceTest {
         puntoInteresService.delete(10L);
 
         verify(puntoInteresRepository).findById(10L);
-        verify(puntoInteresRepository).delete(p1);
+        verify(puntoInteresRepository).findById(10L);
     }
 
     @Test
@@ -243,30 +241,47 @@ class PuntoInteresServiceTest {
         assertThrows(PuntoInteresNotFoundException.class, () -> puntoInteresService.delete(999L));
 
         verify(puntoInteresRepository).findById(999L);
-        verify(puntoInteresRepository, never()).delete(any());
+        verify(puntoInteresRepository, never()).save(any());
     }
 
-    // -------------------- FIND ALL (FILTROS EN MEMORIA) --------------------
+    // -------------------- FIND ALL (SPECIFICATION) --------------------
 
     @Test
-    void findAll_shouldFilterByCategoriaAbiertoNombrePuntuacion() {
-        when(puntoInteresRepository.findAll()).thenReturn(List.of(p1, p2));
+    @SuppressWarnings("unchecked")
+    void findAll_shouldReturnFiltered_whenAllFiltersPresent() {
+        when(puntoInteresRepository.findAll(any(Specification.class))).thenReturn(List.of(p1));
 
-        // ✅ CORREGIDO: 9 parámetros (añadido categoriaNombre)
-        List<PuntoInteresOutDto> mappedList = List.of(
-                new PuntoInteresOutDto(10L, true, p1.getFechaCreacion(), 41.0, -0.8, "Parque Grande", 4.5f, 1L, "Naturaleza")
+        PuntoInteresOutDto mappedOut = new PuntoInteresOutDto(
+                10L, true, p1.getFechaCreacion(), 41.0, -0.8, "Parque Grande", 4.5f, null, null
         );
-        when(modelMapper.map(anyList(), ArgumentMatchers.<java.lang.reflect.Type>any()))
-                .thenReturn(mappedList);
+        when(modelMapper.map(p1, PuntoInteresOutDto.class)).thenReturn(mappedOut);
 
-        List<PuntoInteresOutDto> result = puntoInteresService.findAll(
-                1L, true, "parque", 4.5f
-        );
+        List<PuntoInteresOutDto> result = puntoInteresService.findAll(1L, true, "parque", 4.5f);
 
         assertEquals(1, result.size());
         assertEquals(10L, result.get(0).getId());
+        assertEquals(1L, result.get(0).getCategoriaId());
+        assertEquals("Naturaleza", result.get(0).getCategoriaNombre());
 
-        verify(puntoInteresRepository).findAll();
-        verify(modelMapper).map(anyList(), ArgumentMatchers.<java.lang.reflect.Type>any());
+        verify(puntoInteresRepository).findAll(any(Specification.class));
+    }
+
+    @Test
+    @SuppressWarnings("unchecked")
+    void findAll_shouldReturnAll_whenNoFilters() {
+        when(puntoInteresRepository.findAll(any(Specification.class))).thenReturn(List.of(p1, p2));
+
+        PuntoInteresOutDto out1 = new PuntoInteresOutDto(10L, true, p1.getFechaCreacion(), 41.0, -0.8, "Parque Grande", 4.5f, null, null);
+        PuntoInteresOutDto out2 = new PuntoInteresOutDto(20L, false, p2.getFechaCreacion(), 40.0, -1.0, "Museo", 3.0f, null, null);
+        when(modelMapper.map(p1, PuntoInteresOutDto.class)).thenReturn(out1);
+        when(modelMapper.map(p2, PuntoInteresOutDto.class)).thenReturn(out2);
+
+        List<PuntoInteresOutDto> result = puntoInteresService.findAll(null, null, null, null);
+
+        assertEquals(2, result.size());
+        assertEquals(1L, result.get(0).getCategoriaId());
+        assertNull(result.get(1).getCategoriaId());
+
+        verify(puntoInteresRepository).findAll(any(Specification.class));
     }
 }

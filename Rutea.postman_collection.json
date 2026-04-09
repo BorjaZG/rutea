@@ -1,0 +1,907 @@
+{
+  "info": {
+    "_postman_id": "1c7cccb3-7f26-4dd1-8fdb-18d87e6311f5",
+    "name": "Rutea API - CRUD + filtros",
+    "description": "Colección para probar CRUD completo y filtros de la API Rutea.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "49434023",
+    "_collection_link": "https://go.postman.co/collection/49434023-1c7cccb3-7f26-4dd1-8fdb-18d87e6311f5?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Categorias",
+      "item": [
+        {
+          "name": "GET /categorias (sin filtros)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/categorias",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categorias"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /categorias (filtros)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/categorias?activa=true&nombre=mon&ordenPrioridad=2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categorias"
+              ],
+              "query": [
+                {
+                  "key": "activa",
+                  "value": "true"
+                },
+                {
+                  "key": "nombre",
+                  "value": "mon"
+                },
+                {
+                  "key": "ordenPrioridad",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /categorias/{id}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/categorias/{{categoriaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categorias",
+                "{{categoriaId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST /categorias",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"activa\": true,\n  \"costePromedio\": 10,\n  \"descripcion\": \"Rutas por la montaña\",\n  \"iconoUrl\": \"https://example.com/icono.png\",\n  \"nombre\": \"Ruta de montaña\",\n  \"ordenPrioridad\": 2\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/categorias",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categorias"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT /categorias/{id}",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"activa\": true,\n  \"costePromedio\": 10.0,\n  \"descripcion\": \"Ruta por la Ciudad\",\n  \"iconoUrl\": \"https://example.com/icono2.png\",\n  \"nombre\": \"Ruta de Ciudad\",\n  \"ordenPrioridad\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/categorias/{{categoriaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categorias",
+                "{{categoriaId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH /categorias{id}",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"nombre\": \"Ruta de Ciudad Actualizada\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/categorias/{{categoriaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categorias",
+                "{{categoriaId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE /categorias/{id}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/categorias/{{categoriaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categorias",
+                "{{categoriaId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Puntos",
+      "item": [
+        {
+          "name": "GET /puntos (sin filtros)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/puntos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "puntos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /puntos (filtros)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/puntos?abiertoActualmente=true&nombre=La Seo&puntuacionMedia=4.6",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "puntos"
+              ],
+              "query": [
+                {
+                  "key": "abiertoActualmente",
+                  "value": "true"
+                },
+                {
+                  "key": "nombre",
+                  "value": "La Seo"
+                },
+                {
+                  "key": "puntuacionMedia",
+                  "value": "4.6"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /puntos/{id}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/puntos/{{puntoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "puntos",
+                "{{puntoId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST /puntos",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"abiertoActualmente\": true,\n  \"fechaCreacion\": \"2026-02-03T10:00:00\",\n  \"latitud\": 41.6488,\n  \"longitud\": -0.8891,\n  \"nombre\": \"Mirador del Ebro\",\n  \"puntuacionMedia\": 4.5,\n  \"categoriaId\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/puntos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "puntos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT /puntos/{id}",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"abiertoActualmente\": false,\n  \"fechaCreacion\": \"2026-02-03T10:00:00\",\n  \"latitud\": 41.65,\n  \"longitud\": -0.88,\n  \"nombre\": \"Mirador actualizado\",\n  \"puntuacionMedia\": 4.2,\n  \"categoriaId\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/puntos/{{puntoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "puntos",
+                "{{puntoId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH /puntos/{id}",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nombre\": \"Punto de Interés Actualizado\",\r\n  \"puntuacionMedia\": 4.9,\r\n  \"abiertoActualmente\": false\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/puntos/{{puntoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "puntos",
+                "{{puntoId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE /puntos/{id}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/puntos/{{puntoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "puntos",
+                "{{puntoId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Resenas",
+      "item": [
+        {
+          "name": "GET /resenas (sin filtros)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/resenas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "resenas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /resenas (filtros)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/resenas?editada=true&likes=10&valoracion=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "resenas"
+              ],
+              "query": [
+                {
+                  "key": "editada",
+                  "value": "true"
+                },
+                {
+                  "key": "likes",
+                  "value": "10"
+                },
+                {
+                  "key": "valoracion",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /resenas/{id}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/resenas/{{resenaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "resenas",
+                "{{resenaId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST /resenas",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"comentario\": \"Pésimo\",\n  \"editada\": true,\n  \"fechaPublicacion\": \"2026-02-05\",\n  \"likes\": 10,\n  \"titulo\": \"Malísima\",\n  \"valoracion\": 1,\n  \"puntoId\": 3,\n  \"usuarioId\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/resenas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "resenas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT /resenas/{id}",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"comentario\": \"Actualizada\",\n  \"editada\": true,\n  \"fechaPublicacion\": \"2026-02-02\",\n  \"likes\": 11,\n  \"titulo\": \"Mejor aún\",\n  \"valoracion\": 4,\n  \"puntoId\": 1,\n  \"usuarioId\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/resenas/{{resenaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "resenas",
+                "{{resenaId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE /resenas/{id}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/resenas/{{resenaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "resenas",
+                "{{resenaId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH /resenas/{id}",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"comentario\": \"No está mal\",\r\n    \"titulo\": \"Justita\",\r\n    \"valoracion\": 5\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/resenas/{{resenaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "resenas",
+                "{{resenaId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Rutas",
+      "item": [
+        {
+          "name": "GET /rutas (sin filtros)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/rutas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rutas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /rutas (filtros)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/rutas?dificultad=alta&publica=false&titulo=rut",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rutas"
+              ],
+              "query": [
+                {
+                  "key": "dificultad",
+                  "value": "alta"
+                },
+                {
+                  "key": "publica",
+                  "value": "false"
+                },
+                {
+                  "key": "titulo",
+                  "value": "rut"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /rutas/{id}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/rutas/{{rutaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rutas",
+                "{{rutaId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST /rutas",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dificultad\": \"alta\",\n  \"distanciaKm\": 17.5,\n  \"duracionMinutos\": 120,\n  \"fechaRealizacion\": \"2026-02-05\",\n  \"publica\": false,\n  \"titulo\": \"Ruta del bacalao\",\n  \"usuarioId\": 1,\n  \"puntosIds\": [\n    1,\n    2\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/rutas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rutas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT /rutas/{id}",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dificultad\": \"alta\",\n  \"distanciaKm\": 9.0,\n  \"duracionMinutos\": 140,\n  \"fechaRealizacion\": \"2026-02-03\",\n  \"publica\": false,\n  \"titulo\": \"Ruta del rio actualizada\",\n  \"usuarioId\": 1,\n  \"puntosIds\": [\n    1\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/rutas/{{rutaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rutas",
+                "{{rutaId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE /rutas/{id}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/rutas/{{rutaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rutas",
+                "{{rutaId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH /rutas/{id}",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"distanciaKm\": 5.5,\r\n    \"duracionMinutos\": 180,\r\n    \"publica\": false\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/rutas/{{rutaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rutas",
+                "{{rutaId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Usuarios",
+      "item": [
+        {
+          "name": "GET /usuarios (sin filtros)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/usuarios",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuarios"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /usuarios (filtros)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/usuarios?premium=false&nivelExperiencia=1&username=borja",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuarios"
+              ],
+              "query": [
+                {
+                  "key": "premium",
+                  "value": "false"
+                },
+                {
+                  "key": "nivelExperiencia",
+                  "value": "1"
+                },
+                {
+                  "key": "username",
+                  "value": "borja"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /usuarios/{id}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/usuarios/{{usuarioId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuarios",
+                "{{usuarioId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST /usuarios",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"borja@example.com\",\n  \"esPremium\": true,\n  \"fechaRegistro\": \"2026-02-08\",\n  \"nivelExperiencia\": 5,\n  \"password\": \"secret123\",\n  \"username\": \"Borja\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/usuarios",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuarios"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT /usuarios/{id}",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user2@example.com\",\n  \"esPremium\": true,\n  \"fechaRegistro\": \"2026-02-03\",\n  \"nivelExperiencia\": 2,\n  \"password\": \"secret123\",\n  \"username\": \"borja2\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/usuarios/{{usuarioId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuarios",
+                "{{usuarioId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE /usuarios/{id}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/usuarios/{{usuarioId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuarios",
+                "{{usuarioId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH/ usuarios/{id}",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"borjazg@example.com\",\r\n    \"esPremium\": true,\r\n    \"username\": \"Borjazg\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/usuarios/{{usuarioId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuarios",
+                "{{usuarioId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "categoriaId",
+      "value": "1"
+    },
+    {
+      "key": "puntoId",
+      "value": "1"
+    },
+    {
+      "key": "usuarioId",
+      "value": "1"
+    },
+    {
+      "key": "resenaId",
+      "value": "1"
+    },
+    {
+      "key": "rutaId",
+      "value": "1"
+    }
+  ]
+}
