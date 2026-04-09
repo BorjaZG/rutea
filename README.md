@@ -48,17 +48,67 @@ API REST para gestión de rutas turísticas, puntos de interés, reseñas y usua
 
 ### 1. Clonar repositorio
 
-### 2. Configurar Base de Datos
+```bash
+git clone <url-del-repo>
+cd rutea
+```
 
-Iniciar MariaDB/MySQL y crear base de datos:
+### 2. Configurar variables de entorno
 
-### 3. Configurar application.properties
+```bash
+cp .env.sample .env
+# Editar .env con los valores reales
+```
 
-Editar `src/main/resources/application.properties`:
+### 3. Opción A — Desarrollo local (H2 en memoria, sin Docker)
 
-### 4. Compilar y ejecutar
+```bash
+./mvnw spring-boot:run -Dspring-boot.run.profiles=dev
+```
 
-La API estará disponible en: `http://localhost:8080`
+La API estará disponible en `http://localhost:8080`.  
+La consola H2 estará en `http://localhost:8080/h2-console` (JDBC URL: `jdbc:h2:mem:ruteadb`).
+
+### 3. Opción B — Desarrollo con MariaDB en Docker
+
+Arranca solo la base de datos con el compose de dev:
+
+```bash
+docker compose -f docker-compose.dev.yaml up -d
+./mvnw spring-boot:run -Dspring-boot.run.profiles=prod
+```
+
+Para detenerla:
+
+```bash
+docker compose -f docker-compose.dev.yaml down
+```
+
+> Descomenta el bloque `volumes` en `docker-compose.dev.yaml` para persistir datos entre reinicios.
+
+### 3. Opción C — Producción completa con Docker
+
+Construye el JAR y la imagen, luego levanta todos los servicios:
+
+```bash
+./mvnw clean package -DskipTests
+docker build -t rutea-api .
+docker compose up -d
+```
+
+Para ver los logs de la API:
+
+```bash
+docker compose logs -f rutea-api
+```
+
+Para detener y eliminar los contenedores:
+
+```bash
+docker compose down
+```
+
+La API estará disponible en `http://localhost:8080`.
 
 ## 📚 API Endpoints
 
