@@ -114,6 +114,21 @@ public class RutaService {
         return toOutDto(ruta);
     }
 
+    @Transactional(readOnly = true)
+    public RutaOutDtoV2 findByIdV2(long id) throws RutaNotFoundException {
+        logger.debug("Buscando ruta v2 por ID: {}", id);
+        Ruta ruta = rutaRepository.findById(id)
+                .orElseThrow(() -> {
+                    logger.error("Ruta no encontrada v2: ID {}", id);
+                    return new RutaNotFoundException();
+                });
+        if (ruta.isEliminada()) {
+            logger.error("Ruta no encontrada v2 (eliminada): ID {}", id);
+            throw new RutaNotFoundException();
+        }
+        return toOutDtoV2(ruta);
+    }
+
     public RutaOutDto modify(long id, RutaInDto dto)
             throws RutaNotFoundException, UsuarioNotFoundException, PuntoInteresNotFoundException {
         logger.info("Modificando ruta ID: {}", id);

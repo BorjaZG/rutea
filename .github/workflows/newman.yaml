@@ -1,0 +1,54 @@
+name: Newman Integration Tests
+
+on:
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  newman:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build JAR
+        run: ./mvnw package -DskipTests
+
+      - name: Build Docker image
+        run: docker build -t rutea-api .
+
+      - name: Create CI .env
+        run: |
+          echo "PROFILE=dev"                    > .env
+          echo "MARIADB_USER=unused"           >> .env
+          echo "MARIADB_DATABASE=unused"       >> .env
+          echo "MARIADB_ROOT_PASSWORD=unused"  >> .env
+          echo "RUTEA_DATABASE_PASSWORD=unused" >> .env
+
+      - name: Start API (perfil dev / H2)
+        run: docker compose -f docker-compose.yaml up -d --no-deps rutea-api
+
+      - name: Wait for API to be ready
+        run: sleep 15
+
+      - name: Install Newman
+        run: npm install -g newman
+
+      - name: Run Postman tests
+        run: |
+          newman run Rutea.postman_collection.json \
+            --environment local.postman_environment.json \
+            --bail \
+            --color on
+
+      - name: Stop containers
+        if: always()
+        run: docker compose -f docker-compose.yaml down

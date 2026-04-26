@@ -1,0 +1,257 @@
+2026-04-25 11:50:04.547 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2026-04-25 11:50:04.567 [main] INFO  com.svalero.rutea.RuteaApplication - Starting RuteaApplication using Java 17.0.17 with PID 6724 (/home/borja/IdeaProjects/rutea/target/classes started by borja in /home/borja/IdeaProjects/rutea)
+2026-04-25 11:50:04.567 [main] DEBUG com.svalero.rutea.RuteaApplication - Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-04-25 11:50:04.567 [main] INFO  com.svalero.rutea.RuteaApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-25 11:50:04.903 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-25 11:50:04.931 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 24 ms. Found 5 JPA repository interfaces.
+2026-04-25 11:50:05.173 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-04-25 11:50:05.178 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-04-25 11:50:05.179 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-04-25 11:50:05.180 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-04-25 11:50:05.204 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-04-25 11:50:05.204 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 618 ms
+2026-04-25 11:50:05.266 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-25 11:50:05.289 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2026-04-25 11:50:05.302 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-04-25 11:50:05.436 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-25 11:50:05.448 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-04-25 11:50:05.540 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:698e3ade-3436-4c56-a759-6b511eb0737f user=SA
+2026-04-25 11:50:05.541 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-25 11:50:06.035 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-25 11:50:06.083 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-25 11:50:06.326 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-25 11:50:06.382 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 40 mappings in 'requestMappingHandlerMapping'
+2026-04-25 11:50:06.420 [main] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2026-04-25 11:50:06.435 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2026-04-25 11:50:06.450 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 2 @ExceptionHandler, 1 ResponseBodyAdvice
+2026-04-25 11:50:06.522 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-04-25 11:50:06.529 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-04-25 11:50:06.535 [main] INFO  com.svalero.rutea.RuteaApplication - Started RuteaApplication in 2.198 seconds (process running for 2.459)
+2026-04-25 12:09:40.083 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-25 12:09:40.083 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-25 12:09:40.083 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Detected StandardServletMultipartResolver
+2026-04-25 12:09:40.083 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Detected AcceptHeaderLocaleResolver
+2026-04-25 12:09:40.083 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Detected FixedThemeResolver
+2026-04-25 12:09:40.084 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@6259d7a0
+2026-04-25 12:09:40.084 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@1ec98548
+2026-04-25 12:09:40.084 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2026-04-25 12:09:40.084 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-04-25 12:09:40.089 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - GET "/puntos?categoriaId=9507&abiertoActualmente=true&nombre=string", parameters={masked}
+2026-04-25 12:09:40.096 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.PuntoInteresController#getAll(Long, Boolean, Boolean, String, Float)
+2026-04-25 12:09:40.111 [http-nio-8080-exec-2] DEBUG c.s.r.c.PuntoInteresController - GET /puntos - Filtros: categoriaId=9507, abiertoActualmente=true, nombre=string, puntuacionMedia=null
+2026-04-25 12:09:40.117 [http-nio-8080-exec-2] DEBUG c.s.r.service.PuntoInteresService - Buscando puntos de interés con filtros: categoriaId=9507, abiertoActualmente=true, nombre=string, puntuacionMedia=null
+2026-04-25 12:09:40.204 [http-nio-8080-exec-2] INFO  c.s.r.service.PuntoInteresService - Se encontraron 0 puntos de interés
+2026-04-25 12:09:40.214 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json] and supported [application/json, application/*+json]
+2026-04-25 12:09:40.215 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[]]
+2026-04-25 12:09:40.224 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-25 12:10:02.045 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - POST "/puntos", parameters={}
+2026-04-25 12:10:02.045 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.PuntoInteresController#add(PuntoInteresInDto)
+2026-04-25 12:10:02.081 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [PuntoInteresInDto(abiertoActualmente=true, fechaCreacion=2024-01-15T10:00, latitud=41.633055, longit (truncated)...]
+2026-04-25 12:10:02.096 [http-nio-8080-exec-3] DEBUG c.s.r.c.PuntoInteresController - POST /puntos - Parque Grande José Antonio Labordeta
+2026-04-25 12:10:02.096 [http-nio-8080-exec-3] INFO  c.s.r.service.PuntoInteresService - Creando nuevo punto de interés: Parque Grande José Antonio Labordeta
+2026-04-25 12:10:02.101 [http-nio-8080-exec-3] ERROR c.s.r.service.PuntoInteresService - Categoría no encontrada: ID 1
+2026-04-25 12:10:02.102 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleNotFound(Exception)
+2026-04-25 12:10:02.108 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json] and supported [application/json, application/*+json]
+2026-04-25 12:10:02.109 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=404, title=not-found, message=Resource not found, errors={})]
+2026-04-25 12:10:02.111 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.svalero.rutea.exception.CategoriaNotFoundException]
+2026-04-25 12:10:02.112 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+2026-04-25 12:10:15.698 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - GET "/puntos?categoriaId=9507&abiertoActualmente=true&nombre=string", parameters={masked}
+2026-04-25 12:10:15.698 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.PuntoInteresController#getAll(Long, Boolean, Boolean, String, Float)
+2026-04-25 12:10:15.699 [http-nio-8080-exec-4] DEBUG c.s.r.c.PuntoInteresController - GET /puntos - Filtros: categoriaId=9507, abiertoActualmente=true, nombre=string, puntuacionMedia=null
+2026-04-25 12:10:15.699 [http-nio-8080-exec-4] DEBUG c.s.r.service.PuntoInteresService - Buscando puntos de interés con filtros: categoriaId=9507, abiertoActualmente=true, nombre=string, puntuacionMedia=null
+2026-04-25 12:10:15.701 [http-nio-8080-exec-4] INFO  c.s.r.service.PuntoInteresService - Se encontraron 0 puntos de interés
+2026-04-25 12:10:15.701 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json] and supported [application/json, application/*+json]
+2026-04-25 12:10:15.701 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[]]
+2026-04-25 12:10:15.702 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-25 12:10:25.452 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - GET "/puntos/9507", parameters={}
+2026-04-25 12:10:25.452 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.svalero.rutea.controller.PuntoInteresController#get(long)
+2026-04-25 12:10:25.453 [http-nio-8080-exec-5] DEBUG c.s.r.c.PuntoInteresController - GET /puntos/9507
+2026-04-25 12:10:25.453 [http-nio-8080-exec-5] DEBUG c.s.r.service.PuntoInteresService - Buscando punto de interés por ID: 9507
+2026-04-25 12:10:25.457 [http-nio-8080-exec-5] ERROR c.s.r.service.PuntoInteresService - Punto de interés no encontrado: ID 9507
+2026-04-25 12:10:25.458 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleNotFound(Exception)
+2026-04-25 12:10:25.458 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json] and supported [application/json, application/*+json]
+2026-04-25 12:10:25.458 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=404, title=not-found, message=Resource not found, errors={})]
+2026-04-25 12:10:25.459 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.svalero.rutea.exception.PuntoInteresNotFoundException]
+2026-04-25 12:10:25.459 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+2026-04-25 12:10:42.204 [http-nio-8080-exec-6] INFO  o.a.coyote.http11.Http11Processor - Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+java.lang.IllegalArgumentException: Invalid character found in the request target [/categorias?activa=true&nombre=string&ordenPrioridad=[object%20Object]&ordenPrioridad=[object%20Object] ]. The valid characters are defined in RFC 7230 and RFC 3986
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:482)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:257)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:904)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+2026-04-25 12:10:49.152 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - GET "/rutas?usuarioId=9507&publica=true&dificultad=string", parameters={masked}
+2026-04-25 12:10:49.156 [http-nio-8080-exec-8] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2026-04-25 12:10:49.158 [http-nio-8080-exec-8] DEBUG o.s.w.s.r.ResourceHttpRequestHandler - Resource not found
+2026-04-25 12:10:49.158 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleGeneric(Exception)
+2026-04-25 12:10:49.158 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json] and supported [application/json, application/*+json]
+2026-04-25 12:10:49.158 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=500, title=internal-server-error, message=Unexpected error, errors={})]
+2026-04-25 12:10:49.159 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource rutas.]
+2026-04-25 12:10:49.159 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - Completed 500 INTERNAL_SERVER_ERROR
+2026-04-25 12:15:55.447 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-25 12:15:55.448 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-25 12:15:55.449 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-25 12:34:02.038 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2026-04-25 12:34:02.062 [main] INFO  com.svalero.rutea.RuteaApplication - Starting RuteaApplication using Java 17.0.17 with PID 20360 (/home/borja/IdeaProjects/rutea/target/classes started by borja in /home/borja/IdeaProjects/rutea)
+2026-04-25 12:34:02.062 [main] DEBUG com.svalero.rutea.RuteaApplication - Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-04-25 12:34:02.063 [main] INFO  com.svalero.rutea.RuteaApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-25 12:34:02.430 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-25 12:34:02.462 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 28 ms. Found 5 JPA repository interfaces.
+2026-04-25 12:34:02.677 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-04-25 12:34:02.682 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-04-25 12:34:02.683 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-04-25 12:34:02.683 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-04-25 12:34:02.705 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-04-25 12:34:02.705 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 624 ms
+2026-04-25 12:34:02.771 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-25 12:34:02.799 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2026-04-25 12:34:02.819 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-04-25 12:34:02.967 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-25 12:34:02.980 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-04-25 12:34:03.076 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:780283ac-3647-498c-81f6-b6517e52ed28 user=SA
+2026-04-25 12:34:03.077 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-25 12:34:03.588 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-25 12:34:03.627 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-25 12:34:03.838 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-25 12:34:03.889 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 40 mappings in 'requestMappingHandlerMapping'
+2026-04-25 12:34:03.923 [main] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2026-04-25 12:34:03.938 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2026-04-25 12:34:03.952 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 2 @ExceptionHandler, 1 ResponseBodyAdvice
+2026-04-25 12:34:04.024 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-04-25 12:34:04.027 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2026-04-25 12:34:04.029 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-25 12:34:04.029 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-25 12:34:04.030 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-25 12:34:04.038 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-04-25 12:34:04.045 [main] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:288)
+	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:469)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.context.support.DefaultLifecycleProcessor.startBeans(DefaultLifecycleProcessor.java:257)
+	at org.springframework.context.support.DefaultLifecycleProcessor.onRefresh(DefaultLifecycleProcessor.java:202)
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:990)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:628)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:335)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352)
+	at com.svalero.rutea.RuteaApplication.main(RuteaApplication.java:10)
+Caused by: org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat server
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:251)
+	at org.springframework.boot.web.servlet.context.WebServerStartStopLifecycle.start(WebServerStartStopLifecycle.java:44)
+	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:285)
+	... 13 common frames omitted
+Caused by: java.lang.IllegalArgumentException: standardService.connector.startFailed
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:222)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.addPreviouslyRemovedConnectors(TomcatWebServer.java:310)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:236)
+	... 15 common frames omitted
+Caused by: org.apache.catalina.LifecycleException: Protocol handler start failed
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1061)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:219)
+	... 17 common frames omitted
+Caused by: java.net.BindException: La dirección ya se está usando
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Net.java:555)
+	at java.base/sun.nio.ch.ServerSocketChannelImpl.netBind(ServerSocketChannelImpl.java:337)
+	at java.base/sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:294)
+	at org.apache.tomcat.util.net.NioEndpoint.initServerSocket(NioEndpoint.java:239)
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:194)
+	at org.apache.tomcat.util.net.AbstractEndpoint.bindWithCleanup(AbstractEndpoint.java:1304)
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1390)
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:643)
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1058)
+	... 19 common frames omitted
+2026-04-25 12:34:37.047 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2026-04-25 12:34:37.064 [main] INFO  com.svalero.rutea.RuteaApplication - Starting RuteaApplication using Java 17.0.17 with PID 20759 (/home/borja/IdeaProjects/rutea/target/classes started by borja in /home/borja/IdeaProjects/rutea)
+2026-04-25 12:34:37.064 [main] DEBUG com.svalero.rutea.RuteaApplication - Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-04-25 12:34:37.064 [main] INFO  com.svalero.rutea.RuteaApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-25 12:34:37.388 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-25 12:34:37.415 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 24 ms. Found 5 JPA repository interfaces.
+2026-04-25 12:34:37.617 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-04-25 12:34:37.621 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-04-25 12:34:37.623 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-04-25 12:34:37.623 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-04-25 12:34:37.649 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-04-25 12:34:37.649 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 567 ms
+2026-04-25 12:34:37.705 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-25 12:34:37.723 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2026-04-25 12:34:37.735 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-04-25 12:34:37.844 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-25 12:34:37.855 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-04-25 12:34:37.941 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:3484871a-8ab2-46f0-ac80-eb91b341024a user=SA
+2026-04-25 12:34:37.942 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-25 12:34:38.409 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-25 12:34:38.448 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-25 12:34:38.660 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-25 12:34:38.709 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 40 mappings in 'requestMappingHandlerMapping'
+2026-04-25 12:34:38.745 [main] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2026-04-25 12:34:38.758 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2026-04-25 12:34:38.772 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 2 @ExceptionHandler, 1 ResponseBodyAdvice
+2026-04-25 12:34:38.841 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-04-25 12:34:38.849 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-04-25 12:34:38.855 [main] INFO  com.svalero.rutea.RuteaApplication - Started RuteaApplication in 1.994 seconds (process running for 2.222)
+2026-04-25 12:35:20.270 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-25 12:35:20.270 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-25 12:35:20.270 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected StandardServletMultipartResolver
+2026-04-25 12:35:20.270 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected AcceptHeaderLocaleResolver
+2026-04-25 12:35:20.271 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected FixedThemeResolver
+2026-04-25 12:35:20.271 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@5220e6ff
+2026-04-25 12:35:20.271 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@2bfe4df9
+2026-04-25 12:35:20.271 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2026-04-25 12:35:20.271 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-04-25 12:35:20.275 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/apimanui", parameters={}
+2026-04-25 12:35:20.279 [http-nio-8080-exec-1] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2026-04-25 12:35:20.283 [http-nio-8080-exec-1] DEBUG o.s.w.s.r.ResourceHttpRequestHandler - Resource not found
+2026-04-25 12:35:20.285 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.svalero.rutea.exception.GlobalExceptionHandler#handleGeneric(Exception)
+2026-04-25 12:35:20.303 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json;q=0.8', given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7] and supported [application/json, application/*+json]
+2026-04-25 12:35:20.305 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [ErrorResponse(code=500, title=internal-server-error, message=Unexpected error, errors={})]
+2026-04-25 12:35:20.313 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource apimanui.]
+2026-04-25 12:35:20.313 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 500 INTERNAL_SERVER_ERROR
+2026-04-25 13:02:12.076 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-25 13:02:12.077 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-25 13:02:12.077 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-25 13:02:34.660 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2026-04-25 13:02:34.680 [main] INFO  com.svalero.rutea.RuteaApplication - Starting RuteaApplication using Java 17.0.17 with PID 30790 (/home/borja/IdeaProjects/rutea/target/classes started by borja in /home/borja/IdeaProjects/rutea)
+2026-04-25 13:02:34.680 [main] DEBUG com.svalero.rutea.RuteaApplication - Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-04-25 13:02:34.680 [main] INFO  com.svalero.rutea.RuteaApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-25 13:02:35.016 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-25 13:02:35.043 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 23 ms. Found 5 JPA repository interfaces.
+2026-04-25 13:02:35.271 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-04-25 13:02:35.276 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-04-25 13:02:35.278 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-04-25 13:02:35.278 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-04-25 13:02:35.300 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-04-25 13:02:35.300 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 601 ms
+2026-04-25 13:02:35.361 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-25 13:02:35.381 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2026-04-25 13:02:35.394 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-04-25 13:02:35.515 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-25 13:02:35.529 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-04-25 13:02:35.614 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:0377f82e-3f7a-4a94-8496-ef6d806e8de6 user=SA
+2026-04-25 13:02:35.614 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-25 13:02:36.096 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-25 13:02:36.133 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-25 13:02:36.360 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-25 13:02:36.409 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 40 mappings in 'requestMappingHandlerMapping'
+2026-04-25 13:02:36.446 [main] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2026-04-25 13:02:36.462 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2026-04-25 13:02:36.477 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 2 @ExceptionHandler, 1 ResponseBodyAdvice
+2026-04-25 13:02:36.544 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-04-25 13:02:36.553 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-04-25 13:02:36.558 [main] INFO  com.svalero.rutea.RuteaApplication - Started RuteaApplication in 2.094 seconds (process running for 2.306)
+2026-04-25 13:08:38.880 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-25 13:08:38.882 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-25 13:08:38.883 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

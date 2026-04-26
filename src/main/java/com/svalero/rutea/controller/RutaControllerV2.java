@@ -35,6 +35,12 @@ public class RutaControllerV2 {
         return ResponseEntity.ok(rutaService.findAllV2(dificultad, publica, titulo));
     }
 
+    @GetMapping("/v2/rutas/{id}")
+    public ResponseEntity<RutaOutDtoV2> get(@PathVariable long id) throws RutaNotFoundException {
+        logger.debug("GET /v2/rutas/{}", id);
+        return ResponseEntity.ok(rutaService.findByIdV2(id));
+    }
+
     @PostMapping("/v2/rutas")
     public ResponseEntity<RutaOutDtoV2> add(@Valid @RequestBody RutaInDtoV2 dto)
             throws UsuarioNotFoundException, PuntoInteresNotFoundException {
