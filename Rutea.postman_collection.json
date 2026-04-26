@@ -1,21 +1,244 @@
 {
   "info": {
-    "_postman_id": "1c7cccb3-7f26-4dd1-8fdb-18d87e6311f5",
-    "name": "Rutea API - CRUD + filtros",
-    "description": "Colección para probar CRUD completo y filtros de la API Rutea.",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "49434023",
-    "_collection_link": "https://go.postman.co/collection/49434023-1c7cccb3-7f26-4dd1-8fdb-18d87e6311f5?source=collection_link"
+    "_postman_id": "bd9cf383-0255-43a9-915c-c58d50d5f1d3",
+    "name": "Rutea API",
+    "description": "Tests de integración para la API Rutea (Acceso a Datos - 2ª Evaluación). Cubre cobertura completa de Categorias (entidad obligatoria) y cobertura básica del resto de entidades incluyendo versionado v1/v2 de rutas. Compatible con baseUrl local o pasando por APIMan (cambiar el environment).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
     {
       "name": "Categorias",
       "item": [
         {
+          "name": "POST /categorias (happy path)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const jsonResponse = pm.response.json();",
+                  "",
+                  "pm.test(\"status code is 201\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(201);",
+                  "});",
+                  "",
+                  "pm.test(\"response structure is ok\", () => {",
+                  "    pm.expect(jsonResponse).to.have.property('id');",
+                  "    pm.expect(jsonResponse).to.have.property('activa');",
+                  "    pm.expect(jsonResponse).to.have.property('costePromedio');",
+                  "    pm.expect(jsonResponse).to.have.property('descripcion');",
+                  "    pm.expect(jsonResponse).to.have.property('iconoUrl');",
+                  "    pm.expect(jsonResponse).to.have.property('nombre');",
+                  "    pm.expect(jsonResponse).to.have.property('ordenPrioridad');",
+                  "",
+                  "    pm.expect(jsonResponse.id).to.be.a('number');",
+                  "    pm.expect(jsonResponse.activa).to.be.a('boolean');",
+                  "    pm.expect(jsonResponse.costePromedio).to.be.a('number');",
+                  "    pm.expect(jsonResponse.descripcion).to.be.a('string');",
+                  "    pm.expect(jsonResponse.iconoUrl).to.be.a('string');",
+                  "    pm.expect(jsonResponse.nombre).to.be.a('string');",
+                  "    pm.expect(jsonResponse.ordenPrioridad).to.be.a('number');",
+                  "});",
+                  "",
+                  "pm.test(\"data is ok\", () => {",
+                  "    pm.expect(jsonResponse.nombre).to.eql(pm.collectionVariables.get('nombre1'));",
+                  "    pm.expect(jsonResponse.ordenPrioridad).to.eql(parseInt(pm.collectionVariables.get('ordenPrioridad1')));",
+                  "});",
+                  "",
+                  "pm.collectionVariables.set('categoriaId', jsonResponse.id);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"activa\": true,\n    \"costePromedio\": 0,\n    \"descripcion\": \"{{$randomLoremSentence}}\",\n    \"iconoUrl\": \"https://example.com/icon.png\",\n    \"nombre\": \"{{nombre1}}\",\n    \"ordenPrioridad\": {{ordenPrioridad1}}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/categorias",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categorias"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST /categorias (segunda)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const jsonResponse = pm.response.json();",
+                  "",
+                  "pm.test(\"status code is 201\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(201);",
+                  "});",
+                  "",
+                  "pm.test(\"response structure is ok\", () => {",
+                  "    pm.expect(jsonResponse).to.have.property('id');",
+                  "    pm.expect(jsonResponse).to.have.property('nombre');",
+                  "});",
+                  "",
+                  "pm.collectionVariables.set('categoriaId2', jsonResponse.id);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"activa\": false,\n    \"costePromedio\": 12.5,\n    \"descripcion\": \"{{$randomLoremSentence}}\",\n    \"iconoUrl\": \"https://example.com/icon2.png\",\n    \"nombre\": \"{{nombre2}}\",\n    \"ordenPrioridad\": {{ordenPrioridad2}}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/categorias",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categorias"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST /categorias (400 - sin nombre)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const jsonResponse = pm.response.json();",
+                  "",
+                  "pm.test(\"status code is 400\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(400);",
+                  "});",
+                  "",
+                  "pm.test(\"error response structure is ok\", () => {",
+                  "    pm.expect(jsonResponse).to.have.property('code');",
+                  "    pm.expect(jsonResponse).to.have.property('title');",
+                  "    pm.expect(jsonResponse).to.have.property('message');",
+                  "    pm.expect(jsonResponse).to.have.property('errors');",
+                  "});",
+                  "",
+                  "pm.test(\"error values are ok\", () => {",
+                  "    pm.expect(jsonResponse.code).to.eql(400);",
+                  "    pm.expect(jsonResponse.title).to.eql('bad-request');",
+                  "    pm.expect(jsonResponse.message).to.eql('Validation error');",
+                  "    pm.expect(jsonResponse.errors).to.have.property('nombre');",
+                  "    pm.expect(jsonResponse.errors.nombre).to.eql('nombre is mandatory');",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"activa\": true,\n    \"costePromedio\": 5.0,\n    \"descripcion\": \"Sin nombre\",\n    \"ordenPrioridad\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/categorias",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categorias"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
           "name": "GET /categorias (sin filtros)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const jsonResponse = pm.response.json();",
+                  "",
+                  "pm.test(\"status code is 200\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(200);",
+                  "});",
+                  "",
+                  "pm.test(\"response is an array\", () => {",
+                  "    pm.expect(jsonResponse).to.be.an('array');",
+                  "});",
+                  "",
+                  "pm.test(\"response has at least 2 items\", () => {",
+                  "    pm.expect(jsonResponse.length).to.be.at.least(2);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
           "request": {
             "method": "GET",
-            "header": [],
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
+              }
+            ],
             "url": {
               "raw": "{{baseUrl}}/categorias",
               "host": [
@@ -30,11 +253,42 @@
         },
         {
           "name": "GET /categorias (filtros)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const jsonResponse = pm.response.json();",
+                  "",
+                  "pm.test(\"status code is 200\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(200);",
+                  "});",
+                  "",
+                  "pm.test(\"response is an array\", () => {",
+                  "    pm.expect(jsonResponse).to.be.an('array');",
+                  "});",
+                  "",
+                  "pm.test(\"all items match filter activa=true\", () => {",
+                  "    jsonResponse.forEach(c => pm.expect(c.activa).to.eql(true));",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
           "request": {
             "method": "GET",
-            "header": [],
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
+              }
+            ],
             "url": {
-              "raw": "{{baseUrl}}/categorias?activa=true&nombre=mon&ordenPrioridad=2",
+              "raw": "{{baseUrl}}/categorias?activa=true",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -45,14 +299,6 @@
                 {
                   "key": "activa",
                   "value": "true"
-                },
-                {
-                  "key": "nombre",
-                  "value": "mon"
-                },
-                {
-                  "key": "ordenPrioridad",
-                  "value": "2"
                 }
               ]
             }
@@ -60,10 +306,47 @@
           "response": []
         },
         {
-          "name": "GET /categorias/{id}",
+          "name": "GET /categorias/:id (happy path)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const jsonResponse = pm.response.json();",
+                  "",
+                  "pm.test(\"status code is 200\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(200);",
+                  "});",
+                  "",
+                  "pm.test(\"response structure is ok\", () => {",
+                  "    pm.expect(jsonResponse).to.have.property('id');",
+                  "    pm.expect(jsonResponse).to.have.property('activa');",
+                  "    pm.expect(jsonResponse).to.have.property('costePromedio');",
+                  "    pm.expect(jsonResponse).to.have.property('descripcion');",
+                  "    pm.expect(jsonResponse).to.have.property('iconoUrl');",
+                  "    pm.expect(jsonResponse).to.have.property('nombre');",
+                  "    pm.expect(jsonResponse).to.have.property('ordenPrioridad');",
+                  "});",
+                  "",
+                  "pm.test(\"id matches\", () => {",
+                  "    pm.expect(jsonResponse.id).to.eql(parseInt(pm.collectionVariables.get('categoriaId')));",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
           "request": {
             "method": "GET",
-            "header": [],
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
+              }
+            ],
             "url": {
               "raw": "{{baseUrl}}/categorias/{{categoriaId}}",
               "host": [
@@ -78,18 +361,625 @@
           "response": []
         },
         {
-          "name": "POST /categorias",
+          "name": "GET /categorias/:id (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const jsonResponse = pm.response.json();",
+                  "",
+                  "pm.test(\"status code is 404\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(404);",
+                  "});",
+                  "",
+                  "pm.test(\"error response structure is ok\", () => {",
+                  "    pm.expect(jsonResponse).to.have.property('code');",
+                  "    pm.expect(jsonResponse).to.have.property('title');",
+                  "    pm.expect(jsonResponse).to.have.property('message');",
+                  "    pm.expect(jsonResponse).to.have.property('errors');",
+                  "});",
+                  "",
+                  "pm.test(\"error values are ok\", () => {",
+                  "    pm.expect(jsonResponse.code).to.eql(404);",
+                  "    pm.expect(jsonResponse.title).to.eql('not-found');",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
           "request": {
-            "method": "POST",
+            "method": "GET",
             "header": [
               {
-                "key": "Content-Type",
-                "value": "application/json"
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/categorias/999999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categorias",
+                "999999"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT /categorias/:id (happy path)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const jsonResponse = pm.response.json();",
+                  "",
+                  "pm.test(\"status code is 200\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(200);",
+                  "});",
+                  "",
+                  "pm.test(\"response structure is ok\", () => {",
+                  "    pm.expect(jsonResponse).to.have.property('id');",
+                  "    pm.expect(jsonResponse).to.have.property('nombre');",
+                  "});",
+                  "",
+                  "pm.test(\"nombre has changed\", () => {",
+                  "    pm.expect(jsonResponse.nombre).to.eql(pm.collectionVariables.get('nombreCambiado'));",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
               }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"activa\": true,\n  \"costePromedio\": 10,\n  \"descripcion\": \"Rutas por la montaña\",\n  \"iconoUrl\": \"https://example.com/icono.png\",\n  \"nombre\": \"Ruta de montaña\",\n  \"ordenPrioridad\": 2\n}"
+              "raw": "{\n    \"activa\": true,\n    \"costePromedio\": 25.0,\n    \"descripcion\": \"Categoría modificada\",\n    \"iconoUrl\": \"https://example.com/new-icon.png\",\n    \"nombre\": \"{{nombreCambiado}}\",\n    \"ordenPrioridad\": 99\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/categorias/{{categoriaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categorias",
+                "{{categoriaId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT /categorias/:id (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"status code is 404\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(404);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"activa\": true,\n    \"costePromedio\": 5.0,\n    \"descripcion\": \"No existe\",\n    \"iconoUrl\": \"https://example.com/x.png\",\n    \"nombre\": \"Inexistente\",\n    \"ordenPrioridad\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/categorias/999999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categorias",
+                "999999"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH /categorias/:id (happy path)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const jsonResponse = pm.response.json();",
+                  "",
+                  "pm.test(\"status code is 200\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(200);",
+                  "});",
+                  "",
+                  "pm.test(\"costePromedio has changed\", () => {",
+                  "    pm.expect(jsonResponse.costePromedio).to.eql(50.0);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"costePromedio\": 50.0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/categorias/{{categoriaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categorias",
+                "{{categoriaId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE /categorias/:id (happy path)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"status code is 204\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(204);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/categorias/{{categoriaId2}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categorias",
+                "{{categoriaId2}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE /categorias/:id (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"status code is 404\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(404);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/categorias/999999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categorias",
+                "999999"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Usuarios",
+      "item": [
+        {
+          "name": "POST /usuarios (happy path)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const jsonResponse = pm.response.json();",
+                  "",
+                  "pm.test(\"status code is 201\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(201);",
+                  "});",
+                  "",
+                  "pm.test(\"response structure is ok\", () => {",
+                  "    pm.expect(jsonResponse).to.have.property('id');",
+                  "    pm.expect(jsonResponse).to.have.property('email');",
+                  "    pm.expect(jsonResponse).to.have.property('username');",
+                  "    pm.expect(jsonResponse).to.have.property('esPremium');",
+                  "    pm.expect(jsonResponse).to.have.property('fechaRegistro');",
+                  "    pm.expect(jsonResponse).to.have.property('nivelExperiencia');",
+                  "});",
+                  "",
+                  "pm.collectionVariables.set('usuarioId', jsonResponse.id);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"{{$randomEmail}}\",\n    \"esPremium\": false,\n    \"fechaRegistro\": \"2026-04-26\",\n    \"nivelExperiencia\": 1,\n    \"password\": \"secret123\",\n    \"username\": \"{{$randomUserName}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/usuarios",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuarios"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST /usuarios (400 - sin email)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const jsonResponse = pm.response.json();",
+                  "",
+                  "pm.test(\"status code is 400\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(400);",
+                  "});",
+                  "",
+                  "pm.test(\"error values are ok\", () => {",
+                  "    pm.expect(jsonResponse.title).to.eql('bad-request');",
+                  "    pm.expect(jsonResponse.errors).to.have.property('email');",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"esPremium\": false,\n    \"fechaRegistro\": \"2026-04-26\",\n    \"nivelExperiencia\": 1,\n    \"password\": \"secret123\",\n    \"username\": \"noemail\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/usuarios",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuarios"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /usuarios (sin filtros)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const jsonResponse = pm.response.json();",
+                  "",
+                  "pm.test(\"status code is 200\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(200);",
+                  "});",
+                  "",
+                  "pm.test(\"response is an array\", () => {",
+                  "    pm.expect(jsonResponse).to.be.an('array');",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/usuarios",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuarios"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /usuarios/:id (happy path)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"status code is 200\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(200);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/usuarios/{{usuarioId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuarios",
+                "{{usuarioId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /usuarios/:id (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const jsonResponse = pm.response.json();",
+                  "",
+                  "pm.test(\"status code is 404\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(404);",
+                  "});",
+                  "",
+                  "pm.test(\"error values are ok\", () => {",
+                  "    pm.expect(jsonResponse.code).to.eql(404);",
+                  "    pm.expect(jsonResponse.title).to.eql('not-found');",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/usuarios/999999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuarios",
+                "999999"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE /usuarios/:id (happy path)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"status code is 204\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(204);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/usuarios/{{usuarioId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuarios",
+                "{{usuarioId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Puntos",
+      "item": [
+        {
+          "name": "POST /categorias (setup punto)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const jsonResponse = pm.response.json();",
+                  "pm.test(\"status code is 201\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(201);",
+                  "});",
+                  "pm.collectionVariables.set('categoriaPuntoId', jsonResponse.id);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"activa\": true,\n    \"costePromedio\": 0,\n    \"descripcion\": \"Categoría para punto\",\n    \"iconoUrl\": \"https://example.com/icon.png\",\n    \"nombre\": \"Categoria Punto {{$timestamp}}\",\n    \"ordenPrioridad\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
             },
             "url": {
               "raw": "{{baseUrl}}/categorias",
@@ -104,40 +994,46 @@
           "response": []
         },
         {
-          "name": "PUT /categorias/{id}",
+          "name": "POST /puntos (happy path)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const jsonResponse = pm.response.json();",
+                  "",
+                  "pm.test(\"status code is 201\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(201);",
+                  "});",
+                  "",
+                  "pm.test(\"response structure is ok\", () => {",
+                  "    pm.expect(jsonResponse).to.have.property('id');",
+                  "    pm.expect(jsonResponse).to.have.property('nombre');",
+                  "    pm.expect(jsonResponse).to.have.property('latitud');",
+                  "    pm.expect(jsonResponse).to.have.property('longitud');",
+                  "    pm.expect(jsonResponse).to.have.property('categoriaId');",
+                  "});",
+                  "",
+                  "pm.collectionVariables.set('puntoId', jsonResponse.id);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
           "request": {
-            "method": "PUT",
+            "method": "POST",
             "header": [
               {
-                "key": "Content-Type",
-                "value": "application/json"
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
               }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"activa\": true,\n  \"costePromedio\": 10.0,\n  \"descripcion\": \"Ruta por la Ciudad\",\n  \"iconoUrl\": \"https://example.com/icono2.png\",\n  \"nombre\": \"Ruta de Ciudad\",\n  \"ordenPrioridad\": 1\n}"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/categorias/{{categoriaId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "categorias",
-                "{{categoriaId}}"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "PATCH /categorias{id}",
-          "request": {
-            "method": "PATCH",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"nombre\": \"Ruta de Ciudad Actualizada\"\r\n}",
+              "raw": "{\n    \"abiertoActualmente\": true,\n    \"fechaCreacion\": \"2026-04-26T10:00:00\",\n    \"latitud\": 41.6488,\n    \"longitud\": -0.8891,\n    \"nombre\": \"La Seo {{$timestamp}}\",\n    \"puntuacionMedia\": 4.5,\n    \"categoriaId\": {{categoriaPuntoId}}\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -145,46 +1041,95 @@
               }
             },
             "url": {
-              "raw": "{{baseUrl}}/categorias/{{categoriaId}}",
+              "raw": "{{baseUrl}}/puntos",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
-                "categorias",
-                "{{categoriaId}}"
+                "puntos"
               ]
             }
           },
           "response": []
         },
         {
-          "name": "DELETE /categorias/{id}",
+          "name": "POST /puntos (400 - sin nombre)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const jsonResponse = pm.response.json();",
+                  "pm.test(\"status code is 400\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(400);",
+                  "});",
+                  "pm.test(\"error values are ok\", () => {",
+                  "    pm.expect(jsonResponse.title).to.eql('bad-request');",
+                  "    pm.expect(jsonResponse.errors).to.have.property('nombre');",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
           "request": {
-            "method": "DELETE",
-            "header": [],
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"abiertoActualmente\": true,\n    \"latitud\": 40.0,\n    \"longitud\": -3.0,\n    \"puntuacionMedia\": 3.0,\n    \"categoriaId\": {{categoriaPuntoId}}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
             "url": {
-              "raw": "{{baseUrl}}/categorias/{{categoriaId}}",
+              "raw": "{{baseUrl}}/puntos",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
-                "categorias",
-                "{{categoriaId}}"
+                "puntos"
               ]
             }
           },
           "response": []
-        }
-      ]
-    },
-    {
-      "name": "Puntos",
-      "item": [
+        },
         {
           "name": "GET /puntos (sin filtros)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"status code is 200\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(200);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
           "request": {
             "method": "GET",
-            "header": [],
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
+              }
+            ],
             "url": {
               "raw": "{{baseUrl}}/puntos",
               "host": [
@@ -198,139 +1143,70 @@
           "response": []
         },
         {
-          "name": "GET /puntos (filtros)",
+          "name": "GET /puntos/:id (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"status code is 404\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(404);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
           "request": {
             "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/puntos?abiertoActualmente=true&nombre=La Seo&puntuacionMedia=4.6",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "puntos"
-              ],
-              "query": [
-                {
-                  "key": "abiertoActualmente",
-                  "value": "true"
-                },
-                {
-                  "key": "nombre",
-                  "value": "La Seo"
-                },
-                {
-                  "key": "puntuacionMedia",
-                  "value": "4.6"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "GET /puntos/{id}",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/puntos/{{puntoId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "puntos",
-                "{{puntoId}}"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "POST /puntos",
-          "request": {
-            "method": "POST",
             "header": [
               {
-                "key": "Content-Type",
-                "value": "application/json"
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
               }
             ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"abiertoActualmente\": true,\n  \"fechaCreacion\": \"2026-02-03T10:00:00\",\n  \"latitud\": 41.6488,\n  \"longitud\": -0.8891,\n  \"nombre\": \"Mirador del Ebro\",\n  \"puntuacionMedia\": 4.5,\n  \"categoriaId\": 1\n}"
-            },
             "url": {
-              "raw": "{{baseUrl}}/puntos",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "puntos"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "PUT /puntos/{id}",
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"abiertoActualmente\": false,\n  \"fechaCreacion\": \"2026-02-03T10:00:00\",\n  \"latitud\": 41.65,\n  \"longitud\": -0.88,\n  \"nombre\": \"Mirador actualizado\",\n  \"puntuacionMedia\": 4.2,\n  \"categoriaId\": 1\n}"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/puntos/{{puntoId}}",
+              "raw": "{{baseUrl}}/puntos/999999",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "puntos",
-                "{{puntoId}}"
+                "999999"
               ]
             }
           },
           "response": []
         },
         {
-          "name": "PATCH /puntos/{id}",
-          "request": {
-            "method": "PATCH",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n  \"nombre\": \"Punto de Interés Actualizado\",\r\n  \"puntuacionMedia\": 4.9,\r\n  \"abiertoActualmente\": false\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
+          "name": "DELETE /puntos/:id (happy path)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"status code is 204\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(204);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
               }
-            },
-            "url": {
-              "raw": "{{baseUrl}}/puntos/{{puntoId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "puntos",
-                "{{puntoId}}"
-              ]
             }
-          },
-          "response": []
-        },
-        {
-          "name": "DELETE /puntos/{id}",
+          ],
           "request": {
             "method": "DELETE",
-            "header": [],
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
+              }
+            ],
             "url": {
               "raw": "{{baseUrl}}/puntos/{{puntoId}}",
               "host": [
@@ -339,6 +1215,45 @@
               "path": [
                 "puntos",
                 "{{puntoId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE /categorias (cleanup punto)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"status code is 204\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(204);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/categorias/{{categoriaPuntoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categorias",
+                "{{categoriaPuntoId}}"
               ]
             }
           },
@@ -347,425 +1262,44 @@
       ]
     },
     {
-      "name": "Resenas",
+      "name": "Rutas v1",
       "item": [
         {
-          "name": "GET /resenas (sin filtros)",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/resenas",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "resenas"
-              ]
+          "name": "POST /usuarios (setup ruta v1)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const jsonResponse = pm.response.json();",
+                  "pm.test(\"status code is 201\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(201);",
+                  "});",
+                  "pm.collectionVariables.set('usuarioRutaV1Id', jsonResponse.id);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
             }
-          },
-          "response": []
-        },
-        {
-          "name": "GET /resenas (filtros)",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/resenas?editada=true&likes=10&valoracion=1",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "resenas"
-              ],
-              "query": [
-                {
-                  "key": "editada",
-                  "value": "true"
-                },
-                {
-                  "key": "likes",
-                  "value": "10"
-                },
-                {
-                  "key": "valoracion",
-                  "value": "1"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "GET /resenas/{id}",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/resenas/{{resenaId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "resenas",
-                "{{resenaId}}"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "POST /resenas",
+          ],
           "request": {
             "method": "POST",
             "header": [
               {
-                "key": "Content-Type",
-                "value": "application/json"
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
               }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"comentario\": \"Pésimo\",\n  \"editada\": true,\n  \"fechaPublicacion\": \"2026-02-05\",\n  \"likes\": 10,\n  \"titulo\": \"Malísima\",\n  \"valoracion\": 1,\n  \"puntoId\": 3,\n  \"usuarioId\": 1\n}"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/resenas",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "resenas"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "PUT /resenas/{id}",
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"comentario\": \"Actualizada\",\n  \"editada\": true,\n  \"fechaPublicacion\": \"2026-02-02\",\n  \"likes\": 11,\n  \"titulo\": \"Mejor aún\",\n  \"valoracion\": 4,\n  \"puntoId\": 1,\n  \"usuarioId\": 1\n}"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/resenas/{{resenaId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "resenas",
-                "{{resenaId}}"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "DELETE /resenas/{id}",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/resenas/{{resenaId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "resenas",
-                "{{resenaId}}"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "PATCH /resenas/{id}",
-          "request": {
-            "method": "PATCH",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"comentario\": \"No está mal\",\r\n    \"titulo\": \"Justita\",\r\n    \"valoracion\": 5\r\n}",
+              "raw": "{\n    \"email\": \"rutav1-{{$timestamp}}@example.com\",\n    \"esPremium\": false,\n    \"fechaRegistro\": \"2026-04-26\",\n    \"nivelExperiencia\": 2,\n    \"password\": \"secret123\",\n    \"username\": \"userrutav1{{$timestamp}}\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
                 }
               }
-            },
-            "url": {
-              "raw": "{{baseUrl}}/resenas/{{resenaId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "resenas",
-                "{{resenaId}}"
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Rutas",
-      "item": [
-        {
-          "name": "GET /rutas (sin filtros)",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/rutas",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "rutas"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "GET /rutas (filtros)",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/rutas?dificultad=alta&publica=false&titulo=rut",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "rutas"
-              ],
-              "query": [
-                {
-                  "key": "dificultad",
-                  "value": "alta"
-                },
-                {
-                  "key": "publica",
-                  "value": "false"
-                },
-                {
-                  "key": "titulo",
-                  "value": "rut"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "GET /rutas/{id}",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/rutas/{{rutaId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "rutas",
-                "{{rutaId}}"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "POST /rutas",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"dificultad\": \"alta\",\n  \"distanciaKm\": 17.5,\n  \"duracionMinutos\": 120,\n  \"fechaRealizacion\": \"2026-02-05\",\n  \"publica\": false,\n  \"titulo\": \"Ruta del bacalao\",\n  \"usuarioId\": 1,\n  \"puntosIds\": [\n    1,\n    2\n  ]\n}"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/rutas",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "rutas"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "PUT /rutas/{id}",
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"dificultad\": \"alta\",\n  \"distanciaKm\": 9.0,\n  \"duracionMinutos\": 140,\n  \"fechaRealizacion\": \"2026-02-03\",\n  \"publica\": false,\n  \"titulo\": \"Ruta del rio actualizada\",\n  \"usuarioId\": 1,\n  \"puntosIds\": [\n    1\n  ]\n}"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/rutas/{{rutaId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "rutas",
-                "{{rutaId}}"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "DELETE /rutas/{id}",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/rutas/{{rutaId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "rutas",
-                "{{rutaId}}"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "PATCH /rutas/{id}",
-          "request": {
-            "method": "PATCH",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"distanciaKm\": 5.5,\r\n    \"duracionMinutos\": 180,\r\n    \"publica\": false\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{baseUrl}}/rutas/{{rutaId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "rutas",
-                "{{rutaId}}"
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Usuarios",
-      "item": [
-        {
-          "name": "GET /usuarios (sin filtros)",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/usuarios",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "usuarios"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "GET /usuarios (filtros)",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/usuarios?premium=false&nivelExperiencia=1&username=borja",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "usuarios"
-              ],
-              "query": [
-                {
-                  "key": "premium",
-                  "value": "false"
-                },
-                {
-                  "key": "nivelExperiencia",
-                  "value": "1"
-                },
-                {
-                  "key": "username",
-                  "value": "borja"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "GET /usuarios/{id}",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/usuarios/{{usuarioId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "usuarios",
-                "{{usuarioId}}"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "POST /usuarios",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"email\": \"borja@example.com\",\n  \"esPremium\": true,\n  \"fechaRegistro\": \"2026-02-08\",\n  \"nivelExperiencia\": 5,\n  \"password\": \"secret123\",\n  \"username\": \"Borja\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/usuarios",
@@ -780,58 +1314,48 @@
           "response": []
         },
         {
-          "name": "PUT /usuarios/{id}",
+          "name": "POST /v1/rutas (happy path)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const jsonResponse = pm.response.json();",
+                  "",
+                  "pm.test(\"status code is 201\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(201);",
+                  "});",
+                  "",
+                  "pm.test(\"response structure v1 is ok (sin etiquetas)\", () => {",
+                  "    pm.expect(jsonResponse).to.have.property('id');",
+                  "    pm.expect(jsonResponse).to.have.property('titulo');",
+                  "    pm.expect(jsonResponse).to.have.property('dificultad');",
+                  "    pm.expect(jsonResponse).to.have.property('distanciaKm');",
+                  "    pm.expect(jsonResponse).to.have.property('duracionMinutos');",
+                  "    pm.expect(jsonResponse).to.have.property('publica');",
+                  "    pm.expect(jsonResponse).to.have.property('usuarioId');",
+                  "});",
+                  "",
+                  "pm.collectionVariables.set('rutaV1Id', jsonResponse.id);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
           "request": {
-            "method": "PUT",
+            "method": "POST",
             "header": [
               {
-                "key": "Content-Type",
-                "value": "application/json"
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
               }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"email\": \"user2@example.com\",\n  \"esPremium\": true,\n  \"fechaRegistro\": \"2026-02-03\",\n  \"nivelExperiencia\": 2,\n  \"password\": \"secret123\",\n  \"username\": \"borja2\"\n}"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/usuarios/{{usuarioId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "usuarios",
-                "{{usuarioId}}"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "DELETE /usuarios/{id}",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/usuarios/{{usuarioId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "usuarios",
-                "{{usuarioId}}"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "PATCH/ usuarios/{id}",
-          "request": {
-            "method": "PATCH",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"email\": \"borjazg@example.com\",\r\n    \"esPremium\": true,\r\n    \"username\": \"Borjazg\"\r\n}",
+              "raw": "{\n    \"dificultad\": \"media\",\n    \"distanciaKm\": 5.5,\n    \"duracionMinutos\": 90,\n    \"fechaRealizacion\": \"2026-04-26\",\n    \"publica\": true,\n    \"titulo\": \"Ruta v1 {{$timestamp}}\",\n    \"usuarioId\": {{usuarioRutaV1Id}},\n    \"puntosIds\": []\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -839,13 +1363,428 @@
               }
             },
             "url": {
-              "raw": "{{baseUrl}}/usuarios/{{usuarioId}}",
+              "raw": "{{baseUrl}}/v1/rutas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v1",
+                "rutas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /v1/rutas (sin filtros)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"status code is 200\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(200);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v1/rutas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v1",
+                "rutas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /v1/rutas/:id (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"status code is 404\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(404);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v1/rutas/999999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v1",
+                "rutas",
+                "999999"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE /v1/rutas/:id (happy path)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"status code is 204\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(204);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v1/rutas/{{rutaV1Id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v1",
+                "rutas",
+                "{{rutaV1Id}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE /usuarios (cleanup v1)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"status code is 204\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(204);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/usuarios/{{usuarioRutaV1Id}}",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "usuarios",
-                "{{usuarioId}}"
+                "{{usuarioRutaV1Id}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Rutas v2",
+      "item": [
+        {
+          "name": "POST /usuarios (setup ruta v2)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const jsonResponse = pm.response.json();",
+                  "pm.test(\"status code is 201\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(201);",
+                  "});",
+                  "pm.collectionVariables.set('usuarioRutaV2Id', jsonResponse.id);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"rutav2-{{$timestamp}}@example.com\",\n    \"esPremium\": false,\n    \"fechaRegistro\": \"2026-04-26\",\n    \"nivelExperiencia\": 2,\n    \"password\": \"secret123\",\n    \"username\": \"userrutav2{{$timestamp}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/usuarios",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuarios"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST /v2/rutas (happy path - con etiquetas)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const jsonResponse = pm.response.json();",
+                  "",
+                  "pm.test(\"status code is 201\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(201);",
+                  "});",
+                  "",
+                  "pm.test(\"response v2 structure is ok (incluye etiquetas y totalPuntos)\", () => {",
+                  "    pm.expect(jsonResponse).to.have.property('id');",
+                  "    pm.expect(jsonResponse).to.have.property('titulo');",
+                  "    pm.expect(jsonResponse).to.have.property('etiquetas');",
+                  "    pm.expect(jsonResponse).to.have.property('totalPuntos');",
+                  "    pm.expect(jsonResponse.etiquetas).to.be.a('string');",
+                  "    pm.expect(jsonResponse.totalPuntos).to.be.a('number');",
+                  "});",
+                  "",
+                  "pm.collectionVariables.set('rutaV2Id', jsonResponse.id);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"dificultad\": \"alta\",\n    \"distanciaKm\": 12.0,\n    \"duracionMinutos\": 240,\n    \"fechaRealizacion\": \"2026-04-26\",\n    \"publica\": true,\n    \"titulo\": \"Ruta v2 {{$timestamp}}\",\n    \"usuarioId\": {{usuarioRutaV2Id}},\n    \"puntosIds\": [],\n    \"etiquetas\": \"montana,panoramica\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v2/rutas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v2",
+                "rutas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /v2/rutas/:id (happy path)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const jsonResponse = pm.response.json();",
+                  "",
+                  "pm.test(\"status code is 200\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(200);",
+                  "});",
+                  "",
+                  "pm.test(\"v2 response includes etiquetas and totalPuntos\", () => {",
+                  "    pm.expect(jsonResponse).to.have.property('etiquetas');",
+                  "    pm.expect(jsonResponse).to.have.property('totalPuntos');",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v2/rutas/{{rutaV2Id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v2",
+                "rutas",
+                "{{rutaV2Id}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT /v2/rutas/:id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const jsonResponse = pm.response.json();",
+                  "",
+                  "pm.test(\"status code is 200\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(200);",
+                  "});",
+                  "",
+                  "pm.test(\"etiquetas updated\", () => {",
+                  "    pm.expect(jsonResponse.etiquetas).to.include('actualizada');",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"dificultad\": \"alta\",\n    \"distanciaKm\": 15.0,\n    \"duracionMinutos\": 300,\n    \"fechaRealizacion\": \"2026-04-26\",\n    \"publica\": true,\n    \"titulo\": \"Ruta v2 actualizada\",\n    \"usuarioId\": {{usuarioRutaV2Id}},\n    \"puntosIds\": [],\n    \"etiquetas\": \"montana,actualizada\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v2/rutas/{{rutaV2Id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v2",
+                "rutas",
+                "{{rutaV2Id}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE /v2/rutas/:id (soft-delete)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"status code is 204\", () => {",
+                  "    pm.expect(pm.response.code).to.eql(204);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "default"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v2/rutas/{{rutaV2Id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v2",
+                "rutas",
+                "{{rutaV2Id}}"
               ]
             }
           },
@@ -858,23 +1797,23 @@
     {
       "listen": "prerequest",
       "script": {
-        "type": "text/javascript",
-        "packages": {},
-        "requests": {},
         "exec": [
           ""
-        ]
+        ],
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {}
       }
     },
     {
       "listen": "test",
       "script": {
-        "type": "text/javascript",
-        "packages": {},
-        "requests": {},
         "exec": [
           ""
-        ]
+        ],
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {}
       }
     }
   ],
@@ -885,23 +1824,59 @@
     },
     {
       "key": "categoriaId",
-      "value": "1"
+      "value": ""
+    },
+    {
+      "key": "categoriaId2",
+      "value": ""
+    },
+    {
+      "key": "categoriaPuntoId",
+      "value": ""
     },
     {
       "key": "puntoId",
-      "value": "1"
+      "value": ""
     },
     {
       "key": "usuarioId",
+      "value": ""
+    },
+    {
+      "key": "usuarioRutaV1Id",
+      "value": ""
+    },
+    {
+      "key": "usuarioRutaV2Id",
+      "value": ""
+    },
+    {
+      "key": "rutaV1Id",
+      "value": ""
+    },
+    {
+      "key": "rutaV2Id",
+      "value": ""
+    },
+    {
+      "key": "nombre1",
+      "value": "Monumentos"
+    },
+    {
+      "key": "nombre2",
+      "value": "Naturaleza"
+    },
+    {
+      "key": "ordenPrioridad1",
       "value": "1"
     },
     {
-      "key": "resenaId",
-      "value": "1"
+      "key": "ordenPrioridad2",
+      "value": "2"
     },
     {
-      "key": "rutaId",
-      "value": "1"
+      "key": "nombreCambiado",
+      "value": "Categoría modificada"
     }
   ]
 }
