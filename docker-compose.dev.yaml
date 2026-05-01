@@ -13,6 +13,12 @@ services:
       MYSQL_PASSWORD: ${RUTEA_DATABASE_PASSWORD}
     ports:
       - "3306:3306"
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 20s
     # volumes:
     #   - rutea-db-data:/var/lib/mysql
 
