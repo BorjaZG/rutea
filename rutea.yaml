@@ -691,7 +691,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /rutas:
+  /v1/rutas:
     get:
       tags: [Rutas]
       summary: Listar rutas
@@ -790,7 +790,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /rutas/{id}:
+  /v1/rutas/{id}:
     get:
       tags: [Rutas]
       summary: Obtener ruta por id
@@ -877,6 +877,172 @@ paths:
     delete:
       tags: [Rutas]
       summary: Eliminar ruta
+      parameters:
+        - $ref: "#/components/parameters/IdPathParam"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
+  /v2/rutas:
+    get:
+      tags: [Rutas]
+      summary: Listar rutas v2
+      description: >
+        Versión 2 de la API de rutas. Devuelve una lista de rutas con información extendida.
+        Permite filtrado por hasta 3 campos (usuarioId, publica, dificultad).
+      parameters:
+        - in: query
+          name: usuarioId
+          required: false
+          schema: { type: integer, format: int64 }
+        - in: query
+          name: publica
+          required: false
+          schema: { type: boolean }
+        - in: query
+          name: dificultad
+          required: false
+          schema: { type: string }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RutaV2OutDto"
+              examples:
+                lista_rutas_v2:
+                  summary: Lista de rutas v2
+                  value:
+                    - id: 1
+                      titulo: "Ruta Cultural - Casco Histórico"
+                      dificultad: "Fácil"
+                      distanciaKm: 3.5
+                      duracionMinutos: 90
+                      publica: true
+                      fechaRealizacion: "2024-03-15"
+                      usuarioId: 1
+                      puntosIds: [ 1, 2, 3 ]
+                      version: "2.0"
+                      estado: "activa"
+                    - id: 2
+                      titulo: "Ruta Verde - Parques"
+                      dificultad: "Moderada"
+                      distanciaKm: 8.0
+                      duracionMinutos: 180
+                      publica: true
+                      fechaRealizacion: "2024-03-20"
+                      usuarioId: 1
+                      puntosIds: [ 1, 4, 5 ]
+                      version: "2.0"
+                      estado: "activa"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
+    post:
+      tags: [Rutas]
+      summary: Crear ruta v2
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RutaV2InDto"
+            examples:
+              ruta_casco_historico_v2:
+                summary: Ruta por el Casco Histórico v2
+                value:
+                  titulo: "Ruta Cultural - Casco Histórico de Zaragoza"
+                  dificultad: "Fácil"
+                  distanciaKm: 3.5
+                  duracionMinutos: 90
+                  fechaRealizacion: "2024-03-15"
+                  publica: true
+                  usuarioId: 1
+                  estado: "activa"
+              ruta_parques_v2:
+                summary: Ruta por Parques v2
+                value:
+                  titulo: "Ruta Verde - Parques de Zaragoza"
+                  dificultad: "Moderada"
+                  distanciaKm: 8.0
+                  duracionMinutos: 180
+                  fechaRealizacion: "2024-03-20"
+                  publica: true
+                  usuarioId: 1
+                  estado: "activa"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RutaV2OutDto"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
+  /v2/rutas/{id}:
+    get:
+      tags: [Rutas]
+      summary: Obtener ruta v2 por id
+      parameters:
+        - $ref: "#/components/parameters/IdPathParam"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RutaV2OutDto"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
+    put:
+      tags: [Rutas]
+      summary: Modificar ruta v2
+      parameters:
+        - $ref: "#/components/parameters/IdPathParam"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RutaV2InDto"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RutaV2OutDto"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
+    delete:
+      tags: [Rutas]
+      summary: Eliminar ruta v2
       parameters:
         - $ref: "#/components/parameters/IdPathParam"
       responses:
@@ -1302,3 +1468,38 @@ components:
         fechaRegistro: { type: string, format: date }
         nivelExperiencia: { type: integer, minimum: 0 }
         username: { type: string }
+
+    RutaV2InDto:
+      type: object
+      required: [titulo, distanciaKm, duracionMinutos, fechaRealizacion]
+      properties:
+        dificultad: { type: string, nullable: true }
+        distanciaKm: { type: number, format: float, minimum: 0 }
+        duracionMinutos: { type: integer, minimum: 0 }
+        fechaRealizacion: { type: string, format: date }
+        publica: { type: boolean }
+        titulo: { type: string, maxLength: 60 }
+        usuarioId: { type: integer, format: int64, nullable: true }
+        puntosIds:
+          type: array
+          items: { type: integer, format: int64 }
+          nullable: true
+        estado: { type: string, enum: ["activa", "inactiva", "archivada"], nullable: true }
+
+    RutaV2OutDto:
+      type: object
+      properties:
+        id: { type: integer, format: int64 }
+        dificultad: { type: string, nullable: true }
+        distanciaKm: { type: number, format: float }
+        duracionMinutos: { type: integer }
+        fechaRealizacion: { type: string, format: date }
+        publica: { type: boolean }
+        titulo: { type: string }
+        usuarioId: { type: integer, format: int64, nullable: true }
+        puntosIds:
+          type: array
+          items: { type: integer, format: int64 }
+          nullable: true
+        version: { type: string }
+        estado: { type: string, enum: ["activa", "inactiva", "archivada"] }

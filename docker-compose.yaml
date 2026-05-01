@@ -29,6 +29,7 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: ${PROFILE}
       RUTEA_DATABASE_PASSWORD: ${RUTEA_DATABASE_PASSWORD}
+      MARIADB_HOST: rutea-db
     ports:
       - "8080:8080"
     networks:
